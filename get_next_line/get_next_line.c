@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-char	*ft_rem(char	*remainder, char **line)
+char	*ft_rem(char *remainder, char **line)
 {
 	char	*res;
 	char *tmp;
@@ -27,10 +27,10 @@ char	*ft_rem(char	*remainder, char **line)
 		{
 			*res = '\0';
 			*line = ft_strdupp(remainder);
-			tmp = ft_strdup(++res);
+			tmp = ft_strdupp(++res);
 			free(remainder);
 			remainder = tmp;
-			return(remainder);
+			return (remainder);
 		}
 		else
 		{
@@ -58,28 +58,12 @@ int		get_next_line(int fd, char **line)
 	while (!remainder && (rd = read(fd, buf, BUFFER_SIZE)))
 	{
 		buf[rd] = '\0';
-		if ((res = ft_strchar(buf, '\n')))
-		{
+		if ((res = ft_strchar(buf, '\n'))) {
 			*res = '\0';
 			remainder = ft_strdupp(++res);
 		}
 		*line = ft_strjoinn(*line, buf);
+	}
 	free(buf);
 	return (!rd ? 0 : 1);
-}
-
-int main()
-{
- 	int fd = open("63", O_RDONLY);
- 	char *line;
- 	int i;
-
- 	while ((i = get_next_line(fd, &line)))
- 	{
- 		printf("%s\n", line);
- 		free(line);
-	 }
- 	printf("%s\n", line);
-	free(line);
- 	return (0);
 }

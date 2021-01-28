@@ -16,7 +16,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-int get_next_line(int fd, char **line);
+# define BUFFER_SIZE 32
+
+int		get_next_line(int fd, char **line);
 char	*ft_strjoinn(char *s1, char const *s2);
 char	*ft_strchar(const char *s, int c);
 char	*ft_strdupp(char *s1);

@@ -26,5 +26,6 @@ void cub()
 int main()
 {
 	cub();
+	printf("Yey!");
 	return 0;
 }
