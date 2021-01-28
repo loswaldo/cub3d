@@ -17,7 +17,7 @@
 //
 //}
 
-void ft_check_for_map(t_config map, char *line)
+/*void ft_check_for_map(t_config map, char *line)
 {
 	int i;
 
@@ -121,7 +121,7 @@ int ft_parse_map(char *line, t_config map)
 		map.C_RGB = ft_strdup(&line[i]);
 	}
 	ft_check_for_map(map, line);
-	return 0; /* todo: alert */
+	return 0; *//* todo: alert *//*
 }
 int ft_parse(t_config map)
 {
@@ -155,7 +155,7 @@ void ft_print_st(t_config map)
 		printf("%s",*map.MAP);
 		l++;
 	}
-}
+}*/
 /*int main()
 {
 	t_config map;
