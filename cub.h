@@ -8,7 +8,7 @@
 #include <fcntl.h>
 #include <math.h>
 
-typedef struct	s_list
+typedef struct	s_config
 {
 	int 	Rx;
 	int		Ry;
@@ -20,9 +20,10 @@ typedef struct	s_list
 	char 	*F_RGB;
 	char 	*C_RGB;
 	char	**MAP;
-}				t_list;
+}				t_config;
+
 int				get_next_line(int fd, char **line);
-void	ft_init(t_list *map);
+//void			ft_init(t_list *map);
 void cub();
 
 #endif

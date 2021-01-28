@@ -7,4 +7,6 @@ include_directories(.)
 
 add_executable(cub
         cub.h
-        parser.c main.c parse_rgb.c main_fc.c)
+        parser.c
+        main.c
+        )

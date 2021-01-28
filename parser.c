@@ -17,7 +17,7 @@
 //
 //}
 
-void ft_check_for_map(t_list map, char *line)
+void ft_check_for_map(t_config map, char *line)
 {
 	int i;
 
@@ -38,7 +38,7 @@ int ft_skip_spaces(char *line, int i)
 	return (i);
 }
 
-int ft_parse_map(char *line, t_list map)
+int ft_parse_map(char *line, t_config map)
 {
 	int i;
 	i = 0;
@@ -121,9 +121,9 @@ int ft_parse_map(char *line, t_list map)
 		map.C_RGB = ft_strdup(&line[i]);
 	}
 	ft_check_for_map(map, line);
-
+	return 0; /* todo: alert */
 }
-int ft_parse(t_list map)
+int ft_parse(t_config map)
 {
 	char *line;
 	int i;
@@ -136,7 +136,7 @@ int ft_parse(t_list map)
 	}
 	return 0;
 }
-void ft_print_st(t_list map)
+void ft_print_st(t_config map)
 {
 	int l;
 
@@ -156,11 +156,11 @@ void ft_print_st(t_list map)
 		l++;
 	}
 }
-int main()
+/*int main()
 {
-	t_list map;
+	t_config map;
 	ft_parse(map);
 	ft_print_st(map);
-}
+}*/
 
 
