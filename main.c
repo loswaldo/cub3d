@@ -2,30 +2,51 @@
 #include <unistd.h>
 //#include <mlx.h>
 
-/*void	ft_init(t_config *map)
+void parse(t_config *map, char *file_name)
 {
-	map->Rx = 0;
-	map->Ry = 0;
-	map->WE_T = NULL;
-	map->SO_T = NULL;
-	map->NO_T = NULL;
-	map->EA_T = NULL;
-	map->S_T = NULL;
-	map->C_RGB = NULL;
-	map->F_RGB = NULL;
-	map->MAP = NULL;
-}*/
+	char *line;
+	int ret;
+	int fd;
 
-void cub()
+	(void )map;
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+	{
+		printf("FILE ERROR");
+		exit(1);
+	}
+	while ((ret = get_next_line(fd, &line)) > 0)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	if (ret == -1)
+	{
+		printf("GNL ERROR");
+		exit(1);
+	}
+	printf("%s\n", line);
+	free(line);
+}
+
+void cub(char *file_name)
 {
 	t_config   map;
 
 	ft_bzero(&map, sizeof(t_config));
+	parse(&map, file_name);
 }
 
-int main()
+int main(int ac, char **av)
 {
-	cub();
-	printf("Yey!");
+	if (ac > 1)
+	{
+		cub(av[1]);
+		printf("Yey!");
+	}
+	else
+	{
+		printf("Nope!");
+	}
 	return 0;
 }

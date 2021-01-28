@@ -24,8 +24,7 @@ typedef struct	s_config
 	char	**MAP;
 }				t_config;
 
-int				get_next_line(int fd, char **line);
-//void			ft_init(t_list *map);
-void cub();
+int			get_next_line(int fd, char **line);
+void		cub();
 
 #endif
