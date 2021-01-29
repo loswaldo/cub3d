@@ -11,25 +11,22 @@ void ft_print_st(t_config *map)
 {
 //	printf("%d\n",map->Rx);
 //	printf("%d\n",map->Ry);
-	printf("SO_T %s\n",map->SO_T);
-	printf("EA_T%s\n",map->EA_T);
-	printf("WE_T%s\n",map->WE_T);
-	printf("NO_T%s\n",map->NO_T);
-//	printf("%s\n",map->C_RGB);
-//	printf("%s\n",map->F_RGB);
-	printf("S_T%s\n",map->S_T);
+//	printf("SO_T %s\n",map->SO_T);
+//	printf("EA_T%s\n",map->EA_T);
+//	printf("WE_T%s\n",map->WE_T);
+//	printf("NO_T%s\n",map->NO_T);
+	printf("f_r %d\n", map->floor->r);
+	printf("f_g %d\n", map->floor->g);
+	printf("f_b %d\n", map->floor->b);
+//	printf("S_T%s\n",map->S_T);
 }
 void parser_for_resolution(t_config *config, char *line)
 {
-
+	printf("parser resolution: %s\n", line);
 }
 void parser_for_texture(char *line, char **part_of_struct, int i)
 {
 	*part_of_struct = ft_strdup(&line[i]);
-}
-void parser_for_rgb(char *line, char **part_of_struct)
-{
-
 }
 
 void ft_parse_map(t_config *config, char *line)
@@ -40,8 +37,10 @@ void ft_parse_map(t_config *config, char *line)
 void ft_parse_data(t_config *config, char *line)
 {
 	int i;
+	int b;
 
 	i = 0;
+	b = 2;
 	i = ft_skip_spaces(line, i);
 	if (line[i] == 'R')
 	{
@@ -49,9 +48,6 @@ void ft_parse_data(t_config *config, char *line)
 	}
 	if (line [i] == 'N' || line [i] == 'E' || line [i] == 'W' || line [i] == 'S')
 	{
-		int b;
-
-		b = 2;
 		if (line[i] == 'N')
 		{
 			parser_for_texture(line, &config->NO_T, b);
@@ -76,14 +72,15 @@ void ft_parse_data(t_config *config, char *line)
 	}
 	if (line[i] == 'F' || line[i] == 'C')
 	{
+
 		if (line[i] == 'F')
 		{
-			parser_for_rgb(line, &config->F_RGB);
+			parser_for_rgb_f(line, config);
 		}
 		else
 		{
-			parser_for_rgb(line, &config->C_RGB);
+//			parser_for_rgb(line, config, &config->celling);
 		}
 	}
-	ft_print_st(config);
+//	ft_print_st(config);
 }

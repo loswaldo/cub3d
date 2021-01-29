@@ -3,20 +3,11 @@
 
 int check_data_filled(t_config *config)
 {
-	return (config->F_RGB != NULL && config->C_RGB != NULL
-			&& config->NO_T != NULL && config->WE_T != NULL
-			&& config->EA_T != NULL
+
+	return (config->floor->r != 0  && config->floor->g != 0  && config->floor->b != 0
+			&& config->celling->r != 0 && config->celling->g != 0 && config->celling->b != 0
+			&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
 			&& config->SO_T != NULL && config->Ry != 0 && config->Rx != 0);
-}
-
-void ft_parse_map(t_config *config, char *line)
-{
-	printf("!%s\n", line);
-}
-
-void ft_parse_data(t_config *config, char *line)
-{
-	printf("?%s\n", line);
 }
 
 void fill_config(t_config *config, char *line)
@@ -24,6 +15,7 @@ void fill_config(t_config *config, char *line)
 	if (check_data_filled(config))
 	{
 		ft_parse_map(config, line);
+		ft_print_st(config);
 	}
 	else
 	{
@@ -62,6 +54,8 @@ void cub(char *file_name)
 	t_config   config;
 
 	ft_bzero(&config, sizeof(t_config));
+	config.floor = ft_calloc(1,sizeof(t_rgb));
+	config.celling = ft_calloc(1,sizeof(t_rgb));
 	parse(&config, file_name);
 }
 

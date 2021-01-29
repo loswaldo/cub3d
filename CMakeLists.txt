@@ -48,7 +48,7 @@ set(GNL_SRC
         get_next_line/get_next_line.c
         get_next_line/get_next_line_utils.c
         get_next_line/get_next_line.h
-        )
+        parse_config.c parse_rgb.c)
 
 add_executable(cub
         ${LIBFT_SRC}
