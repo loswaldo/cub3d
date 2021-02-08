@@ -1,33 +1,48 @@
 #include "cub.h"
 
-void parser_for_rgb_f(char *line, t_config *config)
+void parser_for_rgb_f(char *line, t_config *config, t_rgb *part_of_struct)
 {
 	int i;
 
 	i = 1;
 	while (line[i])
 	{
-		if (ft_isdigit(line[i]) && config->floor->r == 0)
+		if (ft_isdigit(line[i]) && part_of_struct->r < 0)
 		{
-			config->floor->r = ft_atoi(&line[i]);
+			part_of_struct->r = ft_atoi(&line[i]);
+			if (part_of_struct->r > 255)
+			{
+				printf("WRONG COLOR");
+				exit(1);
+			}
 			while (ft_isdigit(line[i]))
 			{
 				i++;
 			}
 			i++;
 		}
-		if (ft_isdigit(line[i]) && config->floor->g == 0)
+		if (ft_isdigit(line[i]) && part_of_struct->g < 0)
 		{
-			config->floor->g = ft_atoi(&line[i]);
+			part_of_struct->g = ft_atoi(&line[i]);
+			if (part_of_struct->g > 255)
+			{
+				printf("WRONG COLOR");
+				exit(1);
+			}
 			while (ft_isdigit(line[i]))
 			{
 				i++;
 			}
 			i++;
 		}
-		if (ft_isdigit(line[i]) && config->floor->b)
+		if (ft_isdigit(line[i]) && part_of_struct->b < 0)
 		{
-			config->floor->b = ft_atoi(&line[i]);
+			part_of_struct->b = ft_atoi(&line[i]);
+			if (part_of_struct->b > 255)
+			{
+				printf("WRONG COLOR");
+				exit(1);
+			}
 		}
 		else
 		{

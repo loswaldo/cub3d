@@ -1,11 +1,20 @@
 #include "cub.h"
 #include <unistd.h>
 
+void ft_init_struct(t_config *config)
+{
+	config->floor->r = -1;
+	config->floor->g = -1;
+	config->floor->b = -1;
+	config->celling->r = -1;
+	config->celling->g = -1;
+	config->celling->b = -1;
+}
 int check_data_filled(t_config *config)
 {
 
-	return (config->floor->r != 0  && config->floor->g != 0  && config->floor->b != 0
-			&& config->celling->r != 0 && config->celling->g != 0 && config->celling->b != 0
+	return (config->floor->r != -1  && config->floor->g != -1  && config->floor->b != -1
+			&& config->celling->r != -1 && config->celling->g != -1 && config->celling->b != -1
 			&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
 			&& config->SO_T != NULL && config->Ry != 0 && config->Rx != 0);
 }
@@ -54,8 +63,9 @@ void cub(char *file_name)
 	t_config   config;
 
 	ft_bzero(&config, sizeof(t_config));
-	config.floor = ft_calloc(1,sizeof(t_rgb));
-	config.celling = ft_calloc(1,sizeof(t_rgb));
+	config.floor = malloc(sizeof(t_rgb));
+	config.celling = malloc(sizeof(t_rgb));
+	ft_init_struct(&config);
 	parse(&config, file_name);
 }
 

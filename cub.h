@@ -46,6 +46,6 @@ int			get_next_line(int fd, char **line);
 void		cub();
 void ft_parse_map(t_config *config, char *line);
 void ft_parse_data(t_config *config, char *line);
-void parser_for_rgb_f(char *line, t_config *config);
+void parser_for_rgb_f(char *line, t_config *config, t_rgb *part_of_struct);
 
 #endif

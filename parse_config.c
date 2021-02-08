@@ -15,6 +15,9 @@ void ft_print_st(t_config *map)
 //	printf("EA_T%s\n",map->EA_T);
 //	printf("WE_T%s\n",map->WE_T);
 //	printf("NO_T%s\n",map->NO_T);
+	printf("c_r %d\n", map->celling->r);
+	printf("c_g %d\n", map->celling->g);
+	printf("c_b %d\n", map->celling->b);
 	printf("f_r %d\n", map->floor->r);
 	printf("f_g %d\n", map->floor->g);
 	printf("f_b %d\n", map->floor->b);
@@ -75,11 +78,11 @@ void ft_parse_data(t_config *config, char *line)
 
 		if (line[i] == 'F')
 		{
-			parser_for_rgb_f(line, config);
+			parser_for_rgb_f(line, config, config->floor);
 		}
-		else
+		if (line[i] == 'C')
 		{
-//			parser_for_rgb(line, config, &config->celling);
+			parser_for_rgb_f(line, config, config->celling);
 		}
 	}
 //	ft_print_st(config);
