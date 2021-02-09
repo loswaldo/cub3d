@@ -24,7 +24,7 @@ void fill_config(t_config *config, char *line)
 	if (check_data_filled(config))
 	{
 		ft_parse_map(config, line);
-		ft_print_st(config);
+//		ft_print_st(config);
 	}
 	else
 	{
@@ -46,7 +46,10 @@ void parse(t_config *config, char *file_name)
 	}
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		fill_config(config, line);
+		if (check_line(line, config))
+		{
+			fill_config(config, line);
+		}
 		free(line);
 	}
 	if (ret == -1)
@@ -67,6 +70,10 @@ void cub(char *file_name)
 	config.celling = malloc(sizeof(t_rgb));
 	ft_init_struct(&config);
 	parse(&config, file_name);
+	rgb_conversion(config.floor, &config.fl);
+	rgb_conversion(config.celling, &config.cel);
+	map_validation(&config);
+	ft_print_st(&config);
 }
 
 int main(int ac, char **av)
