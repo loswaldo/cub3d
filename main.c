@@ -19,18 +19,6 @@ int check_data_filled(t_config *config)
 			&& config->SO_T != NULL && config->S_T != NULL && config->Ry != 0 && config->Rx != 0);
 }
 
-void fill_config(t_config *config, char *line)
-{
-	if (check_data_filled(config))
-	{
-		ft_parse_map(config, line);
-	}
-	else
-	{
-		ft_parse_data(config, line);
-	}
-}
-
 void parse(t_config *config, char *file_name)
 {
 	char *line;
@@ -45,9 +33,9 @@ void parse(t_config *config, char *file_name)
 	}
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
-		if (check_line(line, config))
+		if (check_line(line, config) && check_data_filled(config))
 		{
-			fill_config(config, line);
+			ft_parse_map(config, line);
 		}
 		free(line);
 	}
@@ -56,7 +44,7 @@ void parse(t_config *config, char *file_name)
 		printf("GNL ERROR");
 		exit(1);
 	}
-	fill_config(config, line);
+	ft_parse_map(config, line);
 	free(line);
 }
 

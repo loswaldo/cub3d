@@ -58,7 +58,15 @@ void parser_for_resolution(t_config *config, char *line)
 }
 void parser_for_texture(char *line, char **part_of_struct, int i)
 {
-	*part_of_struct = ft_strdup(&line[i]);
+	if (!(*part_of_struct))
+	{
+		*part_of_struct = ft_strdup(&line[i]);
+	}
+	else
+	{
+		printf("REITERATION TEXTURE");
+		exit(1);
+	}
 }
 
 void ft_parse_map(t_config *config, char *line)
@@ -79,92 +87,5 @@ void ft_parse_map(t_config *config, char *line)
 		free(config->MAP);
 		config->MAP = ft_strjoin(tmp, line);
 		free(tmp);
-	}
-}
-
-void ft_parse_data(t_config *config, char *line)
-{
-	int i;
-
-	i = 0;
-	i = ft_skip_spaces(line, i);
-	if (line[i] == 'R')
-	{
-		parser_for_resolution(config, line);
-	}
-	if (line [i] == 'N' || line [i] == 'E' || line [i] == 'W' || line [i] == 'S')
-	{
-		if (line[i] == 'N')
-		{
-			if (!(config->NO_T))
-			{
-				parser_for_texture(line, &config->NO_T, 2);
-			}
-			else
-			{
-				printf("REITERATION TEXTURE");
-				exit(1);
-			}
-		}
-		if (line[i] == 'E')
-		{
-			if (!(config->EA_T))
-			{
-				parser_for_texture(line, &config->EA_T, 2);
-			}
-			else
-			{
-				printf("REITERATION TEXTURE");
-				exit(1);
-			}
-		}
-		if (line[i] == 'W')
-		{
-			if (!(config->WE_T))
-			{
-				parser_for_texture(line, &config->WE_T, 2);
-			}
-			else
-			{
-				printf("REITERATION TEXTURE");
-				exit(1);
-			}
-		}
-		if (line[i] == 'S' && line[i + 1] == 'O')
-		{
-			if (!(config->SO_T))
-			{
-				parser_for_texture(line, &config->SO_T, 2);
-			}
-			else
-			{
-				printf("REITERATION TEXTURE");
-				exit(1);
-			}
-		}
-		else if (line[i] == 'S')
-		{
-			if (!(config->S_T))
-			{
-				parser_for_texture(line, &config->S_T, 1);
-			}
-			else
-			{
-				printf("REITERATION TEXTURE");
-				exit(1);
-			}
-		}
-	}
-	if (line[i] == 'F' || line[i] == 'C')
-	{
-
-		if (line[i] == 'F')
-		{
-			parser_for_rgb(line, config, config->floor);
-		}
-		if (line[i] == 'C')
-		{
-			parser_for_rgb(line, config, config->celling);
-		}
 	}
 }

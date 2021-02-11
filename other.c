@@ -1,41 +1,42 @@
 #include "cub.h"
 
-int ft_is_identifier(const char *line, int i, t_config *config)
+int  ft_is_identifier(char *line, int i, t_config *config)
 {
 	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
 	{
-		return (1);
+		parser_for_texture(line, &config->NO_T, 2);
 	}
-	if (line[i] == 'S' && (line[i + 1] == 'O' || line[i + 1] == ' '))
+	else if (line[i] == 'S' && (line[i + 1] == 'O' || line[i + 1] == ' '))
+	{
+		parser_for_texture(line,line[i + 1] == 'O' ? &config->SO_T : &config->S_T, 2);
+	}
+	else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
+	{
+		parser_for_texture(line, &config->WE_T, 2);
+	}
+	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
+	{
+		parser_for_texture(line, &config->EA_T, 2);
+	}
+	else if (line[i] == 'R' && line[i + 1] == ' ')
+	{
+		parser_for_resolution(config, line);
+	}
+	else if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ')
+	{
+		parser_for_rgb(line, config, line[i] == 'F' ?config->floor : config->celling);
+	}
+	else if (line[i] == '1' && check_data_filled(config))
 	{
 		return (1);
 	}
-	if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
+	else
 	{
-		return (1);
+		printf("WRONG STRING OR NOT ENOUGH SHTUKI");
+		exit (1);
 	}
-	if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-	{
-		return (1);
-	}
-	if (line[i] == 'R' && line[i + 1] == ' ')
-	{
-		return (1);
-	}
-	if (line[i] == 'F' && line[i + 1] == ' ')
-	{
-		return (1);
-	}
-	if (line[i] == 'C' && line[i + 1] == ' ')
-	{
-		return (1);
-	}
-	if (line[i] == '1' && check_data_filled(config))
-	{
-		return (1);
-	}
-	printf("WRONG STRING OR NOT ENOUGH SHTUKI");
-	exit (1);
+	ft_print_st(config);
+	return (0);
 }
 void rgb_conversion(t_rgb *color, int *part_of_struct)
 {
@@ -134,6 +135,7 @@ void part_of_map_checker(t_config *config, int x, int y)
 			}
 			else
 			{
+				printf("%s", config->MAP);
 				printf("all good \n");
 			}
 			i++;
@@ -201,12 +203,14 @@ void map_validation(t_config *config)
 	free(tmp);
 
 	str = ft_split(config->MAP, '\n');
-	while (str[y++])
+	while (str[y])
 	{
+
 		if (str[y] != 0 && config->map_width > (int)ft_strlen(str[y]))
 		{
 			str[y] = ft_fill_spaces(str[y], config->map_width);
 		}
+		y++;
 	}
 	config->map_height = y - 1;
 	free (config->MAP);

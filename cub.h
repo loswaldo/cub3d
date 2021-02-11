@@ -54,8 +54,10 @@ void parser_for_rgb(char *line, t_config *config, t_rgb *part_of_struct);
 void rgb_conversion(t_rgb *color, int *part_of_struct);
 int check_line(char *line, t_config *config);
 int ft_skip_spaces(char *line, int i);
-int ft_is_identifier(const char *line, int i, t_config *config);
+int ft_is_identifier(char *line, int i, t_config *config);
 int check_data_filled(t_config *config);
 void map_validation(t_config *config);
+void parser_for_texture(char *line, char **part_of_struct, int i);
+void parser_for_resolution(t_config *config, char *line);
 
 #endif
