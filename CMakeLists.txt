@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(cub C)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -Wno-unused -Wno-unused-variable -Wno-unused-parameter")
 
 include_directories(libft get_next_line)

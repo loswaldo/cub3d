@@ -1,6 +1,6 @@
 #include "cub.h"
 
-int ft_is_identifier(char *line, int i, t_config *config)
+int ft_is_identifier(const char *line, int i, t_config *config)
 {
 	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
 	{
@@ -34,7 +34,7 @@ int ft_is_identifier(char *line, int i, t_config *config)
 	{
 		return (1);
 	}
-	printf("WRONG STRING");
+	printf("WRONG STRING OR NOT ENOUGH SHTUKI");
 	exit (1);
 }
 void rgb_conversion(t_rgb *color, int *part_of_struct)
@@ -91,6 +91,103 @@ char *ft_fill_spaces(char *str, int len)
 	free(str);
 	return (b);
 }
+int map_symbol_check(char c, char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+		{
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+void part_of_map_checker(t_config *config, int x, int y)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	x += -1;
+	y += -1;
+	if ((x < 0 || x > config->map_width) || (y < 0 || y > config->map_height))
+	{
+		printf("MAP IS NOT VALID!!!!!!!");
+		printf("x = %d y = %d", x,y);
+		exit(1);
+	}
+	while (j < 3)
+	{
+		i = 0;
+		while (i < 3)
+		{
+			if (!(map_symbol_check(config->MAP[x + y * (config->map_width + 1)], "102NWES")))
+			{
+				printf("MAP IS NOT VALID!!!!!!!");
+				printf("x = %d y = %d", x,y);
+				exit(1);
+			}
+			else
+			{
+				printf("all good \n");
+			}
+			i++;
+			x++;
+		}
+		x += -3;
+		j++;
+		y++;
+		if (y < 0 || y > config->map_height)
+		{
+			printf("MAP IS NOT VALID!!!!!!!");
+			printf("x = %d y = %d", x,y);
+			exit(1);
+		}
+	}
+}
+void map_checker(t_config *config)
+{
+	int x;
+	int y;
+	int check;
+	int i;
+
+	i = 0;
+	check = 0;
+	x = 0;
+	y = 0;
+	while (config->MAP[i])
+	{
+		if (config->MAP[i] == 'S' || config->MAP[i] == 'N' || config->MAP[i] == 'W' || config->MAP[i] == 'E')
+		{
+			check++;
+		}
+		if (check > 1)
+		{
+			printf("MAP ERROR(too many start position)");
+			exit(1);
+		}
+		i++;
+	}
+	while (y < config->map_height)
+	{
+		x = 0;
+		while (x < config->map_width + 1)
+		{
+			 if (map_symbol_check(config->MAP[x + y * (config->map_width + 1)], "02NWES"))
+			 {
+			 	part_of_map_checker(config, x, y);
+			 }
+			x++;
+		}
+		y++;
+	}
+}
 void map_validation(t_config *config)
 {
 	char *tmp;
@@ -120,6 +217,12 @@ void map_validation(t_config *config)
 		ft_parse_map(config, str[y]);
 		y++;
 	}
-	printf("%s", config->MAP);
-//	printf("height = %d", config->map_height);
+	y = 0;
+	while (str[y])
+	{
+		free(str[y]);
+		y++;
+	}
+	free (str);
+	map_checker(config);
 }

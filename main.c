@@ -16,7 +16,7 @@ int check_data_filled(t_config *config)
 	return (config->floor->r != -1  && config->floor->g != -1  && config->floor->b != -1
 			&& config->celling->r != -1 && config->celling->g != -1 && config->celling->b != -1
 			&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
-			&& config->SO_T != NULL && config->Ry != 0 && config->Rx != 0);
+			&& config->SO_T != NULL && config->S_T != NULL && config->Ry != 0 && config->Rx != 0);
 }
 
 void fill_config(t_config *config, char *line)
@@ -24,7 +24,6 @@ void fill_config(t_config *config, char *line)
 	if (check_data_filled(config))
 	{
 		ft_parse_map(config, line);
-//		ft_print_st(config);
 	}
 	else
 	{

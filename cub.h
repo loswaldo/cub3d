@@ -50,11 +50,11 @@ int			get_next_line(int fd, char **line);
 void		cub();
 void ft_parse_map(t_config *config, char *line);
 void ft_parse_data(t_config *config, char *line);
-void parser_for_rgb_f(char *line, t_config *config, t_rgb *part_of_struct);
+void parser_for_rgb(char *line, t_config *config, t_rgb *part_of_struct);
 void rgb_conversion(t_rgb *color, int *part_of_struct);
 int check_line(char *line, t_config *config);
 int ft_skip_spaces(char *line, int i);
-int ft_is_identifier(char *line, int i, t_config *config);
+int ft_is_identifier(const char *line, int i, t_config *config);
 int check_data_filled(t_config *config);
 void map_validation(t_config *config);
 
