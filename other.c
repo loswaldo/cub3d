@@ -24,7 +24,7 @@ int  ft_is_identifier(char *line, int i, t_config *config)
 	}
 	else if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ')
 	{
-		parser_for_rgb(line, config, line[i] == 'F' ?config->floor : config->celling);
+		parser_for_rgb(line, line[i] == 'F' ? config->floor : config->celling);
 	}
 	else if (line[i] == '1' && check_data_filled(config))
 	{
@@ -35,7 +35,7 @@ int  ft_is_identifier(char *line, int i, t_config *config)
 		printf("WRONG STRING OR NOT ENOUGH SHTUKI");
 		exit (1);
 	}
-	ft_print_st(config);
+//	ft_print_st(config);
 	return (0);
 }
 void rgb_conversion(t_rgb *color, int *part_of_struct)
@@ -60,6 +60,11 @@ int check_line(char *line, t_config *config)
 	i = 0;
 	if (line[i] == '\0')
 	{
+		if (check_data_filled(config) && config->PRE_MAP) //// сделаь роыерку на то что после этой сроки больше нчиего нет!  ?? и до карты можт быть блять одна строкаБ лдно не одна, а много!!!!!!!
+		{
+			printf("MAP IS NOT MAP!");
+			exit(1);
+		}
 		return (0);
 	}
 	i = ft_skip_spaces(line, i);
@@ -116,7 +121,7 @@ void part_of_map_checker(t_config *config, int x, int y)
 	j = 0;
 	x += -1;
 	y += -1;
-	if ((x < 0 || x > config->map_width) || (y < 0 || y > config->map_height))
+	if ((x < 0 || x >= config->map_width) || (y < 0 || y >= config->map_height))
 	{
 		printf("MAP IS NOT VALID!!!!!!!");
 		printf("x = %d y = %d", x,y);
@@ -127,7 +132,7 @@ void part_of_map_checker(t_config *config, int x, int y)
 		i = 0;
 		while (i < 3)
 		{
-			if (!(map_symbol_check(config->MAP[x + y * (config->map_width + 1)], "102NWES")))
+			if (!(map_symbol_check(config->MAP[y + j][x + i], "102NWES")))
 			{
 				printf("MAP IS NOT VALID!!!!!!!");
 				printf("x = %d y = %d", x,y);
@@ -135,15 +140,15 @@ void part_of_map_checker(t_config *config, int x, int y)
 			}
 			else
 			{
-				printf("%s", config->MAP);
+				printf("%s", config->PRE_MAP);
 				printf("all good \n");
 			}
 			i++;
-			x++;
+//			x++;
 		}
-		x += -3;
+//		x += -3;
 		j++;
-		y++;
+//		y++;
 		if (y < 0 || y > config->map_height)
 		{
 			printf("MAP IS NOT VALID!!!!!!!");
@@ -157,38 +162,77 @@ void map_checker(t_config *config)
 	int x;
 	int y;
 	int check;
-	int i;
 
-	i = 0;
 	check = 0;
 	x = 0;
 	y = 0;
-	while (config->MAP[i])
+	while (y < config->map_height)
 	{
-		if (config->MAP[i] == 'S' || config->MAP[i] == 'N' || config->MAP[i] == 'W' || config->MAP[i] == 'E')
+		x = 0;
+		while (x < config->map_width)
+		{
+			if (config->MAP[y][x] == 'S' || config->MAP[y][x] == 'N'
+			|| config->MAP[y][x] == 'W' || config->MAP[y][x] == 'E')
+			{
+				check++;
+			}
+			x++;
+		}
+		y++;
+	}
+	if (check != 1)
+	{
+		printf("MAP ERROR(number of start position)");
+		exit(1);
+	}
+	x = 0;
+	y = 0;
+	while (y < config->map_height)
+	{
+		x = 0;
+		while (x < config ->map_width)
+		{
+			if (map_symbol_check(config->MAP[y][x], "02NWES" ))
+			{
+				part_of_map_checker(config, x, y);
+			}
+			x++;
+		}
+		y++;
+	}
+	y = 0;
+	while (config->MAP[y])
+	{
+		printf("%s\n", config->MAP[y]);
+		y++;
+	}
+
+	/*while (config->PRE_MAP[i])
+	{
+		if (config->PRE_MAP[i] == 'S' || config->PRE_MAP[i] == 'N' || config->PRE_MAP[i] == 'W' || config->PRE_MAP[i] == 'E')
 		{
 			check++;
 		}
 		if (check > 1)
 		{
-			printf("MAP ERROR(too many start position)");
+			printf("PRE_MAP ERROR(too many start position)");
 			exit(1);
 		}
 		i++;
-	}
-	while (y < config->map_height)
+	}*/
+/*	while (y < config->map_height)
 	{
 		x = 0;
 		while (x < config->map_width + 1)
 		{
-			 if (map_symbol_check(config->MAP[x + y * (config->map_width + 1)], "02NWES"))
+			 if (map_symbol_check(config->PRE_MAP[x + y * (config->map_width + 1)], "02NWES"))
 			 {
 			 	part_of_map_checker(config, x, y);
 			 }
 			x++;
 		}
 		y++;
-	}
+	}*/
 }
 void map_validation(t_config *config)
 {
@@ -197,12 +241,12 @@ void map_validation(t_config *config)
 	int y;
 
 	y = 0;
-	tmp = ft_strdup(config->MAP);
-	free(config->MAP);
-	config->MAP = ft_strtrim(tmp, "\n");
+	tmp = ft_strdup(config->PRE_MAP);
+	free(config->PRE_MAP);
+	config->PRE_MAP = ft_strtrim(tmp, "\n");
 	free(tmp);
 
-	str = ft_split(config->MAP, '\n');
+	str = ft_split(config->PRE_MAP, '\n');
 	while (str[y])
 	{
 
@@ -213,14 +257,26 @@ void map_validation(t_config *config)
 		y++;
 	}
 	config->map_height = y - 1;
-	free (config->MAP);
-	config->MAP = NULL;
+	free (config->PRE_MAP);
+
+	config->MAP = malloc((config->map_height + 1) * sizeof(char*));
+	y = 0;
+	while (y <= config->map_height)
+	{
+		config->MAP[y] = malloc(config->map_width * sizeof(char));
+		y++;
+	}
+//	printf("h = %d", config->map_height);
+
 	y = 0;
 	while (str[y])
 	{
-		ft_parse_map(config, str[y]);
+		config->MAP[y] = ft_strdup(str[y]);
+//		ft_parse_map(config, str[y]);
 		y++;
 	}
+	config->MAP[y] = NULL;
+//	config->MAP = str;
 	y = 0;
 	while (str[y])
 	{

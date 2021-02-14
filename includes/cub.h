@@ -50,8 +50,8 @@ void ft_print_st(t_config *map); 				//надо снести
 int			get_next_line(int fd, char **line);
 void		cub();
 void ft_parse_map(t_config *config, char *line);
-//void ft_parse_data(t_config *config, char *line);
-void parser_for_rgb(char *line, t_rgb *part_of_struct);
+void ft_parse_data(t_config *config, char *line);
+void parser_for_rgb(char *line, t_config *config, t_rgb *part_of_struct);
 void rgb_conversion(t_rgb *color, int *part_of_struct);
 int check_line(char *line, t_config *config);
 int ft_skip_spaces(char *line, int i);

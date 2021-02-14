@@ -7,24 +7,32 @@ int ft_skip_spaces(char *line, int i)
 	}
 	return (i);
 }
-void ft_print_st(t_config *map)
-{
-	printf("Rx %d\n",map->Rx);
-	printf("Ry %d\n",map->Ry);
-	printf("SO_T %s\n",map->SO_T);
-	printf("EA_T%s\n",map->EA_T);
-	printf("WE_T%s\n",map->WE_T);
-	printf("NO_T%s\n",map->NO_T);
-	printf("S_T%s\n",map->S_T);
-	printf("c_r %d\n", map->celling->r);
-	printf("c_g %d\n", map->celling->g);
-	printf("c_b %d\n", map->celling->b);
-	printf("f_r %d\n", map->floor->r);
-	printf("f_g %d\n", map->floor->g);
-	printf("f_b %d\n", map->floor->b);
-	printf("rgb_f %d\n", map->fl);
-	printf("rgb_c %d\n", map->cel);
-}
+//void ft_print_st(t_config *map)
+//{
+//	int i;
+//
+//	i = 0;
+//	printf("Rx %d\n",map->Rx);
+//	printf("Ry %d\n",map->Ry);
+//	printf("SO_T %s\n",map->SO_T);
+//	printf("EA_T%s\n",map->EA_T);
+//	printf("WE_T%s\n",map->WE_T);
+//	printf("NO_T%s\n",map->NO_T);
+//	printf("S_T%s\n",map->S_T);
+//	printf("c_r %d\n", map->celling->r);
+//	printf("c_g %d\n", map->celling->g);
+//	printf("c_b %d\n", map->celling->b);
+//	printf("f_r %d\n", map->floor->r);
+//	printf("f_g %d\n", map->floor->g);
+//	printf("f_b %d\n", map->floor->b);
+//	printf("rgb_f %d\n", map->fl);
+//	printf("rgb_c %d\n", map->cel);
+//	while (map->MAP[i])
+//	{
+//		printf("%s\n", map->MAP[i]);
+//		i++;
+//	}
+//}
 void parser_for_resolution(t_config *config, char *line)
 {
 	int i;
@@ -77,15 +85,15 @@ void ft_parse_map(t_config *config, char *line)
 	{
 		config->map_width = ft_strlen(line);
 	}
-	if (!(config->MAP))
+	if (!(config->PRE_MAP))
 	{
-		config->MAP = ft_strdup(line);
+		config->PRE_MAP = ft_strdup(line);
 	}
 	else
 	{
-		tmp = ft_strjoin(config->MAP, "\n");
-		free(config->MAP);
-		config->MAP = ft_strjoin(tmp, line);
+		tmp = ft_strjoin(config->PRE_MAP, "\n");
+		free(config->PRE_MAP);
+		config->PRE_MAP = ft_strjoin(tmp, line);
 		free(tmp);
 	}
 }
