@@ -60,7 +60,7 @@ void cub(char *file_name)
 	rgb_conversion(config.floor, &config.fl);
 	rgb_conversion(config.celling, &config.cel);
 	map_validation(&config);
-//	ft_print_st(&config);
+	for_window(&config);
 }
 
 int main(int ac, char **av)

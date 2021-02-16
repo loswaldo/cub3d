@@ -35,7 +35,6 @@ int  ft_is_identifier(char *line, int i, t_config *config)
 		printf("WRONG STRING OR NOT ENOUGH SHTUKI");
 		exit (1);
 	}
-//	ft_print_st(config);
 	return (0);
 }
 void rgb_conversion(t_rgb *color, int *part_of_struct)
@@ -140,15 +139,11 @@ void part_of_map_checker(t_config *config, int x, int y)
 			}
 			else
 			{
-				printf("%s", config->PRE_MAP);
 				printf("all good \n");
 			}
 			i++;
-//			x++;
 		}
-//		x += -3;
 		j++;
-//		y++;
 		if (y < 0 || y > config->map_height)
 		{
 			printf("MAP IS NOT VALID!!!!!!!");
@@ -206,33 +201,6 @@ void map_checker(t_config *config)
 		printf("%s\n", config->MAP[y]);
 		y++;
 	}
-
-	/*while (config->PRE_MAP[i])
-	{
-		if (config->PRE_MAP[i] == 'S' || config->PRE_MAP[i] == 'N' || config->PRE_MAP[i] == 'W' || config->PRE_MAP[i] == 'E')
-		{
-			check++;
-		}
-		if (check > 1)
-		{
-			printf("PRE_MAP ERROR(too many start position)");
-			exit(1);
-		}
-		i++;
-	}*/
-/*	while (y < config->map_height)
-	{
-		x = 0;
-		while (x < config->map_width + 1)
-		{
-			 if (map_symbol_check(config->PRE_MAP[x + y * (config->map_width + 1)], "02NWES"))
-			 {
-			 	part_of_map_checker(config, x, y);
-			 }
-			x++;
-		}
-		y++;
-	}*/
 }
 void map_validation(t_config *config)
 {
@@ -266,17 +234,14 @@ void map_validation(t_config *config)
 		config->MAP[y] = malloc(config->map_width * sizeof(char));
 		y++;
 	}
-//	printf("h = %d", config->map_height);
 
 	y = 0;
 	while (str[y])
 	{
 		config->MAP[y] = ft_strdup(str[y]);
-//		ft_parse_map(config, str[y]);
 		y++;
 	}
 	config->MAP[y] = NULL;
-//	config->MAP = str;
 	y = 0;
 	while (str[y])
 	{

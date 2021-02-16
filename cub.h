@@ -8,6 +8,7 @@
 
 #include "get_next_line.h"
 #include "libft.h"
+#include "minilibx_mms_20200219/mlx.h"
 
 typedef struct s_rgb
 {
@@ -36,21 +37,11 @@ typedef struct	s_config
 	int		map_width;
 	int 	map_height;
 }				t_config;
-//typedef struct s_rgb
-//{
-//	int		F_R;
-//	int 	F_G;
-//	int		F_B;
-//	int 	C_R;
-//	int 	C_G;
-//	int 	C_B;
-//}				t_rgb;
 
 void ft_print_st(t_config *map); 				//надо снести
 int			get_next_line(int fd, char **line);
 void		cub();
 void ft_parse_map(t_config *config, char *line);
-//void ft_parse_data(t_config *config, char *line);
 void parser_for_rgb(char *line, t_rgb *part_of_struct);
 void rgb_conversion(t_rgb *color, int *part_of_struct);
 int check_line(char *line, t_config *config);
@@ -60,5 +51,6 @@ int check_data_filled(t_config *config);
 void map_validation(t_config *config);
 void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
+void for_window(t_config *config);
 
 #endif
