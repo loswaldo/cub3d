@@ -1,7 +1,6 @@
 #include "cub.h"
-#include <unistd.h>
 
-void ft_init_struct(t_config *config)
+void	ft_init_struct(t_config *config)
 {
 	config->floor->r = -1;
 	config->floor->g = -1;
@@ -10,20 +9,22 @@ void ft_init_struct(t_config *config)
 	config->celling->g = -1;
 	config->celling->b = -1;
 }
-int check_data_filled(t_config *config)
-{
 
-	return (config->floor->r != -1  && config->floor->g != -1  && config->floor->b != -1
-			&& config->celling->r != -1 && config->celling->g != -1 && config->celling->b != -1
-			&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
-			&& config->SO_T != NULL && config->S_T != NULL && config->Ry != 0 && config->Rx != 0);
+int		check_data_filled(t_config *config)
+{
+	return (config->floor->r != -1 && config->floor->g != -1
+	&& config->floor->b != -1 && config->celling->r != -1
+	&& config->celling->g != -1 && config->celling->b != -1
+	&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
+	&& config->SO_T != NULL && config->S_T != NULL && config->Ry != 0
+	&& config->Rx != 0);
 }
 
-void parse(t_config *config, char *file_name)
+void	parse(t_config *config, char *file_name)
 {
-	char *line;
-	int ret;
-	int fd;
+	char	*line;
+	int		ret;
+	int		fd;
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
@@ -48,9 +49,9 @@ void parse(t_config *config, char *file_name)
 	free(line);
 }
 
-void cub(char *file_name)
+void	cub(char *file_name)
 {
-	t_config   config;
+	t_config	config;
 
 	ft_bzero(&config, sizeof(t_config));
 	config.floor = malloc(sizeof(t_rgb));
@@ -63,7 +64,7 @@ void cub(char *file_name)
 	for_window(&config);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	if (ac > 1)
 	{
@@ -74,5 +75,5 @@ int main(int ac, char **av)
 	{
 		printf("Nope!");
 	}
-	return 0;
+	return (0);
 }

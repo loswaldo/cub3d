@@ -1,34 +1,30 @@
 #include "cub.h"
 
-void check_line_for_rgb(char *line)
+void	check_line_for_rgb(char *line)
 {
-	int i;
-	int count;
+	int		i;
+	int		count;
 
 	i = 0;
 	count = 0;
 	while (line[i])
 	{
 		if (ft_isdigit(line[i]))
-		{
 			i++;
-		}
 		if (line[i] == ',')
-		{
 			count++;
-		}
 		i++;
 	}
 	if (count > 2)
 	{
 		printf("WRONG COLOR");
-		exit (1);
+		exit(1);
 	}
 }
 
-void parser_for_rgb(char *line, t_rgb *part_of_struct)
+void	parser_for_rgb(char *line, t_rgb *part_of_struct)
 {
-	int i;
+	int		i;
 
 	i = 1;
 	check_line_for_rgb(line);
@@ -43,9 +39,7 @@ void parser_for_rgb(char *line, t_rgb *part_of_struct)
 				exit(1);
 			}
 			while (ft_isdigit(line[i]))
-			{
 				i++;
-			}
 			i++;
 		}
 		if (ft_isdigit(line[i]) && part_of_struct->g < 0)
@@ -57,9 +51,7 @@ void parser_for_rgb(char *line, t_rgb *part_of_struct)
 				exit(1);
 			}
 			while (ft_isdigit(line[i]))
-			{
 				i++;
-			}
 			i++;
 		}
 		if (ft_isdigit(line[i]) && part_of_struct->b < 0)
@@ -72,9 +64,6 @@ void parser_for_rgb(char *line, t_rgb *part_of_struct)
 			}
 		}
 		else
-		{
 			i++;
-		}
 	}
 }
-

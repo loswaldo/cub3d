@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <math.h>
+#include <unistd.h>
 
 #include "get_next_line.h"
 #include "libft.h"
