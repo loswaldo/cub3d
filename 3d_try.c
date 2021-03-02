@@ -22,13 +22,17 @@
 //		int x;
 //		int w;
 //		int h;
+void init(t_for_win *win)
+{
+	win->dir_x = 0;
+	win->dir_y = 1;
+	win->plane_x = 0.66;
+	win->plane_y = 0;
+}
 
-	void	draw_map(t_config *config, t_for_win *win)
+	void	draw_map(t_config *config)
 	{
-		double dir_x = 0;
-		double dir_y = 1;
-		double plane_x = 0.66;
-		double plane_y = 0;
+		init(config->win);
 		//for (int x = 0; x < config->Rx; x++)
 		int x;
 		int y;
@@ -38,8 +42,8 @@
 		{
 			//calculate ray position and direction
 			float cameraX = 2 * x / (float)config->Rx - 1; //x-coordinate in camera space
-			float rayDirX = dir_x + plane_x * cameraX;
-			float rayDirY = dir_y + plane_y * cameraX;
+			float rayDirX = config->win->dir_x + config->win->plane_x * cameraX;
+			float rayDirY = config->win->dir_y + config->win->plane_y * cameraX;
 			//which box of the map we're in
 			int mapX = (int)(config->pl_pos_x);
 			int mapY = (int)(config->pl_pos_y);
@@ -153,13 +157,13 @@
 						{
 //							color = my_mlx_pixel_take(&map->north_texture, texX, texY);
 //							my_mlx_pixel_put(&map->img, x, y, color);
-							my_mlx_pixel_put(&win->img, x, y, 0xFF2FFF);
+							my_mlx_pixel_put(&config->win->img, x, y, 0xFF2FFF);
 						}
 						else if (stepX < 0)
 						{
-//							color = my_mlx_pixel_take(&win->south_texture, texX, texY);
-//							my_mlx_pixel_put(&win->win, x, y, color);
-							my_mlx_pixel_put(&win->img, x, y, 0xFFF9FF);
+//							color = my_mlx_pixel_take(&config->win->south_texture, texX, texY);
+//							my_mlx_pixel_put(&config->win->win, x, y, color);
+							my_mlx_pixel_put(&config->win->img, x, y, 0xFFF9FF);
 						}
 
 
@@ -168,15 +172,15 @@
 					{
 						if (stepY > 0)
 						{
-//							color = my_mlx_pixel_take(&win->west_texture, texX, texY);
-//							my_mlx_pixel_put(&win->img, x, y, color);
-							my_mlx_pixel_put(&win->img, x, y, 0xFFFFFF);
+//							color = my_mlx_pixel_take(&config->win->west_texture, texX, texY);
+//							my_mlx_pixel_put(&config->win->img, x, y, color);
+							my_mlx_pixel_put(&config->win->img, x, y, 0xFFFFFF);
 						}
 						else if (stepY < 0)
 						{
-//							color = my_mlx_pixel_take(&win->east_texture, texX, texY);
-//							my_mlx_pixel_put(&win->img, x, y, color);
-							my_mlx_pixel_put(&win->img, x, y, 0x0000FF);
+//							color = my_mlx_pixel_take(&config->win->east_texture, texX, texY);
+//							my_mlx_pixel_put(&config->win->img, x, y, color);
+							my_mlx_pixel_put(&config->win->img, x, y, 0x0000FF);
 						}
 					}
 				}
@@ -185,18 +189,18 @@
 			x++;
 		}
 	}
-void print_blyat(t_for_win *win, t_config *config)
-{
-	void    *mlx;
-	void	*mlx_win;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, config->Rx, config->Ry, "Hello world!");
-	win->img = mlx_new_image(mlx, config->Rx, config->Ry);
-	win->addr = mlx_get_data_addr(win->img, &win->bpp, &win->line_len,
-								  &win->endian);
-//	karlic(win, config);
-	draw_map(config, win);
-	mlx_put_image_to_window(mlx, mlx_win, win->img, 0, 0);
-	mlx_loop(mlx);
+void print_blyat(t_config *config)
+{
+	config->win->mlx = mlx_init();
+	config->win->mlx_win = mlx_new_window(config->win->mlx, config->Rx, config->Ry, "Hello world!");
+	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
+	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
+								  &config->win->endian);
+	draw_map(config);
+
+	mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);
+	mlx_hook(config->win->mlx_win, 2, 1L << 0, key_hook, config);
+//	printf("check1\n");
+	mlx_loop(config->win->mlx);
 }

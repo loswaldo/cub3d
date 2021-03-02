@@ -18,6 +18,20 @@ typedef struct s_rgb
 	int		b;
 }				t_rgb;
 
+typedef struct s_for_win {
+	void		*img;
+	char 		*addr;
+	void    	*mlx;
+	void		*mlx_win;
+	int 		bpp;
+	int 		line_len;
+	int			endian;
+	double 		dir_x;
+	double 		dir_y;
+	double 		plane_x;
+	double 		plane_y;
+}				t_for_win;
+
 typedef struct	s_config
 {
 	int 	Rx;
@@ -32,6 +46,7 @@ typedef struct	s_config
 
 	t_rgb	*floor;
 	t_rgb	*celling;
+	t_for_win	*win;
 
 	char	*PRE_MAP;
 	char 	**MAP;
@@ -41,13 +56,6 @@ typedef struct	s_config
 	int		pl_pos_y;
 }				t_config;
 
-typedef struct s_for_win {
-	void		*img;
-	char 		*addr;
-	int 		bpp;
-	int 		line_len;
-	int			endian;
-}				t_for_win;
 
 
 void ft_print_st(t_config *map); 				//надо снести
@@ -65,7 +73,8 @@ void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
 void for_window(t_config *config);
 void my_mlx_pixel_put(t_for_win *data, int x, int y, int color);
-int karlic(t_for_win *win, t_config *config);
-void print_blyat(t_for_win *win, t_config *config);
+void print_blyat(t_config *config);
+void	draw_map(t_config *config);
+int key_hook(int key,t_config *config);
 
 #endif
