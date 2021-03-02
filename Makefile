@@ -18,16 +18,17 @@ SRC = get_next_line/get_next_line.c\
       other.c\
       parse_config.c\
       parse_rgb.c\
-      for_window.c
+      for_window.c\
+      3d_try.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	gcc $(CFLAG) -o $(NAME) $^ -lmlx -framework OpenGL -framework AppKit -I./includes
+	gcc  -o $(NAME) $^ $(MLX) -Iminilibx_mms_20200219 -lmlx -framework OpenGL -framework AppKit -I./includes
 %.o: %.c
-		gcc $(CFLAG) $(OPTION)
+		gcc  $(OPTION)
 
 $(LIBFT):
 		make -C libft/

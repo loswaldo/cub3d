@@ -149,7 +149,11 @@ void	map_checker(t_config *config)
 		{
 			if (config->MAP[y][x] == 'S' || config->MAP[y][x] == 'N'
 			|| config->MAP[y][x] == 'W' || config->MAP[y][x] == 'E')
+			{
 				check++;
+				config->pl_pos_y = x;
+				config->pl_pos_x = y;
+			}
 			x++;
 		}
 		y++;

@@ -37,10 +37,21 @@ typedef struct	s_config
 	char 	**MAP;
 	int		map_width;
 	int 	map_height;
+	int		pl_pos_x;
+	int		pl_pos_y;
 }				t_config;
 
+typedef struct s_for_win {
+	void		*img;
+	char 		*addr;
+	int 		bpp;
+	int 		line_len;
+	int			endian;
+}				t_for_win;
+
+
 void ft_print_st(t_config *map); 				//надо снести
-int			get_next_line(int fd, char **line);
+//int			get_next_line(int fd, char **line);
 void		cub();
 void ft_parse_map(t_config *config, char *line);
 void parser_for_rgb(char *line, t_rgb *part_of_struct);
@@ -53,5 +64,8 @@ void map_validation(t_config *config);
 void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
 void for_window(t_config *config);
+void my_mlx_pixel_put(t_for_win *data, int x, int y, int color);
+int karlic(t_for_win *win, t_config *config);
+void print_blyat(t_for_win *win, t_config *config);
 
 #endif

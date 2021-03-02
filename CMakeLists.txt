@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 3.17)
 project(cub C)
 
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -Wno-unused -Wno-unused-variable -Wno-unused-parameter")
+set(CMAKE_C_FLAGS "-Lmlx -lmlx -framework OpenGL -framework AppKit")
+#set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -Wno-unused -Wno-unused-variable -Wno-unused-parameter")
 
+link_directories(./)
 include_directories(libft get_next_line)
 
 set(LIBFT_SRC
@@ -48,12 +50,18 @@ set(GNL_SRC
         get_next_line/get_next_line.c
         get_next_line/get_next_line_utils.c
         get_next_line/get_next_line.h
-        parse_config.c parse_rgb.c other.c for_window.c)
+        )
 
 add_executable(cub
         ${LIBFT_SRC}
         ${GNL_SRC}
+        minilibx_mms_20200219/libmlx.dylib
         cub.h
         parser.c
         main.c
+        parse_config.c
+        parse_rgb.c
+        other.c
+        for_window.c
+        3d_try.c
         )

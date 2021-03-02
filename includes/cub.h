@@ -6,7 +6,7 @@
 #include <fcntl.h>
 #include <math.h>
 
-#include "get_next_line.h"
+#include "./get_next_line.h"
 #include "libft.h"
 #include "../minilibx_mms_20200219/mlx.h"
 
@@ -38,6 +38,14 @@ typedef struct	s_config
 	int 	map_height;
 }				t_config;
 
+typedef struct s_for_win {
+	void		*img;
+	char 		*addr;
+	int 		bpp;
+	int 		line_len;
+	int			endian;
+}
+
 void ft_print_st(t_config *map); 				//надо снести
 int			get_next_line(int fd, char **line);
 void		cub();
@@ -52,5 +60,8 @@ void map_validation(t_config *config);
 void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
 void for_window(t_config *config);
+void my_mlx_pixel_put(t_for_win *data, int x, int y, int color);
+int karlic(t_for_win *win, t_config *config);
+void print_blyat(t_for_win *win, t_config *config);
 
 #endif
