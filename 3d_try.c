@@ -32,7 +32,7 @@ void init(t_for_win *win)
 
 	void	draw_map(t_config *config)
 	{
-		init(config->win);
+//		init(config->win);
 		//for (int x = 0; x < config->Rx; x++)
 		int x;
 		int y;
@@ -197,6 +197,8 @@ void print_blyat(t_config *config)
 	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
 	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
 								  &config->win->endian);
+
+	init(config->win);
 	draw_map(config);
 
 	mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);

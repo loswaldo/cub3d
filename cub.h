@@ -26,10 +26,10 @@ typedef struct s_for_win {
 	int 		bpp;
 	int 		line_len;
 	int			endian;
-	double 		dir_x;
-	double 		dir_y;
-	double 		plane_x;
-	double 		plane_y;
+	float 		dir_x;
+	float 		dir_y;
+	float 		plane_x;
+	float 		plane_y;
 }				t_for_win;
 
 typedef struct	s_config
@@ -52,8 +52,8 @@ typedef struct	s_config
 	char 	**MAP;
 	int		map_width;
 	int 	map_height;
-	int		pl_pos_x;
-	int		pl_pos_y;
+	float	pl_pos_x;
+	float 	pl_pos_y;
 }				t_config;
 
 

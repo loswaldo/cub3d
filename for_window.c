@@ -84,38 +84,46 @@ int key_hook(int key, t_config *config)
 	float	oldDirX;
 	float	oldPlaneX;
 
-	moveSpeed = 0.2;
-	rotSpeed = 0.2;
+	moveSpeed = (float)0.2;
+	rotSpeed = 0.1;
 
+	printf("keycode: %d\n", key);
+	printf("BEFORE\n");
+	printf("PLR_X: %f\n", config->pl_pos_x);
+	printf("PLR_Y: %f\n", config->pl_pos_y);
+	printf("DIR_X: %f\n", config->win->dir_x);
+	printf("DIR_Y: %f\n", config->win->dir_x);
+	printf("PLANE_X: %f\n", config->win->plane_x);
+	printf("PLANE_Y: %f\n", config->win->plane_y);
 	if (key == 13)
 	{
-		if(config->MAP[(int)(config->pl_pos_x + config->win->dir_x * moveSpeed)][(int)(config->pl_pos_y)] == '0')
+		if(config->MAP[(int)(config->pl_pos_x - config->win->dir_x * moveSpeed)][(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x += config->win->dir_x * moveSpeed;
 		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->win->dir_y * moveSpeed)] == '0')
 			config->pl_pos_y += config->win->dir_y * moveSpeed;
 	}
-	if (key == 1)
+	else if (key == 1)
 	{
 		if(config->MAP[(int)(config->pl_pos_x - config->win->dir_x * moveSpeed)][(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x -= config->win->dir_x * moveSpeed;
 		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y - config->win->dir_y * moveSpeed)] == '0')
 			config->pl_pos_y -= config->win->dir_y * moveSpeed;
 	}
-	if (key == 0)
+	else if (key == 0)
 	{
 		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->win->dir_x * moveSpeed)] == '0')
 			config->pl_pos_y += config->win->dir_x * moveSpeed;
 		if(config->MAP[(int)(config->pl_pos_x - config->win->dir_y * moveSpeed)][(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x -= config->win->dir_y * moveSpeed;
 	}
-	if (key == 2)
+	else if (key == 2)
 	{
 		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->win->dir_x * moveSpeed)] == '0')
 			config->pl_pos_y -= config->win->dir_x * moveSpeed;
 		if(config->MAP[(int)(config->pl_pos_x + config->win->dir_y * moveSpeed)][(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x += config->win->dir_y * moveSpeed;
 	}
-	if (key == 124)
+	else if (key == 124)
 	{
 		oldDirX = config->win->dir_x;
 		config->win->dir_x = config->win->dir_x * cos(-rotSpeed) - config->win->dir_y * sin(-rotSpeed);
@@ -124,7 +132,7 @@ int key_hook(int key, t_config *config)
 		config->win->plane_x = config->win->plane_x * cos(-rotSpeed) - config->win->plane_y * sin(-rotSpeed);
 		config->win->plane_y = oldPlaneX * sin(-rotSpeed) + config->win->plane_y * cos(-rotSpeed);
 	}
-	if (key == 123)
+	else if (key == 123)
 	{
 		oldDirX = config->win->dir_x;
 		config->win->dir_x = config->win->dir_x * cos(rotSpeed) - config->win->dir_y * sin(rotSpeed);
@@ -133,10 +141,17 @@ int key_hook(int key, t_config *config)
 		config->win->plane_x = config->win->plane_x * cos(rotSpeed) - config->win->plane_y * sin(rotSpeed);
 		config->win->plane_y = oldPlaneX * sin(rotSpeed) + config->win->plane_y * cos(rotSpeed);
 	}
-	if (key == 53)
+	else if (key == 53)
 	{
 		exit(1);
 	}
+	printf("AFTER\n");
+	printf("PLR_X: %f\n", config->pl_pos_x);
+	printf("PLR_Y: %f\n", config->pl_pos_y);
+	printf("DIR_X: %f\n", config->win->dir_x);
+	printf("DIR_Y: %f\n", config->win->dir_x);
+	printf("PLANE_X: %f\n", config->win->plane_x);
+	printf("PLANE_Y: %f\n", config->win->plane_y);
 	mlx_destroy_image(config->win->mlx, config->win->img);
 	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
 	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len, &config->win->endian);
