@@ -56,6 +56,7 @@ void	cub(char *file_name)
 	ft_bzero(&config, sizeof(t_config));
 	config.floor = malloc(sizeof(t_rgb));
 	config.celling = malloc(sizeof(t_rgb));
+//	config.NO_texture = malloc(sizeof(t_for_win));
 	ft_init_struct(&config);
 	parse(&config, file_name);
 	rgb_conversion(config.floor, &config.fl);

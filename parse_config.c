@@ -7,33 +7,6 @@ int		ft_skip_spaces(char *line, int i)
 	return (i);
 }
 
-//void ft_print_st(t_config *map)
-//{
-//	int i;
-//
-//	i = 0;
-//	printf("Rx %d\n",map->Rx);
-//	printf("Ry %d\n",map->Ry);
-//	printf("SO_T %s\n",map->SO_T);
-//	printf("EA_T%s\n",map->EA_T);
-//	printf("WE_T%s\n",map->WE_T);
-//	printf("NO_T%s\n",map->NO_T);
-//	printf("S_T%s\n",map->S_T);
-//	printf("c_r %d\n", map->celling->r);
-//	printf("c_g %d\n", map->celling->g);
-//	printf("c_b %d\n", map->celling->b);
-//	printf("f_r %d\n", map->floor->r);
-//	printf("f_g %d\n", map->floor->g);
-//	printf("f_b %d\n", map->floor->b);
-//	printf("rgb_f %d\n", map->fl);
-//	printf("rgb_c %d\n", map->cel);
-//	while (map->MAP[i])
-//	{
-//		printf("%s\n", map->MAP[i]);
-//		i++;
-//	}
-//}
-
 void	parser_for_resolution(t_config *config, char *line)
 {
 	int i;
@@ -61,7 +34,7 @@ void	parser_for_resolution(t_config *config, char *line)
 void	parser_for_texture(char *line, char **part_of_struct, int i)
 {
 	if (!(*part_of_struct))
-		*part_of_struct = ft_strdup(&line[i]);
+		*part_of_struct = ft_strdup(&line[i + 1]);
 	else
 	{
 		printf("REITERATION TEXTURE");

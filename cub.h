@@ -26,10 +26,8 @@ typedef struct s_for_win {
 	int 		bpp;
 	int 		line_len;
 	int			endian;
-	float 		dir_x;
-	float 		dir_y;
-	float 		plane_x;
-	float 		plane_y;
+	int			width;
+	int 		height;
 }				t_for_win;
 
 typedef struct	s_config
@@ -47,6 +45,10 @@ typedef struct	s_config
 	t_rgb	*floor;
 	t_rgb	*celling;
 	t_for_win	*win;
+	t_for_win 	NO_texture;
+	t_for_win 	SO_texture;
+	t_for_win 	WE_texture;
+	t_for_win 	EA_texture;
 
 	char	*PRE_MAP;
 	char 	**MAP;
@@ -54,6 +56,10 @@ typedef struct	s_config
 	int 	map_height;
 	float	pl_pos_x;
 	float 	pl_pos_y;
+	float 	dir_x;
+	float 	dir_y;
+	float 	plane_x;
+	float 	plane_y;
 }				t_config;
 
 
@@ -76,5 +82,6 @@ void my_mlx_pixel_put(t_for_win *data, int x, int y, int color);
 void print_blyat(t_config *config);
 void	draw_map(t_config *config);
 int key_hook(int key,t_config *config);
+void fill_texture(t_config *config);
 
 #endif

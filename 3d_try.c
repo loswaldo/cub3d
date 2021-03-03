@@ -2,8 +2,8 @@
 
 //#define screenWidth 640
 //#define screenHeight 480
-#define texWidth 64
-#define texHeight 64
+#define texWidth 512
+#define texHeight 512
 //#define mapWidth 24
 //#define mapHeight 24
 
@@ -22,12 +22,42 @@
 //		int x;
 //		int w;
 //		int h;
-void init(t_for_win *win)
+void floor_and_celling(t_config *config)
 {
-	win->dir_x = 0;
-	win->dir_y = 1;
-	win->plane_x = 0.66;
-	win->plane_y = 0;
+	int x;
+	int y;
+
+	x = 1;
+	while(x < config->Rx)
+	{
+		y = 1;
+		while(y <= config->Ry/2)
+		{
+			my_mlx_pixel_put(&config->win->img, x, y, config->fl);
+			y++;
+		}
+		while(y > config->Ry/2 && y < config->Rx)
+		{
+			my_mlx_pixel_put(&config->win->img, x, y, config->cel);
+			y++;
+		}
+		x++;
+	}
+
+}
+unsigned int		my_mlx_pixel_take(t_for_win *win, int x, int y)
+{
+	char	*dst;
+
+	dst = win->addr + (y * win->line_len + x * (win->bpp / 8));
+	return (*(unsigned int*)dst);
+}
+void init(t_config *config)
+{
+	config->dir_x = 0;
+	config->dir_y = 1;
+	config->plane_x = 0.66;
+	config->plane_y = 0;
 }
 
 	void	draw_map(t_config *config)
@@ -38,12 +68,13 @@ void init(t_for_win *win)
 		int y;
 
 		x = 0;
+//		floor_and_celling(config);
 		while (x < config->Rx)
 		{
 			//calculate ray position and direction
 			float cameraX = 2 * x / (float)config->Rx - 1; //x-coordinate in camera space
-			float rayDirX = config->win->dir_x + config->win->plane_x * cameraX;
-			float rayDirY = config->win->dir_y + config->win->plane_y * cameraX;
+			float rayDirX = config->dir_x + config->plane_x * cameraX;
+			float rayDirY = config->dir_y + config->plane_y * cameraX;
 			//which box of the map we're in
 			int mapX = (int)(config->pl_pos_x);
 			int mapY = (int)(config->pl_pos_y);
@@ -127,7 +158,7 @@ void init(t_for_win *win)
 			if(side == 0)
 				wallX = config->pl_pos_y + perpWallDist * rayDirY;
 			else
-				wallX = config->pl_pos_y + perpWallDist * rayDirX;
+				wallX = config->pl_pos_x + perpWallDist * rayDirX;
 			wallX -= floor((wallX));
 
 			//x coordinate on the texture
@@ -143,9 +174,13 @@ void init(t_for_win *win)
 			// Starting texture coordinate
 			double texPos = (drawStart - config->Ry / 2 + lineHeight / 2) * step;
 			y = 0;
+//			floor_and_celling(config);
 			unsigned int color;
 			while (y < drawEnd)
 			{
+				if (y < drawStart)      //потолок
+					my_mlx_pixel_put(&config->win->img, x, y, 0x6ce6df);
+
 				if (y >= drawStart && y <= drawEnd)
 				{
 					int texY = (int)texPos & (texHeight - 1);
@@ -155,35 +190,36 @@ void init(t_for_win *win)
 					{
 						if (stepX > 0)
 						{
-//							color = my_mlx_pixel_take(&map->north_texture, texX, texY);
-//							my_mlx_pixel_put(&map->img, x, y, color);
-							my_mlx_pixel_put(&config->win->img, x, y, 0xFF2FFF);
+							color = my_mlx_pixel_take(&config->NO_texture, texX, texY);
+							my_mlx_pixel_put(&config->win->img, x, y, color);
+//							my_mlx_pixel_put(&config->win->img, x, y, 0xFF2FFF);
 						}
 						else if (stepX < 0)
 						{
-//							color = my_mlx_pixel_take(&config->win->south_texture, texX, texY);
-//							my_mlx_pixel_put(&config->win->win, x, y, color);
-							my_mlx_pixel_put(&config->win->img, x, y, 0xFFF9FF);
+							color = my_mlx_pixel_take(&config->SO_texture, texX, texY);
+							my_mlx_pixel_put(&config->win->img, x, y, color);
+//							my_mlx_pixel_put(&config->win->img, x, y, 0xFFF9FF);
 						}
-
 
 					}
 					if (side == 1)
 					{
 						if (stepY > 0)
 						{
-//							color = my_mlx_pixel_take(&config->win->west_texture, texX, texY);
-//							my_mlx_pixel_put(&config->win->img, x, y, color);
-							my_mlx_pixel_put(&config->win->img, x, y, 0xFFFFFF);
+							color = my_mlx_pixel_take(&config->WE_texture, texX, texY);
+							my_mlx_pixel_put(&config->win->img, x, y, color);
+//							my_mlx_pixel_put(&config->win->img, x, y, 0xFFFFFF);
 						}
 						else if (stepY < 0)
 						{
-//							color = my_mlx_pixel_take(&config->win->east_texture, texX, texY);
-//							my_mlx_pixel_put(&config->win->img, x, y, color);
-							my_mlx_pixel_put(&config->win->img, x, y, 0x0000FF);
+							color = my_mlx_pixel_take(&config->EA_texture, texX, texY);
+							my_mlx_pixel_put(&config->win->img, x, y, color);
+//							my_mlx_pixel_put(&config->win->img, x, y, 0x0000FF);
 						}
 					}
 				}
+				if (y > drawEnd)         //пол
+					my_mlx_pixel_put(&config->win->img, x, y, 0xd16ce6);
 				y++;
 			}
 			x++;
@@ -193,12 +229,13 @@ void init(t_for_win *win)
 void print_blyat(t_config *config)
 {
 	config->win->mlx = mlx_init();
+	fill_texture(config);
 	config->win->mlx_win = mlx_new_window(config->win->mlx, config->Rx, config->Ry, "Hello world!");
 	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
 	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
 								  &config->win->endian);
 
-	init(config->win);
+	init(config);
 	draw_map(config);
 
 	mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);

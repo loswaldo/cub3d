@@ -91,55 +91,55 @@ int key_hook(int key, t_config *config)
 	printf("BEFORE\n");
 	printf("PLR_X: %f\n", config->pl_pos_x);
 	printf("PLR_Y: %f\n", config->pl_pos_y);
-	printf("DIR_X: %f\n", config->win->dir_x);
-	printf("DIR_Y: %f\n", config->win->dir_x);
-	printf("PLANE_X: %f\n", config->win->plane_x);
-	printf("PLANE_Y: %f\n", config->win->plane_y);
+	printf("DIR_X: %f\n", config->dir_x);
+	printf("DIR_Y: %f\n", config->dir_x);
+	printf("PLANE_X: %f\n", config->plane_x);
+	printf("PLANE_Y: %f\n", config->plane_y);
 	if (key == 13)
 	{
-		if(config->MAP[(int)(config->pl_pos_x - config->win->dir_x * moveSpeed)][(int)(config->pl_pos_y)] == '0')
-			config->pl_pos_x += config->win->dir_x * moveSpeed;
-		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->win->dir_y * moveSpeed)] == '0')
-			config->pl_pos_y += config->win->dir_y * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x - config->dir_x * moveSpeed)][(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x += config->dir_x * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->dir_y * moveSpeed)] == '0')
+			config->pl_pos_y += config->dir_y * moveSpeed;
 	}
 	else if (key == 1)
 	{
-		if(config->MAP[(int)(config->pl_pos_x - config->win->dir_x * moveSpeed)][(int)(config->pl_pos_y)] == '0')
-			config->pl_pos_x -= config->win->dir_x * moveSpeed;
-		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y - config->win->dir_y * moveSpeed)] == '0')
-			config->pl_pos_y -= config->win->dir_y * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x - config->dir_x * moveSpeed)][(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x -= config->dir_x * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y - config->dir_y * moveSpeed)] == '0')
+			config->pl_pos_y -= config->dir_y * moveSpeed;
 	}
 	else if (key == 0)
 	{
-		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->win->dir_x * moveSpeed)] == '0')
-			config->pl_pos_y += config->win->dir_x * moveSpeed;
-		if(config->MAP[(int)(config->pl_pos_x - config->win->dir_y * moveSpeed)][(int)(config->pl_pos_y)] == '0')
-			config->pl_pos_x -= config->win->dir_y * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->dir_x * moveSpeed)] == '0')
+			config->pl_pos_y += config->dir_x * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x - config->dir_y * moveSpeed)][(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x -= config->dir_y * moveSpeed;
 	}
 	else if (key == 2)
 	{
-		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->win->dir_x * moveSpeed)] == '0')
-			config->pl_pos_y -= config->win->dir_x * moveSpeed;
-		if(config->MAP[(int)(config->pl_pos_x + config->win->dir_y * moveSpeed)][(int)(config->pl_pos_y)] == '0')
-			config->pl_pos_x += config->win->dir_y * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y + config->dir_x * moveSpeed)] == '0')
+			config->pl_pos_y -= config->dir_x * moveSpeed;
+		if(config->MAP[(int)(config->pl_pos_x + config->dir_y * moveSpeed)][(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x += config->dir_y * moveSpeed;
 	}
 	else if (key == 124)
 	{
-		oldDirX = config->win->dir_x;
-		config->win->dir_x = config->win->dir_x * cos(-rotSpeed) - config->win->dir_y * sin(-rotSpeed);
-		config->win->dir_y = oldDirX * sin(-rotSpeed) + config->win->dir_y * cos(-rotSpeed);
-		oldPlaneX = config->win->plane_x;
-		config->win->plane_x = config->win->plane_x * cos(-rotSpeed) - config->win->plane_y * sin(-rotSpeed);
-		config->win->plane_y = oldPlaneX * sin(-rotSpeed) + config->win->plane_y * cos(-rotSpeed);
+		oldDirX = config->dir_x;
+		config->dir_x = config->dir_x * cos(-rotSpeed) - config->dir_y * sin(-rotSpeed);
+		config->dir_y = oldDirX * sin(-rotSpeed) + config->dir_y * cos(-rotSpeed);
+		oldPlaneX = config->plane_x;
+		config->plane_x = config->plane_x * cos(-rotSpeed) - config->plane_y * sin(-rotSpeed);
+		config->plane_y = oldPlaneX * sin(-rotSpeed) + config->plane_y * cos(-rotSpeed);
 	}
 	else if (key == 123)
 	{
-		oldDirX = config->win->dir_x;
-		config->win->dir_x = config->win->dir_x * cos(rotSpeed) - config->win->dir_y * sin(rotSpeed);
-		config->win->dir_y = oldDirX * sin(rotSpeed) + config->win->dir_y * cos(rotSpeed);
-		oldPlaneX = config->win->plane_x;
-		config->win->plane_x = config->win->plane_x * cos(rotSpeed) - config->win->plane_y * sin(rotSpeed);
-		config->win->plane_y = oldPlaneX * sin(rotSpeed) + config->win->plane_y * cos(rotSpeed);
+		oldDirX = config->dir_x;
+		config->dir_x = config->dir_x * cos(rotSpeed) - config->dir_y * sin(rotSpeed);
+		config->dir_y = oldDirX * sin(rotSpeed) + config->dir_y * cos(rotSpeed);
+		oldPlaneX = config->plane_x;
+		config->plane_x = config->plane_x * cos(rotSpeed) - config->plane_y * sin(rotSpeed);
+		config->plane_y = oldPlaneX * sin(rotSpeed) + config->plane_y * cos(rotSpeed);
 	}
 	else if (key == 53)
 	{
@@ -148,10 +148,10 @@ int key_hook(int key, t_config *config)
 	printf("AFTER\n");
 	printf("PLR_X: %f\n", config->pl_pos_x);
 	printf("PLR_Y: %f\n", config->pl_pos_y);
-	printf("DIR_X: %f\n", config->win->dir_x);
-	printf("DIR_Y: %f\n", config->win->dir_x);
-	printf("PLANE_X: %f\n", config->win->plane_x);
-	printf("PLANE_Y: %f\n", config->win->plane_y);
+	printf("DIR_X: %f\n", config->dir_x);
+	printf("DIR_Y: %f\n", config->dir_x);
+	printf("PLANE_X: %f\n", config->plane_x);
+	printf("PLANE_Y: %f\n", config->plane_y);
 	mlx_destroy_image(config->win->mlx, config->win->img);
 	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
 	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len, &config->win->endian);
@@ -159,9 +159,40 @@ int key_hook(int key, t_config *config)
 	mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);
 	return (1);
 }
+void fill_texture(t_config *config)
+{
+//	void *img;
+
+	config->NO_texture.img = mlx_xpm_file_to_image(config->win->mlx, config->NO_T,
+							 &config->NO_texture.width,&config->NO_texture.height);
+	config->NO_texture.addr = mlx_get_data_addr(config->NO_texture.img, &config->NO_texture.bpp,
+											  &config->NO_texture.line_len, &config->NO_texture.endian);
+
+//printf("'%s'\n", config->SO_T);
+//	config->SO_texture.height = 0;
+//	config->SO_texture.width = 0;
+//	config->SO_texture.img = NULL;
+	config->SO_texture.img = mlx_xpm_file_to_image(config->win->mlx, config->SO_T,
+								&config->SO_texture.width,&config->SO_texture.height);
+	config->SO_texture.addr = mlx_get_data_addr(config->SO_texture.img, &config->SO_texture.bpp,
+												 &config->SO_texture.line_len, &config->SO_texture.endian);
+	config->EA_texture.img = mlx_xpm_file_to_image(config->win->mlx, config->EA_T,
+								&config->EA_texture.width,&config->EA_texture.height);
+	config->EA_texture.addr = mlx_get_data_addr(config->EA_texture.img, &config->EA_texture.bpp,
+												 &config->EA_texture.line_len, &config->EA_texture.endian);
+	config->WE_texture.img = mlx_xpm_file_to_image(config->win->mlx, config->WE_T,
+								&config->WE_texture.width,&config->WE_texture.height);
+	config->WE_texture.addr = mlx_get_data_addr(config->WE_texture.img, &config->WE_texture.bpp,
+												 &config->WE_texture.line_len, &config->WE_texture.endian);
+
+}
 void for_window(t_config *config)
 {
 	config->win = malloc(sizeof(t_for_win));
+//	config->NO_texture = malloc(sizeof(t_for_win));
+//	config->SO_texture = malloc(sizeof(t_for_win));
+//	config->WE_texture = malloc(sizeof(t_for_win));
+//	config->EA_texture = malloc(sizeof(t_for_win));
 //	void    *mlx;
 //	t_for_win win;
 //	karlic(&win);
