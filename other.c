@@ -151,8 +151,8 @@ void	map_checker(t_config *config)
 			|| config->MAP[y][x] == 'W' || config->MAP[y][x] == 'E')
 			{
 				check++;
-				config->pl_pos_y = x;
-				config->pl_pos_x = y;
+				config->pl_pos_y = x + 0.01;
+				config->pl_pos_x = y + 0.01;
 			}
 			x++;
 		}
