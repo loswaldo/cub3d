@@ -151,6 +151,7 @@ void	map_checker(t_config *config)
 			|| config->MAP[y][x] == 'W' || config->MAP[y][x] == 'E')
 			{
 				check++;
+				config->direction = config->MAP[y][x];
 				config->pl_pos_y = x + 0.01;
 				config->pl_pos_x = y + 0.01;
 			}
@@ -185,6 +186,24 @@ void	map_checker(t_config *config)
 	}
 }
 
+void sprites_counter(t_config *config)
+{
+	int count;
+	int i;
+
+	count = 0;
+	i = 0;
+	while (config->PRE_MAP[i])
+	{
+		if (config->PRE_MAP[i] == '2')
+		{
+			count++;
+		}
+		i++;
+	}
+	config->sp_quantity = count;
+}
+
 void	map_validation(t_config *config)
 {
 	char	*tmp;
@@ -192,6 +211,7 @@ void	map_validation(t_config *config)
 	int		y;
 
 	y = 0;
+	sprites_counter(config);
 	tmp = ft_strdup(config->PRE_MAP);
 	free(config->PRE_MAP);
 	config->PRE_MAP = ft_strtrim(tmp, "\n");
@@ -205,11 +225,16 @@ void	map_validation(t_config *config)
 	}
 	config->map_height = y - 1;
 	free(config->PRE_MAP);
-	config->MAP = malloc((config->map_height + 1) * sizeof(char*));
+	config->MAP = malloc((config->map_height + 1) * /*sizeof(char*)*/ config->map_width + 1);
 	y = 0;
 	while (y <= config->map_height)
 	{
 		config->MAP[y] = malloc(config->map_width * sizeof(char));
+		if (!(config->MAP[y]))
+		{
+			printf("T_T(MALLOC NOT MALLOC)");
+			exit(1);
+		}
 		y++;
 	}
 	y = 0;

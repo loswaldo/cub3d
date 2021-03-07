@@ -9,44 +9,31 @@ void	ft_init_struct(t_config *config)
 	config->celling->g = -1;
 	config->celling->b = -1;
 }
-
-int		check_data_filled(t_config *config)
+void error_output(char *str)
 {
-	return (config->floor->r != -1 && config->floor->g != -1
-	&& config->floor->b != -1 && config->celling->r != -1
-	&& config->celling->g != -1 && config->celling->b != -1
-	&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
-	&& config->SO_T != NULL && config->S_T != NULL && config->Ry != 0
-	&& config->Rx != 0);
+	int len;
+
+	len = ft_strlen(str);
+	write(1, str, len);
+	exit(1);
 }
 
-void	parse(t_config *config, char *file_name)
+void check_file_name(char *file_name)
 {
-	char	*line;
-	int		ret;
-	int		fd;
+	int len;
+	int i;
+	char *str;
 
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
+	str = "buc.";
+	len = ft_strlen(file_name);
+	i = 0;
+	while (i <= 3)
 	{
-		printf("FILE ERROR");
-		exit(1);
+		if (file_name[(len - i) - 1] == str[i])
+			i++;
+		else
+			error_output("FILE EXTENSION ERROR");
 	}
-	while ((ret = get_next_line(fd, &line)) > 0)
-	{
-		if (check_line(line, config) && check_data_filled(config))
-		{
-			ft_parse_map(config, line);
-		}
-		free(line);
-	}
-	if (ret == -1)
-	{
-		printf("GNL ERROR");
-		exit(1);
-	}
-	ft_parse_map(config, line);
-	free(line);
 }
 
 void	cub(char *file_name)
@@ -56,19 +43,25 @@ void	cub(char *file_name)
 	ft_bzero(&config, sizeof(t_config));
 	config.floor = malloc(sizeof(t_rgb));
 	config.celling = malloc(sizeof(t_rgb));
-//	config.NO_texture = malloc(sizeof(t_for_win));
+	config.win = malloc(sizeof (t_for_win));
 	ft_init_struct(&config);
 	parse(&config, file_name);
 	rgb_conversion(config.floor, &config.fl);
 	rgb_conversion(config.celling, &config.cel);
 	map_validation(&config);
-	for_window(&config);
+
+	config.sp = calloc(sizeof(t_sprites), config.sp_quantity + 1);
+	config.wall_dist = malloc(sizeof(double) * config.Rx);
+
+	sprites_coord(&config, config.sp);
+	output(&config);
 }
 
 int		main(int ac, char **av)
 {
 	if (ac > 1)
 	{
+		check_file_name(av[1]);
 		cub(av[1]);
 		printf("Yey!");
 	}

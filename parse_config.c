@@ -1,5 +1,16 @@
 #include "cub.h"
 
+
+int		check_data_filled(t_config *config)
+{
+	return (config->floor->r != -1 && config->floor->g != -1
+			&& config->floor->b != -1 && config->celling->r != -1
+			&& config->celling->g != -1 && config->celling->b != -1
+			&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
+			&& config->SO_T != NULL && config->S_T != NULL && config->Ry != 0
+			&& config->Rx != 0);
+}
+
 int		ft_skip_spaces(char *line, int i)
 {
 	while (line[i] == ' ' || line[i] == '\t')
@@ -26,8 +37,7 @@ void	parser_for_resolution(t_config *config, char *line)
 	i = ft_skip_spaces(line, i);
 	if (ft_isdigit(line[i]))
 	{
-		printf("WRONG NUMBER FOR RESOLUTION");
-		exit(1);
+		error_output("WRONG NUMBER FOR RESOLUTION");
 	}
 }
 
@@ -37,8 +47,7 @@ void	parser_for_texture(char *line, char **part_of_struct, int i)
 		*part_of_struct = ft_strdup(&line[i + 1]);
 	else
 	{
-		printf("REITERATION TEXTURE");
-		exit(1);
+		error_output("REITERATION TEXTURE");
 	}
 }
 

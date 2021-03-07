@@ -18,7 +18,15 @@ typedef struct s_rgb
 	int		b;
 }				t_rgb;
 
-typedef struct s_for_win {
+typedef struct s_sprites
+{
+	double x;
+	double y;
+	double *dist;
+}				t_sprites;
+
+typedef struct s_for_win
+{
 	void		*img;
 	char 		*addr;
 	void    	*mlx;
@@ -41,14 +49,20 @@ typedef struct	s_config
 	char	*S_T;
 	int 	fl;
 	int		cel;
+	int 	tmp_w;
+	int 	tmp_h;
 
 	t_rgb	*floor;
 	t_rgb	*celling;
 	t_for_win	*win;
-	t_for_win 	NO_texture;
-	t_for_win 	SO_texture;
-	t_for_win 	WE_texture;
-	t_for_win 	EA_texture;
+	t_for_win 	NO_tex;
+	t_for_win 	SO_tex;
+	t_for_win 	WE_tex;
+	t_for_win 	EA_tex;
+	t_for_win	S_tex;
+
+	t_sprites 	*sp;
+	t_for_win	tmp_tex;
 
 	char	*PRE_MAP;
 	char 	**MAP;
@@ -60,12 +74,16 @@ typedef struct	s_config
 	float 	dir_y;
 	float 	plane_x;
 	float 	plane_y;
+	int 	sp_quantity;
+	double *wall_dist;
+
+	char	direction;
 }				t_config;
 
 
 
 void ft_print_st(t_config *map); 				//надо снести
-//int			get_next_line(int fd, char **line);
+int			get_next_line(int fd, char **line);
 void		cub();
 void ft_parse_map(t_config *config, char *line);
 void parser_for_rgb(char *line, t_rgb *part_of_struct);
@@ -79,9 +97,11 @@ void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
 void for_window(t_config *config);
 void my_mlx_pixel_put(t_for_win *data, int x, int y, int color);
-void print_blyat(t_config *config);
+void output(t_config *config);
 void	draw_map(t_config *config);
 int key_hook(int key,t_config *config);
 void fill_texture(t_config *config);
+void	parse(t_config *config, char *file_name);
+void sprites_coord(t_config *config, t_sprites *s);
 
 #endif
