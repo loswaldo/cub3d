@@ -1,6 +1,6 @@
 #include "cub.h"
 
-void	my_mlx_pixel_put(t_for_win *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_for_win *data, int x, int y, unsigned int color)
 {
 	char	*dst;
 

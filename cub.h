@@ -94,12 +94,14 @@ void map_validation(t_config *config);
 void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
 void for_window(t_config *config);
-void my_mlx_pixel_put(t_for_win *data, int x, int y, int color);
+void my_mlx_pixel_put(t_for_win *data, int x, int y, unsigned int color);
 void output(t_config *config, int argc);
 void	draw_map(t_config *config);
 int key_hook(int key,t_config *config);
 void fill_texture(t_config *config);
 void	parse(t_config *config, char *file_name);
 void sprites_coord(t_config *config, t_sprites *sprite);
+void draw_sprites(t_config *config);
+unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y);
 
 #endif

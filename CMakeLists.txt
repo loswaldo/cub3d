@@ -50,7 +50,7 @@ set(GNL_SRC
         get_next_line/get_next_line.c
         get_next_line/get_next_line_utils.c
         get_next_line/get_next_line.h
-        )
+        sprite_draw.c)
 
 add_executable(cub
         ${LIBFT_SRC}
