@@ -250,7 +250,7 @@ void output(t_config *config, int argc)
 		config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
 									  &config->win->endian);
 		init(config);
-		config->sp = malloc(config->sp_quantity * sizeof(t_sprites));
+//		config->sp = malloc(config->sp_quantity * sizeof(t_sprites));
 		draw_map(config);
 		mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);
 		screenshot(config);
@@ -264,7 +264,7 @@ void output(t_config *config, int argc)
 		config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
 									  &config->win->endian);
 		init(config);
-		config->sp = malloc(config->sp_quantity * sizeof(t_sprites));
+//		config->sp = malloc(config->sp_quantity * sizeof(t_sprites));
 		draw_map(config);
 		mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);
 		mlx_hook(config->win->mlx_win, 2, 1L<<0, key_hook, config);

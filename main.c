@@ -50,7 +50,7 @@ void	cub(char *file_name, int argc)
 	rgb_conversion(config.celling, &config.cel);
 	map_validation(&config);
 
-	config.sp = malloc(sizeof(t_sprites) * (config.sp_quantity));
+	config.sp = ft_calloc(sizeof(t_sprites), (config.sp_quantity));
 	// int i = 0;
 	// while (i < config.sp_quantity)
 	// {
