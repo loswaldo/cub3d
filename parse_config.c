@@ -47,7 +47,7 @@ void	parser_for_texture(char *line, char **part_of_struct, int i)
 		*part_of_struct = ft_strdup(&line[i + 1]);
 	else
 	{
-		error_output("REITERATION TEXTURE"); /* todo: wtf */
+		error_output("REITERATION TEXTURE");
 	}
 }
 

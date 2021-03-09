@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.17)
 project(cub C)
 
 set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_FLAGS "-Lmlx -lmlx -framework OpenGL -framework AppKit")
+#set(CMAKE_C_FLAGS "-Lmlx -lmlx -framework OpenGL -framework AppKit")
+set(CMAKE_C_FLAGS "-Wall -Wextra -Werror")
 #set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -Wno-unused -Wno-unused-variable -Wno-unused-parameter")
 
 link_directories(./)
@@ -66,4 +67,4 @@ add_executable(cub
         3d_try.c
         )
 
-target_link_libraries(cub libmlx.dylib)
+target_link_libraries(cub libmlx.dylib mlx)

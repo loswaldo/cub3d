@@ -15,13 +15,13 @@ void init(t_config *config)
 	config->plane_y = 0;
 }
 
-void put(t_config *config, int tex_x, int tex_y, int x, int y)
+/*void put(t_config *config, int tex_x, int tex_y, int x, int y)
 {
 	unsigned int color;
 
 	color = my_mlx_pixel_take(&config->tmp_tex, tex_x, tex_y);
 	my_mlx_pixel_put(&config->win->img, x, y, color);
-}
+}*/
 
 void	draw_map(t_config *config)
 {

@@ -20,14 +20,15 @@ SRC = get_next_line/get_next_line.c\
       parse_rgb.c\
       for_window.c\
       3d_try.c\
-      parser.c
+      parser.c \
+      sprite_draw.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	gcc  -o $(NAME) $(OBJ) $(LIBFT) $(MLX) -Iminilibx_mms_20200219 -lmlx -framework OpenGL -framework AppKit -I./includes
+	gcc  -o $(NAME) $(OBJ) $(LIBFT) -Iminilibx_mms_20200219 -lmlx -framework OpenGL -framework AppKit -I./includes
 
 %.o: %.c
 		gcc  $(OPTION)
