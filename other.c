@@ -95,6 +95,18 @@ int		map_symbol_check(char c, const char *str)
 	return (0);
 }
 
+void print_map(char **map) { /* todo: delete this function */
+	puts("Start printing!");
+
+	int y = 0;
+	while (map[y])
+	{
+		printf("%s\n", map[y]);
+		y++;
+	}
+	puts("Success printing!");
+}
+
 void	part_of_map_checker(t_config *config, int x, int y)
 {
 	int		i;
@@ -140,6 +152,8 @@ void	map_checker(t_config *config)
 	int		y;
 	int		check;
 
+	print_map(config->MAP); /* todo: delete */
+
 	check = 0;
 	y = 0;
 	while (y < config->map_height)
@@ -179,12 +193,7 @@ void	map_checker(t_config *config)
 		}
 		y++;
 	}
-	y = 0;
-	while (config->MAP[y])
-	{
-		printf("%s\n", config->MAP[y]);
-		y++;
-	}
+
 }
 
 void sprites_counter(t_config *config)
@@ -208,49 +217,22 @@ void sprites_counter(t_config *config)
 void	map_validation(t_config *config)
 {
 	char	*tmp;
-	char	**str;
 	int		y;
 
 	y = 0;
 	sprites_counter(config);
-	tmp = ft_strdup(config->PRE_MAP);
-	free(config->PRE_MAP);
-	config->PRE_MAP = ft_strtrim(tmp, "\n");
+	tmp = config->PRE_MAP;
+	config->PRE_MAP = ft_strtrim(config->PRE_MAP, "\n");
 	free(tmp);
-	str = ft_split(config->PRE_MAP, '\n');
-	while (str[y])
+	config->MAP = ft_split(config->PRE_MAP, '\n');
+	while (config->MAP[y])
 	{
-		if (str[y] != 0 && config->map_width > (int)ft_strlen(str[y]))
-			str[y] = ft_fill_spaces(str[y], config->map_width);
+		if (config->MAP[y] != 0 && config->map_width > (int)ft_strlen(config->MAP[y]))
+			config->MAP[y] = ft_fill_spaces(config->MAP[y], config->map_width);
 		y++;
 	}
 	config->map_height = y - 1;
 	free(config->PRE_MAP);
-	config->MAP = malloc((config->map_height + 1) * /*sizeof(char*)*/ config->map_width + 1);
-	y = 0;
-	while (y <= config->map_height)
-	{
-		config->MAP[y] = malloc(config->map_width * sizeof(char));
-		if (!(config->MAP[y]))
-		{
-			printf("T_T(MALLOC NOT MALLOC)");
-			exit(1);
-		}
-		y++;
-	}
-	y = 0;
-	while (str[y])
-	{
-		config->MAP[y] = ft_strdup(str[y]);
-		y++;
-	}
-	config->MAP[y] = NULL;
-	y = 0;
-	while (str[y])
-	{
-		free(str[y]);
-		y++;
-	}
-	free(str);
+	config->PRE_MAP = NULL;
 	map_checker(config);
 }
