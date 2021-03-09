@@ -29,26 +29,28 @@ void	parse(t_config *config, char *file_name)
 	free(line);
 }
 
-void sprites_coord(t_config *config, t_sprites *s)
+void sprites_coord(t_config *config, t_sprites *sprite)
 {
 	int x;
 	int y;
 	int i;
-
+	
 	x = 0;
 	y = 0;
 	i = 0;
-	while(config->MAP[y])
+	while (config->MAP[y])
 	{
-		while(config->MAP[y][x])
+		while (config->MAP[y][x])
 		{
 			if (config->MAP[y][x] == '2')
 			{
-				s[i].x = x + 0.5;
-				s[i].y = y + 0.5;
+				sprite[i].x = ((double)y + 0.5);
+				sprite[i].y = ((double)x + 0.5);
+				i++;
 			}
-			x++;
+			x++;	
 		}
+		x = 0;
 		y++;
 	}
 }

@@ -6,7 +6,7 @@ int		ft_is_identifier(char *line, int i, t_config *config)
 		parser_for_texture(line, &config->NO_T, 2);
 	else if (line[i] == 'S' && (line[i + 1] == 'O' || line[i + 1] == ' '))
 		parser_for_texture(line, line[i + 1] == 'O'
-		? &config->SO_T : &config->S_T, 2);
+		? &config->SO_T : &config->S_T, line[i + 1] == 'O' ? 2 : 1);
 	else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
 		parser_for_texture(line, &config->WE_T, 2);
 	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
@@ -121,7 +121,7 @@ void	part_of_map_checker(t_config *config, int x, int y)
 				exit(1);
 			}
 			else
-				printf("all good \n");
+				// printf("all good \n");
 			i++;
 		}
 		j++;
@@ -152,6 +152,7 @@ void	map_checker(t_config *config)
 			{
 				check++;
 				config->direction = config->MAP[y][x];
+				config->MAP[y][x] = '0';
 				config->pl_pos_y = x + 0.01;
 				config->pl_pos_x = y + 0.01;
 			}

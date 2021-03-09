@@ -22,7 +22,7 @@ typedef struct s_sprites
 {
 	double x;
 	double y;
-	double *dist;
+	double dist;
 }				t_sprites;
 
 typedef struct s_for_win
@@ -80,8 +80,6 @@ typedef struct	s_config
 	char	direction;
 }				t_config;
 
-
-
 void ft_print_st(t_config *map); 				//надо снести
 int			get_next_line(int fd, char **line);
 void		cub();
@@ -97,11 +95,11 @@ void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
 void for_window(t_config *config);
 void my_mlx_pixel_put(t_for_win *data, int x, int y, int color);
-void output(t_config *config);
+void output(t_config *config, int argc);
 void	draw_map(t_config *config);
 int key_hook(int key,t_config *config);
 void fill_texture(t_config *config);
 void	parse(t_config *config, char *file_name);
-void sprites_coord(t_config *config, t_sprites *s);
+void sprites_coord(t_config *config, t_sprites *sprite);
 
 #endif

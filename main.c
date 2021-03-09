@@ -36,7 +36,7 @@ void check_file_name(char *file_name)
 	}
 }
 
-void	cub(char *file_name)
+void	cub(char *file_name, int argc)
 {
 	t_config	config;
 
@@ -50,20 +50,34 @@ void	cub(char *file_name)
 	rgb_conversion(config.celling, &config.cel);
 	map_validation(&config);
 
-	config.sp = calloc(sizeof(t_sprites), config.sp_quantity + 1);
+	config.sp = malloc(sizeof(t_sprites) * (config.sp_quantity));
+	// int i = 0;
+	// while (i < config.sp_quantity)
+	// {
+	// ft_bzero(&config.sp[i], (sizeof(t_sprites)));
+	// 	i++;
+	// }
 	config.wall_dist = malloc(sizeof(double) * config.Rx);
-
+	
 	sprites_coord(&config, config.sp);
-	output(&config);
+	output(&config, argc);
 }
 
 int		main(int ac, char **av)
 {
 	if (ac > 1)
 	{
-		check_file_name(av[1]);
-		cub(av[1]);
-		printf("Yey!");
+		if (ac == 2)
+		{
+			check_file_name(av[1]);
+			cub(av[1], ac);
+			printf("Yey!");
+		}
+		else if (ac == 3)
+		{
+			check_file_name(av[1]);
+			cub(av[1], ac);
+		}
 	}
 	else
 	{

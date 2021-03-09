@@ -14,30 +14,80 @@ void	my_mlx_pixel_put(t_for_win *data, int x, int y, int color)
 void	key_hook_move(int key, t_config *config)
 {
 	float	move_s;
-	float	c;
-
-	c = 1;
-	move_s = (float)0.2;
-	if (key == 1 || key == 0)
-		c = -1;
-	if (key == 13 || key == 1)
+	float	move_r;
+	
+	move_s = 0.2f;
+	move_r = 0.2f;
+	printf("key = %d\n", key);
+	if (key == 13) // up
 	{
-		if (config->MAP[(int)(config->pl_pos_x - config->dir_x * move_s)]
-		[(int)(config->pl_pos_y)] == '0')
-			config->pl_pos_x += (config->dir_x * move_s * c);
-		if (config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y +
-		(c * config->dir_y * move_s))] == '0')
-			config->pl_pos_y += (config->dir_y * move_s * c);
-	}
-	if (key == 0 || key == 2)
-	{
+		if (config->MAP[(int)(config->pl_pos_x
+					+ config->dir_x * move_s)]
+						[(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x += config->dir_x * move_s;
 		if (config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y
-		+ config->dir_x * move_s)] == '0')
-			config->pl_pos_y -= (c * config->dir_x * move_s);
-		if (config->MAP[(int)(config->pl_pos_x + (c * config->dir_y *
-		move_s))][(int)(config->pl_pos_y)] == '0')
-			config->pl_pos_x += (c * config->dir_y * move_s);
+					+ config->dir_y * move_s)] == '0')
+			config->pl_pos_y += config->dir_y * move_s;
 	}
+	if (key == 1) // down
+	{
+		if (config->MAP[(int)(config->pl_pos_x
+					- config->dir_x * move_s)]
+						[(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x -= config->dir_x * move_s;
+		if (config->MAP[(int)(config->pl_pos_x)]
+				[(int)(config->pl_pos_y
+					- config->dir_y * move_s)] == '0')
+			config->pl_pos_y -= config->dir_y * move_s;
+	}
+	if (key == 0) // left
+	{
+		if (config->MAP[(int)(config->pl_pos_x)]
+				[(int)(config->pl_pos_y
+					+ config->dir_x * move_s)] == '0')
+			config->pl_pos_y += config->dir_x * move_s;
+		if (config->MAP[(int)(config->pl_pos_x
+					- config->dir_y * move_s)]
+						[(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x -= config->dir_y * move_s;
+	}
+	if (key == 2) // right
+	{
+		if (config->MAP[(int)(config->pl_pos_x)]
+				[(int)(config->pl_pos_y
+					- config->dir_x * move_s)] == '0')
+			config->pl_pos_y -= config->dir_x * move_s;
+		if (config->MAP[(int)(config->pl_pos_x
+					+ config->dir_y * move_s)]
+						[(int)(config->pl_pos_y)] == '0')
+			config->pl_pos_x += config->dir_y * move_s;
+	}
+	
+	
+	// float	c;
+
+	// c = 1;
+	// move_s = (float)0.2;
+	// if (key == 1 || key == 0)
+	// 	c = -1;
+	// if (key == 13 || key == 1)
+	// {
+	// 	if (config->MAP[(int)(config->pl_pos_x - config->dir_x * move_s)]
+	// 	[(int)(config->pl_pos_y)] == '0')
+	// 		config->pl_pos_x += (config->dir_x * move_s * c);
+	// 	if (config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y +
+	// 	(c * config->dir_y * move_s))] == '0')
+	// 		config->pl_pos_y += (config->dir_y * move_s * c);
+	// }
+	// if (key == 0 || key == 2)
+	// {
+	// 	if (config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y
+	// 	+ config->dir_x * move_s)] == '0')
+	// 		config->pl_pos_y -= (c * config->dir_x * move_s);
+	// 	if (config->MAP[(int)(config->pl_pos_x + (c * config->dir_y *
+	// 	move_s))][(int)(config->pl_pos_y)] == '0')
+	// 		config->pl_pos_x += (c * config->dir_y * move_s);
+	// }
 }
 
 void	key_hook_rotation(int key, t_config *config)
@@ -101,6 +151,6 @@ void	fill_texture(t_config *config)
 	config->WE_tex.addr = mlx_get_data_addr(config->WE_tex.img,
 		&config->WE_tex.bpp, &config->WE_tex.line_len, &config->WE_tex.endian);
 
-//	config->S_tex.img = mlx_png_file_to_image(config->win->mlx, config->S_T, &config->S_tex.width, &config->S_tex.height);
-//	config->S_tex.addr = mlx_get_data_addr(config->S_tex.img, &config->S_tex.bpp, &config->S_tex.line_len, &config->S_tex.endian);
+	config->S_tex.img = mlx_xpm_file_to_image(config->win->mlx, config->S_T, &config->S_tex.width, &config->S_tex.height);
+	config->S_tex.addr = mlx_get_data_addr(config->S_tex.img, &config->S_tex.bpp, &config->S_tex.line_len, &config->S_tex.endian);
 }
