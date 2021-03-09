@@ -101,7 +101,7 @@ int key_hook(int key,t_config *config);
 void fill_texture(t_config *config);
 void	parse(t_config *config, char *file_name);
 void sprites_coord(t_config *config, t_sprites *sprite);
-void draw_sprites(t_config *config);
+void draw_sprites(t_config *config, float *ZBuffer);
 unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y);
 
 #endif

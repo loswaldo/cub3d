@@ -25,6 +25,9 @@ void put(t_config *config, int tex_x, int tex_y, int x, int y)
 
 void	draw_map(t_config *config)
 {
+	float *ZBuffer = ft_calloc(config->Rx, sizeof(double));
+	/*todo : check malloc*/
+
 	int x;
 	int y;
 
@@ -157,8 +160,11 @@ void	draw_map(t_config *config)
 		while (kek < config->Ry)         ////JENSKII пол
 			my_mlx_pixel_put(config->win, x, kek++, 0xd16ce6);
 		x++;
+
+		//SET THE ZBUFFER FOR THE SPRITE CASTING
+		ZBuffer[x] = perpWallDist; //perpendicular distance is used
 	}
-	draw_sprites(config);
+	draw_sprites(config, ZBuffer);
 }
 
 
