@@ -55,7 +55,7 @@ set(GNL_SRC
 add_executable(cub
         ${LIBFT_SRC}
         ${GNL_SRC}
-        minilibx_mms_20200219/libmlx.dylib
+#        minilibx_mms_20200219/libmlx.dylib
         cub.h
         parser.c
         main.c
@@ -65,3 +65,5 @@ add_executable(cub
         for_window.c
         3d_try.c
         )
+
+target_link_libraries(cub libmlx.dylib)

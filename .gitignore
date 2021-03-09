@@ -1,0 +1,15 @@
+.vscode
+cmake-build-debug
+libmlx.dylib
+screen.bmp
+
+*.o
+
+minilibx_mms_20200219/*.swiftdoc
+minilibx_mms_20200219/*.swiftmodule
+.idea
+
+libft/*.o
+libft/*.a
+
+cub3D
