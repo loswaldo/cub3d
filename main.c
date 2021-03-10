@@ -36,7 +36,7 @@ void check_file_name(char *file_name)
 	}
 }
 
-void	cub(char *file_name, int argc)
+void	cub(char *file_name, int is_screenshot)
 {
 	t_config	config;
 
@@ -60,7 +60,17 @@ void	cub(char *file_name, int argc)
 	config.wall_dist = malloc(sizeof(double) * config.Rx);
 	
 	sprites_coord(&config, config.sp);
-	output(&config, argc);
+	output(&config, is_screenshot);
+}
+
+void validate_save_argument(const char* arg_save)
+{
+	const char* save = "--save";
+
+	if (ft_strncmp(arg_save, save, ft_strlen(save) + 1) != 0)
+	{
+		error_output("WRONG ARGUMENT");
+	}
 }
 
 int		main(int ac, char **av)
@@ -70,13 +80,14 @@ int		main(int ac, char **av)
 		if (ac == 2)
 		{
 			check_file_name(av[1]);
-			cub(av[1], ac);
+			cub(av[1], 0);
 			printf("Yey!");
 		}
 		else if (ac == 3)
 		{
 			check_file_name(av[1]);
-			cub(av[1], ac);
+			validate_save_argument(av[2]);
+			cub(av[1], 1);
 		}
 	}
 	else

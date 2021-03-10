@@ -259,19 +259,19 @@ void			screenshot(t_config *config)
 	close(fd);
 }
 
-void output(t_config *config, int argc)
+void output(t_config *config, int is_screenshot)
 {
 	config->win->mlx = mlx_init();
 	fill_texture(config);
 
-	if (argc < 3)
+	if (!is_screenshot)
 		config->win->mlx_win = mlx_new_window(config->win->mlx, config->Rx, config->Ry, "Cute girls & cakes");
 	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
 	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
 						&config->win->endian);
 	init(config);
 	draw_map(config);
-	if (argc == 3)
+	if (is_screenshot)
 		screenshot(config);
 	else
 	{

@@ -95,7 +95,7 @@ void parser_for_texture(char *line, char **part_of_struct, int i);
 void parser_for_resolution(t_config *config, char *line);
 void for_window(t_config *config);
 void my_mlx_pixel_put(t_for_win *data, int x, int y, unsigned int color);
-void output(t_config *config, int argc);
+void output(t_config *config, int is_screenshot);
 void	draw_map(t_config *config);
 int key_hook(int key,t_config *config);
 void fill_texture(t_config *config);
