@@ -1,9 +1,65 @@
 #include "cub.h"
 
+void print_array(t_sprites *sp, int size)
+{
+
+	for (int j = 0; j < size; ++j) {
+		printf("%.2lf{%.1lf,%.1lf} ", sp[j].dist, sp[j].x, sp[j].y);
+	}
+	puts("");
+}
+
+void swap(double *d1, double *d2)
+{
+	double tmp;
+
+	tmp = *d2;
+	*d2 = *d1;
+	*d1 = tmp;
+}
+
+void swap_value(t_sprites *first, t_sprites *second)
+{
+	swap(&first->dist, &second->dist);
+	swap(&first->x, &second->x);
+	swap(&first->y, &second->y);
+}
+
+void sprite_sorting(t_config *config, t_sprites *sp)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (i < config->sp_quantity)
+	{
+		sp[i].dist = ((config->pl_pos_x - sp[i].x) *
+		(config->pl_pos_x - sp[i].x) + (config->pl_pos_y - sp[i].y) * (config->pl_pos_y - sp[i].y));
+		i++;
+	}
+	i = 0;
+	while (i < config->sp_quantity)
+	{
+		j = config->sp_quantity - 1;
+		while(j > i)
+		{
+			if (sp[j - 1].dist < sp[j].dist)
+			{
+				swap_value(&sp[j-1], &sp[j]);
+			}
+			j--;
+		}
+		i++;
+	}
+//	 print_array(sp, config->sp_quantity); /* todo */
+}
+
 void draw_sprites(t_config *config, float * ZBuffer)
 {
 	//SPRITE CASTING
 	//sort sprites from far to close
+	int i;
+
 //	for(int i = 0; i < config->sp_quantity; i++)
 //	{
 //		spriteOrder[i] = i;
@@ -11,8 +67,10 @@ void draw_sprites(t_config *config, float * ZBuffer)
 //	}
 //	sortSprites(spriteOrder, spriteDistance, config->sp_quantity);
 
+	sprite_sorting(config, config->sp);
 	//after sorting the sprites, do the projection and draw them
-	for(int i = 0; i < config->sp_quantity; i++)
+	i = 0;
+	while (i < config->sp_quantity)
 	{
 		//translate sprite position to relative to camera
 		double spriteX = config->sp[i].x - config->pl_pos_x;
@@ -72,6 +130,7 @@ void draw_sprites(t_config *config, float * ZBuffer)
 				}
 			}
 		}
+		i++;
 	}
 }
 
