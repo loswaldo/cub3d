@@ -7,12 +7,29 @@ unsigned int		my_mlx_pixel_take(t_for_win *win, int x, int y)
 	dst = win->addr + (y * win->line_len + x * (win->bpp / 8));
 	return (*(unsigned int*)dst);
 }
+
 void init(t_config *config)
 {
-	config->dir_x = 0;
-	config->dir_y = 1;
-	config->plane_x = 0.66f;
-	config->plane_y = 0;
+	if(config->direction == 'N')
+	{
+		config->dir_x = -1;
+		config->plane_y = 0.66f;
+	}
+	if (config->direction == 'W')
+	{
+		config->dir_y = -1;
+		config->plane_x = -0.66f;
+	}
+	if (config->direction == 'E')
+	{
+		config->dir_y = 1;
+		config->plane_x = 0.66f;
+	}
+	if (config->direction == 'S')
+	{
+		config->dir_x = 1;
+		config->plane_y = -0.66f;
+	}
 }
 
 /*void put(t_config *config, int tex_x, int tex_y, int x, int y)
