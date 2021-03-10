@@ -18,10 +18,7 @@ int		ft_is_identifier(char *line, int i, t_config *config)
 	else if (line[i] == '1' && check_data_filled(config))
 		return (1);
 	else
-	{
-		printf("WRONG STRING OR NOT ENOUGH SHTUKI");
-		exit(1);
-	}
+		error_output("WRONG STRING OR NOT ");
 	return (0);
 }
 
@@ -43,10 +40,7 @@ int		check_line(char *line, t_config *config)
 	if (line[i] == '\0')
 	{
 		if (check_data_filled(config) && config->PRE_MAP)
-		{
-			printf("MAP IS NOT MAP!");
-			exit(1);
-		}
+			error_output("MAP IS NOT MAP!");
 		return (0);
 	}
 	i = ft_skip_spaces(line, i);
@@ -116,33 +110,19 @@ void	part_of_map_checker(t_config *config, int x, int y)
 	x += -1;
 	y += -1;
 	if ((x < 0 || x >= config->map_width) || (y < 0 || y >= config->map_height))
-	{
-		printf("MAP IS NOT VALID!!!!!!!");
-		printf("x = %d y = %d", x, y);
-		exit(1);
-	}
+		error_output("MAP IS NOT VALID!");
 	while (j < 3)
 	{
 		i = 0;
 		while (i < 3)
 		{
 			if (!(map_symbol_check(config->MAP[y + j][x + i], "102NWES")))
-			{
-				printf("MAP IS NOT VALID!!!!!!!");
-				printf("x = %d y = %d", x, y);
-				exit(1);
-			}
-			else
-				// printf("all good \n");
+				error_output("MAP IS NOT VALID!!!!!!!");
 			i++;
 		}
 		j++;
 		if (y < 0 || y > config->map_height)
-		{
-			printf("MAP IS NOT VALID!!!!!!!");
-			printf("x = %d y = %d", x, y);
-			exit(1);
-		}
+			error_output("MAP IS NOT VALID!!!!!!!");
 	}
 }
 
@@ -152,7 +132,6 @@ void	map_checker(t_config *config)
 	int		y;
 	int		check;
 
-	print_map(config->MAP); /* todo: delete */
 
 	check = 0;
 	y = 0;
@@ -167,18 +146,15 @@ void	map_checker(t_config *config)
 				check++;
 				config->direction = config->MAP[y][x];
 				config->MAP[y][x] = '0';
-				config->pl_pos_y = x + 0.01;
-				config->pl_pos_x = y + 0.01;
+				config->pl_pos_y = (float)(x + 0.01);
+				config->pl_pos_x = (float)(y + 0.01);
 			}
 			x++;
 		}
 		y++;
 	}
 	if (check != 1)
-	{
-		printf("MAP ERROR(number of start position)");
-		exit(1);
-	}
+		error_output("MAP ERROR(number of start position)");
 	y = 0;
 	while (y < config->map_height)
 	{

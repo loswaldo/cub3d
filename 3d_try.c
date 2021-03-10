@@ -43,7 +43,10 @@ void init(t_config *config)
 void	draw_map(t_config *config)
 {
 	float *ZBuffer = ft_calloc(config->Rx, sizeof(double));
-	/*todo : check malloc*/
+	if (!(ZBuffer))
+	{
+		error_output("MALLOC ERROR");
+	}
 
 	int x;
 	int y;
@@ -258,33 +261,23 @@ void			screenshot(t_config *config)
 
 void output(t_config *config, int argc)
 {
+	config->win->mlx = mlx_init();
+	fill_texture(config);
+
+	if (argc < 3)
+		config->win->mlx_win = mlx_new_window(config->win->mlx, config->Rx, config->Ry, "Cute girls & cakes");
+	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
+	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
+						&config->win->endian);
+	init(config);
+	draw_map(config);
 	if (argc == 3)
-	{
-		config->win->mlx = mlx_init();
-		fill_texture(config);
-		config->win->mlx_win = mlx_new_window(config->win->mlx, config->Rx, config->Ry, "Hello world!");
-		config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
-		config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
-									  &config->win->endian);
-		init(config);
-//		config->sp = malloc(config->sp_quantity * sizeof(t_sprites));
-		draw_map(config);
-		mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);
 		screenshot(config);
-	}
-	else if (argc <= 3)
+	else
 	{
-		config->win->mlx = mlx_init();
-		fill_texture(config);
-		config->win->mlx_win = mlx_new_window(config->win->mlx, config->Rx, config->Ry, "Hello world!");
-		config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
-		config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp, &config->win->line_len,
-									  &config->win->endian);
-		init(config);
-//		config->sp = malloc(config->sp_quantity * sizeof(t_sprites));
-		draw_map(config);
 		mlx_put_image_to_window(config->win->mlx, config->win->mlx_win, config->win->img, 0, 0);
 		mlx_hook(config->win->mlx_win, 2, 1L<<0, key_hook, config);
 		mlx_loop(config->win->mlx);
 	}
+
 }

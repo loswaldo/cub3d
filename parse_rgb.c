@@ -16,10 +16,7 @@ void	check_line_for_rgb(char *line)
 		i++;
 	}
 	if (count > 2)
-	{
-		printf("WRONG COLOR");
-		exit(1);
-	}
+		error_output("WRONG COLOR");
 }
 
 void	parser_for_rgb(char *line, t_rgb *part_of_struct)
@@ -34,10 +31,7 @@ void	parser_for_rgb(char *line, t_rgb *part_of_struct)
 		{
 			part_of_struct->r = ft_atoi(&line[i]);
 			if (part_of_struct->r > 255 || part_of_struct->r < 0)
-			{
-				printf("WRONG COLOR");
-				exit(1);
-			}
+				error_output("WRONG COLOR");
 			while (ft_isdigit(line[i]))
 				i++;
 			i++;
@@ -46,10 +40,7 @@ void	parser_for_rgb(char *line, t_rgb *part_of_struct)
 		{
 			part_of_struct->g = ft_atoi(&line[i]);
 			if (part_of_struct->g > 255 || part_of_struct->g < 0)
-			{
-				printf("WRONG COLOR");
-				exit(1);
-			}
+				error_output("WRONG COLOR");
 			while (ft_isdigit(line[i]))
 				i++;
 			i++;
@@ -58,10 +49,7 @@ void	parser_for_rgb(char *line, t_rgb *part_of_struct)
 		{
 			part_of_struct->b = ft_atoi(&line[i]);
 			if (part_of_struct->b > 255 || part_of_struct->b < 0)
-			{
-				printf("WRONG COLOR");
-				exit(1);
-			}
+				error_output("WRONG COLOR");
 		}
 		else
 			i++;
