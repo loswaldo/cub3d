@@ -37,7 +37,7 @@ void	parser_for_resolution(t_config *config, char *line)
 	i = ft_skip_spaces(line, i);
 	if (ft_isdigit(line[i]))
 	{
-		error_output("WRONG NUMBER FOR RESOLUTION");
+		error_output_n_exit("WRONG NUMBER FOR RESOLUTION");
 	}
 }
 
@@ -47,7 +47,7 @@ void	parser_for_texture(char *line, char **part_of_struct, int i)
 		*part_of_struct = ft_strdup(&line[i + 1]);
 	else
 	{
-		error_output("REITERATION TEXTURE");
+		error_output_n_exit("REITERATION TEXTURE");
 	}
 }
 

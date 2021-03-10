@@ -132,25 +132,43 @@ int		key_hook(int key, t_config *config)
 	return (1);
 }
 
+void for_mlx_create(char *path, t_for_win *tex, t_for_win *win)
+{
+	tex->img = mlx_xpm_file_to_image(win->mlx, path, &tex->width,
+				&tex->height);
+	if (!(tex->img))
+	{
+		error_output_n_exit("NON VALID FILE");
+	}
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bpp,
+				&tex->line_len, &tex->endian);
+}
+
 void	fill_texture(t_config *config)
 {
-	config->NO_tex.img = mlx_xpm_file_to_image(config->win->mlx,
-		config->NO_T, &config->NO_tex.width, &config->NO_tex.height);
-	config->NO_tex.addr = mlx_get_data_addr(config->NO_tex.img,
-		&config->NO_tex.bpp, &config->NO_tex.line_len, &config->NO_tex.endian);
-	config->SO_tex.img = mlx_xpm_file_to_image(config->win->mlx,
-		config->SO_T, &config->SO_tex.width, &config->SO_tex.height);
-	config->SO_tex.addr = mlx_get_data_addr(config->SO_tex.img,
-		&config->SO_tex.bpp, &config->SO_tex.line_len, &config->SO_tex.endian);
-	config->EA_tex.img = mlx_xpm_file_to_image(config->win->mlx, config->EA_T,
-		&config->EA_tex.width, &config->EA_tex.height);
-	config->EA_tex.addr = mlx_get_data_addr(config->EA_tex.img,
-		&config->EA_tex.bpp, &config->EA_tex.line_len, &config->EA_tex.endian);
-	config->WE_tex.img = mlx_xpm_file_to_image(config->win->mlx, config->WE_T,
-		&config->WE_tex.width, &config->WE_tex.height);
-	config->WE_tex.addr = mlx_get_data_addr(config->WE_tex.img,
-		&config->WE_tex.bpp, &config->WE_tex.line_len, &config->WE_tex.endian);
-
-	config->S_tex.img = mlx_xpm_file_to_image(config->win->mlx, config->S_T, &config->S_tex.width, &config->S_tex.height);
-	config->S_tex.addr = mlx_get_data_addr(config->S_tex.img, &config->S_tex.bpp, &config->S_tex.line_len, &config->S_tex.endian);
+	for_mlx_create(config->SO_T, &config->SO_tex, config->win);
+	for_mlx_create(config->S_T, &config->S_tex, config->win);
+	for_mlx_create(config->WE_T, &config->WE_tex, config->win);
+	for_mlx_create(config->EA_T, &config->EA_tex, config->win);
+	for_mlx_create(config->NO_T, &config->NO_tex, config->win);
+//	config->NO_tex.img = mlx_xpm_file_to_image(config->win->mlx,
+//		config->NO_T, &config->NO_tex.width, &config->NO_tex.height);
+//	config->NO_tex.addr = mlx_get_data_addr(config->NO_tex.img,
+//		&config->NO_tex.bpp, &config->NO_tex.line_len, &config->NO_tex.endian);
+//	config->SO_tex.img = mlx_xpm_file_to_image(config->win->mlx,
+//		config->SO_T, &config->SO_tex.width, &config->SO_tex.height);
+//	config->SO_tex.addr = mlx_get_data_addr(config->SO_tex.img,
+//		&config->SO_tex.bpp, &config->SO_tex.line_len, &config->SO_tex.endian);
+//	config->EA_tex.img = mlx_xpm_file_to_image(config->win->mlx, config->EA_T,
+//		&config->EA_tex.width, &config->EA_tex.height);
+//	config->EA_tex.addr = mlx_get_data_addr(config->EA_tex.img,
+//		&config->EA_tex.bpp, &config->EA_tex.line_len, &config->EA_tex.endian);
+//	config->WE_tex.img = mlx_xpm_file_to_image(config->win->mlx, config->WE_T,
+//		&config->WE_tex.width, &config->WE_tex.height);
+//	config->WE_tex.addr = mlx_get_data_addr(config->WE_tex.img,
+//		&config->WE_tex.bpp, &config->WE_tex.line_len, &config->WE_tex.endian);
+//	config->S_tex.img = mlx_xpm_file_to_image(config->win->mlx, config->S_T,
+//		&config->S_tex.width, &config->S_tex.height);
+//	config->S_tex.addr = mlx_get_data_addr(config->S_tex.img, &config->S_tex.bpp,
+//		&config->S_tex.line_len, &config->S_tex.endian);
 }

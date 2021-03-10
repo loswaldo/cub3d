@@ -9,7 +9,7 @@ void	parse(t_config *config, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("FILE ERROR");
+		perror("FILE ERROR");
 		exit(1);
 	}
 	while ((ret = get_next_line(fd, &line)) > 0)
@@ -22,8 +22,7 @@ void	parse(t_config *config, char *file_name)
 	}
 	if (ret == -1)
 	{
-		printf("GNL ERROR");
-		exit(1);
+		error_output_n_exit("GNL ERROR");
 	}
 	ft_parse_map(config, line);
 	free(line);

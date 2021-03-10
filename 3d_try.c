@@ -45,7 +45,7 @@ void	draw_map(t_config *config)
 	float *ZBuffer = ft_calloc(config->Rx, sizeof(double));
 	if (!(ZBuffer))
 	{
-		error_output("MALLOC ERROR");
+		error_output_n_exit("MALLOC ERROR");
 	}
 
 	int x;

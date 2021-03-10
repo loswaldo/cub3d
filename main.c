@@ -9,10 +9,11 @@ void	ft_init_struct(t_config *config)
 	config->celling->g = -1;
 	config->celling->b = -1;
 }
-void error_output(char *str)
+void error_output_n_exit(char *str)
 {
 	int len;
 
+	write(1, "Error\n", 6);
 	len = ft_strlen(str);
 	write(1, str, len);
 	exit(1);
@@ -32,7 +33,7 @@ void check_file_name(char *file_name)
 		if (file_name[(len - i) - 1] == str[i])
 			i++;
 		else
-			error_output("FILE EXTENSION ERROR");
+			error_output_n_exit("FILE EXTENSION ERROR");
 	}
 }
 
@@ -69,7 +70,7 @@ void validate_save_argument(const char* arg_save)
 
 	if (ft_strncmp(arg_save, save, ft_strlen(save) + 1) != 0)
 	{
-		error_output("WRONG ARGUMENT");
+		error_output_n_exit("WRONG ARGUMENT");
 	}
 }
 
