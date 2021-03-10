@@ -1,6 +1,6 @@
 #include "cub.h"
 
-unsigned int		my_mlx_pixel_take(t_for_win *win, int x, int y)
+unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y)
 {
 	char	*dst;
 
@@ -136,7 +136,7 @@ void	draw_map(t_config *config)
 		{
 			// write(1, "228", 3);
 			if (y < drawStart)
-				my_mlx_pixel_put(config->win, x, y, 0x6ce6df);
+				my_mlx_pixel_put(config->win, x, y, config->cel);
 			if (y >= drawStart && y <= drawEnd)
 			{
 				int texY = (int)texPos & (config->tmp_h - 1);
@@ -178,7 +178,7 @@ void	draw_map(t_config *config)
 		}
 		int kek = drawEnd;
 		while (kek < config->Ry)         ////JENSKII пол
-			my_mlx_pixel_put(config->win, x, kek++, 0xd16ce6);
+			my_mlx_pixel_put(config->win, x, kek++, config->fl);
 		x++;
 
 		//SET THE ZBUFFER FOR THE SPRITE CASTING
