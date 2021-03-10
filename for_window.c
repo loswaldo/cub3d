@@ -18,7 +18,7 @@ void	key_hook_move(int key, t_config *config)
 	
 	move_s = 0.2f;
 	move_r = 0.2f;
-	printf("key = %d\n", key);
+//	printf("key = %d\n", key);
 	if (key == 13) // up
 	{
 		if (config->MAP[(int)(config->pl_pos_x

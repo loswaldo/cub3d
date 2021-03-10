@@ -48,7 +48,7 @@ void draw_sprites(t_config *config, float * ZBuffer)
 		//loop through every vertical stripe of the sprite on screen
 		for(int stripe = drawStartX; stripe < drawEndX; stripe++)
 		{
-			int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * config->tmp_w / spriteWidth) / 256;
+			int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * config->S_tex.width / spriteWidth) / 256;
 			//the conditions in the if are:
 			//1) it's in front of camera plane so you don't see things behind you
 			//2) it's on the screen (left)
@@ -59,7 +59,7 @@ void draw_sprites(t_config *config, float * ZBuffer)
 				for(int y = drawStartY; y < drawEndY; y++) //for every pixel of the current stripe
 				{
 					int d = (y) * 256 - config->Ry * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
-					int texY = ((d * config->tmp_h) / spriteHeight) / 256;
+					int texY = ((d * config->S_tex.height) / spriteHeight) / 256;
 
 					unsigned int color = my_mlx_pixel_take(&config->S_tex, texX, texY);
 					if ((color & 0x00FFFFFF) != 0)
