@@ -52,12 +52,6 @@ void	cub(char *file_name, int is_screenshot)
 	map_validation(&config);
 
 	config.sp = ft_calloc(sizeof(t_sprites), (config.sp_quantity));
-	// int i = 0;
-	// while (i < config.sp_quantity)
-	// {
-	// ft_bzero(&config.sp[i], (sizeof(t_sprites)));
-	// 	i++;
-	// }
 	config.wall_dist = malloc(sizeof(double) * config.Rx);
 	
 	sprites_coord(&config, config.sp);
