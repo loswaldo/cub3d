@@ -12,18 +12,16 @@
 
 #include "cub.h"
 
-void take_n_put_color(t_for_win *texture, t_for_calculate *value, t_coord coord,
-					  t_for_win *win)
+void	take_n_put_color(t_for_win *texture, t_for_calculate *value,
+						t_coord coord, t_for_win *win)
 {
-	const unsigned int color = my_mlx_pixel_take(texture, value->tex_x,
-												 value->tex_y);
-
-	my_mlx_pixel_put(win, coord.x, coord.y, color);
+	my_mlx_pixel_put(win, coord.x, coord.y,
+					my_mlx_pixel_take(texture, value->tex_x, value->tex_y));
 }
 
-void  texture_draw(t_config *config, t_for_calculate *value, int x, int y)
+void	texture_draw(t_config *config, t_for_calculate *value, int x, int y)
 {
-	t_coord coord = (t_coord){.x=x, .y=y};
+	const t_coord coord = (t_coord){.x=x, .y=y};
 
 	if (value->side == 0)
 	{
@@ -41,7 +39,7 @@ void  texture_draw(t_config *config, t_for_calculate *value, int x, int y)
 	}
 }
 
-void  directly_draw(t_config *config, t_for_calculate *value, int x)
+void	directly_draw(t_config *config, t_for_calculate *value, int x)
 {
 	int y;
 
@@ -58,12 +56,12 @@ void  directly_draw(t_config *config, t_for_calculate *value, int x)
 		}
 		y++;
 	}
-	int kek = value->draw_end;
-	while (kek < config->ry)
-		my_mlx_pixel_put(config->win, x, kek++, config->fl);
+	y = value->draw_end;
+	while (y < config->ry)
+		my_mlx_pixel_put(config->win, x, y++, config->fl);
 }
 
-void	check_hit(t_for_calculate *value, char **MAP)
+void	check_hit(t_for_calculate *value, char **map)
 {
 	int hit;
 
@@ -82,21 +80,22 @@ void	check_hit(t_for_calculate *value, char **MAP)
 			value->map_y += value->step_y;
 			value->side = 1;
 		}
-		if (MAP[value->map_x][value->map_y] == '1')
+		if (map[value->map_x][value->map_y] == '1')
 			hit = 1;
 	}
 }
 
 void	draw_map(t_config *config)
 {
-	t_for_calculate value;
+	t_for_calculate		value;
+	float				*z_buffer;
+	int					x;
 
 	ft_bzero(&value, sizeof(t_for_calculate));
-	float *ZBuffer = ft_calloc(config->rx, sizeof(double));
-	if (!(ZBuffer))
+	if (!(z_buffer = ft_calloc(config->rx, sizeof(double))))
+	{
 		error_output_n_exit("MALLOC ERROR");
-	int x;
-
+	}
 	x = 0;
 	while (x < config->rx)
 	{
@@ -107,7 +106,7 @@ void	draw_map(t_config *config)
 		check_side_n_tex_x_y(config, &value);
 		directly_draw(config, &value, x);
 		x++;
-		ZBuffer[x] = value.perp_wall_dist;
+		z_buffer[x] = value.perp_wall_dist;
 	}
-	draw_sprites(config, ZBuffer);
+	draw_sprites(config, z_buffer);
 }
