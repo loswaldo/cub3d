@@ -28,12 +28,12 @@ void	parse(t_config *config, char *file_name)
 	free(line);
 }
 
-void sprites_coord(t_config *config, t_sprites *sprite)
+void	sprites_coord(t_config *config, t_sprites *sprite)
 {
 	int x;
 	int y;
 	int i;
-	
+
 	x = 0;
 	y = 0;
 	i = 0;
@@ -47,7 +47,7 @@ void sprites_coord(t_config *config, t_sprites *sprite)
 				sprite[i].y = ((double)x + 0.5);
 				i++;
 			}
-			x++;	
+			x++;
 		}
 		x = 0;
 		y++;
