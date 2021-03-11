@@ -15,14 +15,14 @@
 int		ft_is_identifier(char *line, int i, t_config *config)
 {
 	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-		parser_for_texture(line, &config->NO_T, 2);
+		parser_for_texture(line, &config->no_t, 2);
 	else if (line[i] == 'S' && (line[i + 1] == 'O' || line[i + 1] == ' '))
 		parser_for_texture(line, line[i + 1] == 'O'
-		? &config->SO_T : &config->S_T, line[i + 1] == 'O' ? 2 : 1);
+								 ? &config->so_t : &config->s_t, line[i + 1] == 'O' ? 2 : 1);
 	else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-		parser_for_texture(line, &config->WE_T, 2);
+		parser_for_texture(line, &config->we_t, 2);
 	else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-		parser_for_texture(line, &config->EA_T, 2);
+		parser_for_texture(line, &config->ea_t, 2);
 	else if (line[i] == 'R' && line[i + 1] == ' ')
 		parser_for_resolution(config, line);
 	else if ((line[i] == 'F' || line[i] == 'C') && line[i + 1] == ' ')
@@ -51,8 +51,8 @@ int		check_line(char *line, t_config *config)
 	i = 0;
 	if (line[i] == '\0')
 	{
-		if (check_data_filled(config) && config->PRE_MAP)
-			error_output_n_exit("MAP IS NOT MAP!");
+		if (check_data_filled(config) && config->pre_map)
+			error_output_n_exit("map IS NOT map!");
 		return (0);
 	}
 	i = ft_skip_spaces(line, i);
@@ -122,19 +122,19 @@ void	part_of_map_checker(t_config *config, int x, int y)
 	x += -1;
 	y += -1;
 	if ((x < 0 || x >= config->map_width) || (y < 0 || y >= config->map_height))
-		error_output_n_exit("MAP IS NOT VALID!");
+		error_output_n_exit("map IS NOT VALID!");
 	while (j < 3)
 	{
 		i = 0;
 		while (i < 3)
 		{
-			if (!(map_symbol_check(config->MAP[y + j][x + i], "102NWES")))
-				error_output_n_exit("MAP IS NOT VALID!!!!!!!");
+			if (!(map_symbol_check(config->map[y + j][x + i], "102NWES")))
+				error_output_n_exit("map IS NOT VALID!!!!!!!");
 			i++;
 		}
 		j++;
 		if (y < 0 || y > config->map_height)
-			error_output_n_exit("MAP IS NOT VALID!!!!!!!");
+			error_output_n_exit("map IS NOT VALID!!!!!!!");
 	}
 }
 
@@ -152,12 +152,12 @@ void	map_checker(t_config *config)
 		x = 0;
 		while (x < config->map_width)
 		{
-			if (config->MAP[y][x] == 'S' || config->MAP[y][x] == 'N'
-			|| config->MAP[y][x] == 'W' || config->MAP[y][x] == 'E')
+			if (config->map[y][x] == 'S' || config->map[y][x] == 'N'
+				|| config->map[y][x] == 'W' || config->map[y][x] == 'E')
 			{
 				check++;
-				config->direction = config->MAP[y][x];
-				config->MAP[y][x] = '0';
+				config->direction = config->map[y][x];
+				config->map[y][x] = '0';
 				config->pl_pos_y = (float)(x + 0.01);
 				config->pl_pos_x = (float)(y + 0.01);
 			}
@@ -166,14 +166,14 @@ void	map_checker(t_config *config)
 		y++;
 	}
 	if (check != 1)
-		error_output_n_exit("MAP ERROR(number of start position)");
+		error_output_n_exit("map ERROR(number of start position)");
 	y = 0;
 	while (y < config->map_height)
 	{
 		x = 0;
 		while (x < config->map_width)
 		{
-			if (map_symbol_check(config->MAP[y][x], "02NWES"))
+			if (map_symbol_check(config->map[y][x], "02NWES"))
 			{
 				part_of_map_checker(config, x, y);
 			}
@@ -191,9 +191,9 @@ void sprites_counter(t_config *config)
 
 	count = 0;
 	i = 0;
-	while (config->PRE_MAP[i])
+	while (config->pre_map[i])
 	{
-		if (config->PRE_MAP[i] == '2')
+		if (config->pre_map[i] == '2')
 		{
 			count++;
 		}
@@ -209,18 +209,18 @@ void	map_validation(t_config *config)
 
 	y = 0;
 	sprites_counter(config);
-	tmp = config->PRE_MAP;
-	config->PRE_MAP = ft_strtrim(config->PRE_MAP, "\n");
+	tmp = config->pre_map;
+	config->pre_map = ft_strtrim(config->pre_map, "\n");
 	free(tmp);
-	config->MAP = ft_split(config->PRE_MAP, '\n');
-	while (config->MAP[y])
+	config->map = ft_split(config->pre_map, '\n');
+	while (config->map[y])
 	{
-		if (config->MAP[y] != 0 && config->map_width > (int)ft_strlen(config->MAP[y]))
-			config->MAP[y] = ft_fill_spaces(config->MAP[y], config->map_width);
+		if (config->map[y] != 0 && config->map_width > (int)ft_strlen(config->map[y]))
+			config->map[y] = ft_fill_spaces(config->map[y], config->map_width);
 		y++;
 	}
 	config->map_height = y - 1;
-	free(config->PRE_MAP);
-	config->PRE_MAP = NULL;
+	free(config->pre_map);
+	config->pre_map = NULL;
 	map_checker(config);
 }

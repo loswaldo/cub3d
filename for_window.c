@@ -26,9 +26,9 @@ void	for_mlx_create(char *path, t_for_win *tex, t_for_win *win)
 
 void	fill_texture(t_config *config)
 {
-	for_mlx_create(config->SO_T, &config->SO_tex, config->win);
-	for_mlx_create(config->S_T, &config->S_tex, config->win);
-	for_mlx_create(config->WE_T, &config->WE_tex, config->win);
-	for_mlx_create(config->EA_T, &config->EA_tex, config->win);
-	for_mlx_create(config->NO_T, &config->NO_tex, config->win);
+	for_mlx_create(config->so_t, &config->so_tex, config->win);
+	for_mlx_create(config->s_t, &config->s_tex, config->win);
+	for_mlx_create(config->we_t, &config->we_tex, config->win);
+	for_mlx_create(config->ea_t, &config->ea_tex, config->win);
+	for_mlx_create(config->no_t, &config->no_tex, config->win);
 }

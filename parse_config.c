@@ -17,9 +17,9 @@ int		check_data_filled(t_config *config)
 	return (config->floor->r != -1 && config->floor->g != -1
 			&& config->floor->b != -1 && config->celling->r != -1
 			&& config->celling->g != -1 && config->celling->b != -1
-			&& config->NO_T != NULL && config->WE_T != NULL && config->EA_T != NULL
-			&& config->SO_T != NULL && config->S_T != NULL && config->Ry != 0
-			&& config->Rx != 0);
+			&& config->no_t != NULL && config->we_t != NULL && config->ea_t != NULL
+			&& config->so_t != NULL && config->s_t != NULL && config->ry != 0
+			&& config->rx != 0);
 }
 
 int		ft_skip_spaces(char *line, int i)
@@ -36,13 +36,13 @@ void	parser_for_resolution(t_config *config, char *line)
 	i = 1;
 	i = ft_skip_spaces(line, i);
 	if (ft_isdigit(line[i]))
-		config->Rx = ft_atoi(&line[i]);
+		config->rx = ft_atoi(&line[i]);
 	while (ft_isdigit(line[i]))
 		i++;
 	i++;
 	i = ft_skip_spaces(line, i);
 	if (ft_isdigit(line[i]))
-		config->Ry = ft_atoi(&line[i]);
+		config->ry = ft_atoi(&line[i]);
 	while (ft_isdigit(line[i]))
 		i++;
 	i = ft_skip_spaces(line, i);
@@ -68,13 +68,13 @@ void	ft_parse_map(t_config *config, char *line)
 
 	if (config->map_width < (int)ft_strlen(line))
 		config->map_width = ft_strlen(line);
-	if (!(config->PRE_MAP))
-		config->PRE_MAP = ft_strdup(line);
+	if (!(config->pre_map))
+		config->pre_map = ft_strdup(line);
 	else
 	{
-		tmp = ft_strjoin(config->PRE_MAP, "\n");
-		free(config->PRE_MAP);
-		config->PRE_MAP = ft_strjoin(tmp, line);
+		tmp = ft_strjoin(config->pre_map, "\n");
+		free(config->pre_map);
+		config->pre_map = ft_strjoin(tmp, line);
 		free(tmp);
 	}
 }

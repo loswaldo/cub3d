@@ -22,43 +22,43 @@ void	key_hook_move(int key, t_config *config)
 
 	if (key == 13)
 	{
-		if (config->MAP[(int)(config->pl_pos_x
+		if (config->map[(int)(config->pl_pos_x
 							  + config->dir_x * move_s)]
 			[(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x += config->dir_x * move_s;
-		if (config->MAP[(int)(config->pl_pos_x)][(int)(config->pl_pos_y
+		if (config->map[(int)(config->pl_pos_x)][(int)(config->pl_pos_y
 													   + config->dir_y * move_s)] == '0')
 			config->pl_pos_y += config->dir_y * move_s;
 	}
 	if (key == 1)
 	{
-		if (config->MAP[(int)(config->pl_pos_x
+		if (config->map[(int)(config->pl_pos_x
 							  - config->dir_x * move_s)]
 			[(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x -= config->dir_x * move_s;
-		if (config->MAP[(int)(config->pl_pos_x)]
+		if (config->map[(int)(config->pl_pos_x)]
 			[(int)(config->pl_pos_y
 				   - config->dir_y * move_s)] == '0')
 			config->pl_pos_y -= config->dir_y * move_s;
 	}
 	if (key == 0)
 	{
-		if (config->MAP[(int)(config->pl_pos_x)]
+		if (config->map[(int)(config->pl_pos_x)]
 			[(int)(config->pl_pos_y
 				   + config->dir_x * move_s)] == '0')
 			config->pl_pos_y += config->dir_x * move_s;
-		if (config->MAP[(int)(config->pl_pos_x
+		if (config->map[(int)(config->pl_pos_x
 							  - config->dir_y * move_s)]
 			[(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x -= config->dir_y * move_s;
 	}
 	if (key == 2)
 	{
-		if (config->MAP[(int)(config->pl_pos_x)]
+		if (config->map[(int)(config->pl_pos_x)]
 			[(int)(config->pl_pos_y
 				   - config->dir_x * move_s)] == '0')
 			config->pl_pos_y -= config->dir_x * move_s;
-		if (config->MAP[(int)(config->pl_pos_x
+		if (config->map[(int)(config->pl_pos_x
 							  + config->dir_y * move_s)]
 			[(int)(config->pl_pos_y)] == '0')
 			config->pl_pos_x += config->dir_y * move_s;
@@ -96,9 +96,9 @@ int		key_hook(int key, t_config *config)
 	if (key == 124 || key == 123)
 		key_hook_rotation(key, config);
 	if (key == 53)
-		exit(1);
+		exit(0);
 	mlx_destroy_image(config->win->mlx, config->win->img);
-	config->win->img = mlx_new_image(config->win->mlx, config->Rx, config->Ry);
+	config->win->img = mlx_new_image(config->win->mlx, config->rx, config->ry);
 	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp,
 										  &config->win->line_len, &config->win->endian);
 	draw_map(config);

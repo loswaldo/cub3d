@@ -49,11 +49,11 @@ void	sprites_coord(t_config *config, t_sprites *sprite)
 	x = 0;
 	y = 0;
 	i = 0;
-	while (config->MAP[y])
+	while (config->map[y])
 	{
-		while (config->MAP[y][x])
+		while (config->map[y][x])
 		{
-			if (config->MAP[y][x] == '2')
+			if (config->map[y][x] == '2')
 			{
 				sprite[i].x = ((double)y + 0.5);
 				sprite[i].y = ((double)x + 0.5);

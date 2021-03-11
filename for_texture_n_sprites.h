@@ -76,7 +76,7 @@ typedef struct s_for_calculate
 void	calc_side_dist(t_for_calculate *value, t_config *config);
 void	calculation(t_for_calculate *value, t_config *config, int x);
 void	calc_perpl_wall_dist(t_config *config, t_for_calculate *value);
-void	calc_draw_start_n_end(t_config *config, t_for_calculate *value, int x);
+void calc_draw_start_n_end(t_config *config, t_for_calculate *value);
 void	check_side_n_tex_x_y(t_config *config, t_for_calculate *value);
 void fill_texture(t_config *config);
 void sprites_coord(t_config *config, t_sprites *sprite);

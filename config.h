@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef CUB_CONFIG_H
-#define CUB_CONFIG_H
+# define CUB_CONFIG_H
 
 typedef struct	s_rgb
 {
@@ -42,13 +42,13 @@ typedef struct	s_for_win
 
 typedef struct	s_config
 {
-	int			Rx;
-	int			Ry;
-	char		*NO_T;
-	char		*SO_T;
-	char		*WE_T;
-	char		*EA_T;
-	char		*S_T;
+	int			rx;
+	int			ry;
+	char		*no_t;
+	char		*so_t;
+	char		*we_t;
+	char		*ea_t;
+	char		*s_t;
 	int			fl;
 	int			cel;
 	int			tmp_w;
@@ -57,17 +57,16 @@ typedef struct	s_config
 	t_rgb		*floor;
 	t_rgb		*celling;
 	t_for_win	*win;
-	t_for_win	NO_tex;
-	t_for_win	SO_tex;
-	t_for_win	WE_tex;
-	t_for_win	EA_tex;
-	t_for_win	S_tex;
+	t_for_win	no_tex;
+	t_for_win	so_tex;
+	t_for_win	we_tex;
+	t_for_win	ea_tex;
+	t_for_win	s_tex;
 
 	t_sprites	*sp;
-	t_for_win	tmp_tex;
 
-	char		*PRE_MAP;
-	char		**MAP;
+	char		*pre_map;
+	char		**map;
 	int			map_width;
 	int			map_height;
 	float		pl_pos_x;

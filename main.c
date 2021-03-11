@@ -54,7 +54,6 @@ void	cub(char *file_name, int is_screenshot)
 	rgb_conversion(config.celling, &config.cel);
 	map_validation(&config);
 	config.sp = ft_calloc(sizeof(t_sprites), (config.sp_quantity));
-	config.wall_dist = malloc(sizeof(double) * config.Rx);
 	sprites_coord(&config, config.sp);
 	output(&config, is_screenshot);
 }

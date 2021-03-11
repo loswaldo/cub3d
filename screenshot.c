@@ -18,11 +18,11 @@ static void		filling_file_screenshot(int fd, t_config *config)
 	int	j;
 	int	color;
 
-	i = config->Ry;
+	i = config->ry;
 	while (--i >= 0)
 	{
 		j = -1;
-		while (++j < config->Rx)
+		while (++j < config->rx)
 		{
 			color = *(int*)(config->win->addr + (i * config->win->line_len
 					+ j * (config->win->bpp / 8)));
@@ -41,16 +41,16 @@ void			continue_screenshot(t_config *config, int fd)
 	plane = 1;
 	zero = 0;
 	pos_pixel_data = 54;
-	size_screen = config->Rx
-				  * config->Ry * 4 + 54;
+	size_screen = config->rx
+				  * config->ry * 4 + 54;
 	write(fd, "BM", 2);
 	write(fd, &size_screen, 4);
 	write(fd, &zero, 4);
 	write(fd, &pos_pixel_data, 4);
 	pos_pixel_data = 40;
 	write(fd, &pos_pixel_data, 4);
-	write(fd, &config->Rx, 4);
-	write(fd, &config->Ry, 4);
+	write(fd, &config->rx, 4);
+	write(fd, &config->ry, 4);
 	write(fd, &plane, 2);
 	plane = 32;
 	write(fd, &plane, 2);
@@ -64,11 +64,11 @@ void			screenshot(t_config *config)
 	int size;
 
 	fd = open("screen.bmp", O_CREAT | O_RDWR, 0666);
-	size_screen = config->Rx
-				  * config->Ry * 4 + 54;
+	size_screen = config->rx
+				  * config->ry * 4 + 54;
 	zero = 0;
-	size = config->Rx
-		   * config->Ry;
+	size = config->rx
+		   * config->ry;
 	if (fd < 0)
 		write(1, "Error\n", 6);
 	continue_screenshot(config, fd);

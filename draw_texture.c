@@ -28,16 +28,16 @@ void  texture_draw(t_config *config, t_for_calculate *value, int x, int y)
 	if (value->side == 0)
 	{
 		if (value->step_x > 0)
-			take_n_put_color(&config->NO_tex, value, coord, config->win);
+			take_n_put_color(&config->no_tex, value, coord, config->win);
 		else
-			take_n_put_color(&config->SO_tex, value, coord, config->win);
+			take_n_put_color(&config->so_tex, value, coord, config->win);
 	}
 	if (value->side == 1)
 	{
 		if (value->step_y > 0)
-			take_n_put_color(&config->WE_tex, value, coord, config->win);
+			take_n_put_color(&config->we_tex, value, coord, config->win);
 		else
-			take_n_put_color(&config->EA_tex, value, coord, config->win);
+			take_n_put_color(&config->ea_tex, value, coord, config->win);
 	}
 }
 
@@ -59,7 +59,7 @@ void  directly_draw(t_config *config, t_for_calculate *value, int x)
 		y++;
 	}
 	int kek = value->draw_end;
-	while (kek < config->Ry)
+	while (kek < config->ry)
 		my_mlx_pixel_put(config->win, x, kek++, config->fl);
 }
 
@@ -92,18 +92,18 @@ void	draw_map(t_config *config)
 	t_for_calculate value;
 
 	ft_bzero(&value, sizeof(t_for_calculate));
-	float *ZBuffer = ft_calloc(config->Rx, sizeof(double));
+	float *ZBuffer = ft_calloc(config->rx, sizeof(double));
 	if (!(ZBuffer))
 		error_output_n_exit("MALLOC ERROR");
 	int x;
 
 	x = 0;
-	while (x < config->Rx)
+	while (x < config->rx)
 	{
 		calculation(&value, config, x);
 		calc_side_dist(&value, config);
-		check_hit(&value, config->MAP);
-		calc_draw_start_n_end(config, &value, x);
+		check_hit(&value, config->map);
+		calc_draw_start_n_end(config, &value);
 		check_side_n_tex_x_y(config, &value);
 		directly_draw(config, &value, x);
 		x++;

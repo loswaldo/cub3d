@@ -63,22 +63,22 @@ void calculate_for_sprites(t_config *config, t_for_sprites *value, int i)
 	value->inv_det = 1.0 / (config->plane_x * config->dir_y - config->dir_x * config->plane_y);
 	value->transform.dx = value->inv_det * (config->dir_y * value->sprite.dx - config->dir_x * value->sprite.dy);
 	value->transform.dy = value->inv_det * (-config->plane_y * value->sprite.dx + config->plane_x * value->sprite.dy);
-	value->sprite_sreen_x = (int)((config->Rx / 2) * (1 + value->transform.dx / value->transform.dy));
-	value->sprite_height = abs((int)(config->Ry / (value->transform.dy)));
-	value->draw_start.y = -value->sprite_height / 2 + config->Ry / 2;
+	value->sprite_sreen_x = (int)((config->rx / 2) * (1 + value->transform.dx / value->transform.dy));
+	value->sprite_height = abs((int)(config->ry / (value->transform.dy)));
+	value->draw_start.y = -value->sprite_height / 2 + config->ry / 2;
 	if(value->draw_start.y < 0) value->draw_start.y = 0;
-	value->draw_end.y = value->sprite_height / 2 + config->Ry / 2;
-	if(value->draw_end.y >= config->Ry) value->draw_end.y = config->Ry - 1;
-	value->sprite_width = abs( (int) (config->Ry / (value->transform.dy)));
+	value->draw_end.y = value->sprite_height / 2 + config->ry / 2;
+	if(value->draw_end.y >= config->ry) value->draw_end.y = config->ry - 1;
+	value->sprite_width = abs( (int) (config->ry / (value->transform.dy)));
 	value->draw_start.x = -value->sprite_width / 2 + value->sprite_sreen_x;
 	if(value->draw_start.x < 0) value->draw_start.x = 0;
 	value->draw_end.x = value->sprite_width / 2 + value->sprite_sreen_x;
-	if(value->draw_end.x >= config->Rx) value->draw_end.x = config->Rx - 1;
+	if(value->draw_end.x >= config->rx) value->draw_end.x = config->rx - 1;
 }
 
 void drawing_sprites(t_for_sprites *value, t_for_win *texture, t_config *config)
 {
-	int d = (value->coord.y) * 256 - config->Ry * 128 + value->sprite_height * 128;
+	int d = (value->coord.y) * 256 - config->ry * 128 + value->sprite_height * 128;
 	value->tex.y = ((d * texture->height) / value->sprite_height) / 256;
 	unsigned int color = my_mlx_pixel_take(texture, value->tex.x, value->tex.y);
 	if ((color & 0x00FFFFFF) != 0)
@@ -103,13 +103,13 @@ void draw_sprites(t_config *config, float * ZBuffer)
 
 		while (value.stripe <= value.draw_end.x)
 		{
-			value.tex.x = (int)(256 * (value.stripe - (-value.sprite_width / 2 + value.sprite_sreen_x)) * config->S_tex.width / value.sprite_width) / 256;
-			if (value.transform.dy > 0 && value.stripe > 0 && value.stripe < config->Rx && value.transform.dy < ZBuffer[value.stripe])
+			value.tex.x = (int)(256 * (value.stripe - (-value.sprite_width / 2 + value.sprite_sreen_x)) * config->s_tex.width / value.sprite_width) / 256;
+			if (value.transform.dy > 0 && value.stripe > 0 && value.stripe < config->rx && value.transform.dy < ZBuffer[value.stripe])
 			{
 				value.coord.y = value.draw_start.y;
 				while (value.coord.y <= value.draw_end.y)
 				{
-					drawing_sprites(&value, &config->S_tex, config);
+					drawing_sprites(&value, &config->s_tex, config);
 					value.coord.y++;
 				}
 			}
