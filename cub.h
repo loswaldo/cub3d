@@ -16,7 +16,7 @@
 #include "minilibx_mms_20200219/mlx.h"
 
 int			get_next_line(int fd, char **line);
-void error_output_n_exit(char *str);
+void error_output_n_exit(const char *str);
 void		cub();
 
 void my_mlx_pixel_put(t_for_win *data, int x, int y, unsigned int color);

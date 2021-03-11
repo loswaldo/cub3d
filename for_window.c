@@ -1,7 +1,5 @@
 #include "cub.h"
 
-
-
 void for_mlx_create(char *path, t_for_win *tex, t_for_win *win)
 {
 	tex->img = mlx_xpm_file_to_image(win->mlx, path, &tex->width,

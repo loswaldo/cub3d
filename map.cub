@@ -1,15 +1,15 @@
-R 1920       1080
+R 640  480
 NO ./includes/4.xpm
 SO ./includes/2.xpm
 WE ./includes/3.xpm
 EA ./includes/1.xpm
 S ./includes/sprite.xpm
-F 50,100,150
-C 255,30,0
+F 215,128,232
+C 128,213,232
 
 
 1111111
-1S00101
-1220001
-1200011
+1000101
+1222001
+1E00011
 111111

@@ -51,7 +51,7 @@ set(GNL_SRC
         get_next_line/get_next_line.c
         get_next_line/get_next_line_utils.c
         get_next_line/get_next_line.h
-        )
+        sprite_sort.c parser.h)
 
 add_executable(cub
         ${LIBFT_SRC}
@@ -69,11 +69,11 @@ add_executable(cub
         key_hooks.c
         sprite_draw.c
         calculate_texture.c
-        for_texture.h
+        for_texture_n_sprites.h
         config.h
-        screenshoot.c
+        screenshot.c
         draw_texture.c
-        general_function_for_drawing.c
+        general_function.c
         key_hooks.c
         )
 

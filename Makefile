@@ -24,9 +24,11 @@ SRC = get_next_line/get_next_line.c \
       sprite_draw.c \
       calculate_texture.c \
       draw_texture.c \
-      general_function_for_drawing.c \
+      general_function.c \
       key_hooks.c \
-      screenshoot.c
+      screenshot.c \
+      sprite_sort.c
+
 
 
 
