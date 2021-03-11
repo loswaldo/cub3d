@@ -9,21 +9,12 @@ void	ft_init_struct(t_config *config)
 	config->celling->g = -1;
 	config->celling->b = -1;
 }
-void error_output_n_exit(char *str)
-{
-	int len;
 
-	write(1, "Error\n", 6);
-	len = ft_strlen(str);
-	write(1, str, len);
-	exit(1);
-}
-
-void check_file_name(char *file_name)
+void	check_file_name(char *file_name)
 {
-	int len;
-	int i;
-	char *str;
+	int		len;
+	int		i;
+	char	*str;
 
 	str = "buc.";
 	len = ft_strlen(file_name);
@@ -44,23 +35,21 @@ void	cub(char *file_name, int is_screenshot)
 	ft_bzero(&config, sizeof(t_config));
 	config.floor = malloc(sizeof(t_rgb));
 	config.celling = malloc(sizeof(t_rgb));
-	config.win = malloc(sizeof (t_for_win));
+	config.win = malloc(sizeof(t_for_win));
 	ft_init_struct(&config);
 	parse(&config, file_name);
 	rgb_conversion(config.floor, &config.fl);
 	rgb_conversion(config.celling, &config.cel);
 	map_validation(&config);
-
 	config.sp = ft_calloc(sizeof(t_sprites), (config.sp_quantity));
 	config.wall_dist = malloc(sizeof(double) * config.Rx);
-	
 	sprites_coord(&config, config.sp);
 	output(&config, is_screenshot);
 }
 
-void validate_save_argument(const char* arg_save)
+void	validate_save_argument(const char *arg_save)
 {
-	const char* save = "--save";
+	const char *save = "--save";
 
 	if (ft_strncmp(arg_save, save, ft_strlen(save) + 1) != 0)
 	{
