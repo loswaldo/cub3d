@@ -12,16 +12,23 @@ RM = rm -f
 
 OPTION = -c $< -o $@ -I ./includes
 
-SRC = get_next_line/get_next_line.c\
-      get_next_line/get_next_line_utils.c\
-      main.c\
-      other.c\
-      parse_config.c\
-      parse_rgb.c\
-      for_window.c\
-      3d_try.c\
+SRC = get_next_line/get_next_line.c \
+      get_next_line/get_next_line_utils.c \
+      main.c \
+      other.c \
+      parse_config.c \
+      parse_rgb.c \
+      for_window.c \
+      function_for_draw.c \
       parser.c \
-      sprite_draw.c
+      sprite_draw.c \
+      calculate_texture.c \
+      draw_texture.c \
+      general_function_for_drawing.c \
+      key_hooks.c \
+      screenshoot.c
+
+
 
 OBJ = $(SRC:.c=.o)
 

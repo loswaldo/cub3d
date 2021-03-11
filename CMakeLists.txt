@@ -51,7 +51,7 @@ set(GNL_SRC
         get_next_line/get_next_line.c
         get_next_line/get_next_line_utils.c
         get_next_line/get_next_line.h
-        sprite_draw.c)
+        )
 
 add_executable(cub
         ${LIBFT_SRC}
@@ -64,7 +64,17 @@ add_executable(cub
         parse_rgb.c
         other.c
         for_window.c
-        3d_try.c
+        function_for_draw.c
+        calculate_texture.c
+        key_hooks.c
+        sprite_draw.c
+        calculate_texture.c
+        for_texture.h
+        config.h
+        screenshoot.c
+        draw_texture.c
+        general_function_for_drawing.c
+        key_hooks.c
         )
 
 target_link_libraries(cub libmlx.dylib mlx)
