@@ -1,5 +1,5 @@
 
-#include "for_texture.h"
+#include "for_texture_n_sprites.h"
 #include "cub.h"
 
 void calc_side_dist(t_for_calculate *value, t_config *config)

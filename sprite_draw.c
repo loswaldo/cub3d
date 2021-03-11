@@ -1,13 +1,6 @@
 #include "cub.h"
 
-void print_array(t_sprites *sp, int size)
-{
 
-	for (int j = 0; j < size; ++j) {
-		printf("%.2lf{%.1lf,%.1lf} ", sp[j].dist, sp[j].x, sp[j].y);
-	}
-	puts("");
-}
 
 void swap(double *d1, double *d2)
 {
@@ -51,83 +44,66 @@ void sprite_sorting(t_config *config, t_sprites *sp)
 		}
 		i++;
 	}
-//	 print_array(sp, config->sp_quantity); /* todo */
+}
+
+void calculate_for_sprites(t_config *config, t_for_sprites *value, int i)
+{
+	value->sprite.dx = config->sp[i].x - config->pl_pos_x;
+	value->sprite.dy = config->sp[i].y - config->pl_pos_y;
+	value->inv_det = 1.0 / (config->plane_x * config->dir_y - config->dir_x * config->plane_y);
+	value->transform.dx = value->inv_det * (config->dir_y * value->sprite.dx - config->dir_x * value->sprite.dy);
+	value->transform.dy = value->inv_det * (-config->plane_y * value->sprite.dx + config->plane_x * value->sprite.dy);
+	value->sprite_sreen_x = (int)((config->Rx / 2) * (1 + value->transform.dx / value->transform.dy));
+	value->sprite_height = abs((int)(config->Ry / (value->transform.dy)));
+	value->draw_start.y = -value->sprite_height / 2 + config->Ry / 2;
+	if(value->draw_start.y < 0) value->draw_start.y = 0;
+	value->draw_end.y = value->sprite_height / 2 + config->Ry / 2;
+	if(value->draw_end.y >= config->Ry) value->draw_end.y = config->Ry - 1;
+	value->sprite_width = abs( (int) (config->Ry / (value->transform.dy)));
+	value->draw_start.x = -value->sprite_width / 2 + value->sprite_sreen_x;
+	if(value->draw_start.x < 0) value->draw_start.x = 0;
+	value->draw_end.x = value->sprite_width / 2 + value->sprite_sreen_x;
+	if(value->draw_end.x >= config->Rx) value->draw_end.x = config->Rx - 1;
+}
+
+void drawing_sprites(t_for_sprites *value, t_for_win *texture, t_config *config)
+{
+	int d = (value->coord.y) * 256 - config->Ry * 128 + value->sprite_height * 128;
+	value->tex.y = ((d * texture->height) / value->sprite_height) / 256;
+	unsigned int color = my_mlx_pixel_take(texture, value->tex.x, value->tex.y);
+	if ((color & 0x00FFFFFF) != 0)
+	{
+		my_mlx_pixel_put(config->win, value->stripe, value->coord.y, color);
+	}
 }
 
 void draw_sprites(t_config *config, float * ZBuffer)
 {
-	//SPRITE CASTING
-	//sort sprites from far to close
+	t_for_sprites value;
+
 	int i;
 
-//	for(int i = 0; i < config->sp_quantity; i++)
-//	{
-//		spriteOrder[i] = i;
-//		spriteDistance[i] = ((posX - sprite[i].x) * (posX - sprite[i].x) + (posY - sprite[i].y) * (posY - sprite[i].y)); //sqrt not taken, unneeded
-//	}
-//	sortSprites(spriteOrder, spriteDistance, config->sp_quantity);
-
-	sprite_sorting(config, config->sp);
-	//after sorting the sprites, do the projection and draw them
 	i = 0;
+	sprite_sorting(config, config->sp);
 	while (i < config->sp_quantity)
 	{
-		//translate sprite position to relative to camera
-		double spriteX = config->sp[i].x - config->pl_pos_x;
-		double spriteY = config->sp[i].y - config->pl_pos_y;
+		calculate_for_sprites(config, &value, i);
 
-		//transform sprite with the inverse camera matrix
-		// [ planeX   dirX ] -1                                       [ dirY      -dirX ]
-		// [               ]       =  1/(planeX*dirY-dirX*planeY) *   [                 ]
-		// [ planeY   dirY ]                                          [ -planeY  planeX ]
+		value.stripe = value.draw_start.x;
 
-		double invDet = 1.0 / (config->plane_x * config->dir_y - config->dir_x * config->plane_y); //required for correct matrix multiplication
-
-		double transformX = invDet * (config->dir_y * spriteX - config->dir_x * spriteY);
-		double transformY = invDet * (-config->plane_y * spriteX + config->plane_x * spriteY); //this is actually the depth inside the screen, that what Z is in 3D
-
-		int spriteScreenX = (int)((config->Rx / 2) * (1 + transformX / transformY));
-
-		//calculate height of the sprite on screen
-		int spriteHeight = abs((int)(config->Ry / (transformY))); //using 'transformY' instead of the real distance prevents fisheye
-		//calculate lowest and highest pixel to fill in current stripe
-		int drawStartY = -spriteHeight / 2 + config->Ry / 2;
-		if(drawStartY < 0) drawStartY = 0;
-		int drawEndY = spriteHeight / 2 + config->Ry / 2;
-		if(drawEndY >= config->Ry) drawEndY = config->Ry - 1;
-
-		//calculate width of the sprite
-		int spriteWidth = abs( (int) (config->Ry / (transformY)));
-		int drawStartX = -spriteWidth / 2 + spriteScreenX;
-		if(drawStartX < 0) drawStartX = 0;
-		int drawEndX = spriteWidth / 2 + spriteScreenX;
-		if(drawEndX >= config->Rx) drawEndX = config->Rx - 1;
-
-		//loop through every vertical stripe of the sprite on screen
-		for(int stripe = drawStartX; stripe <= drawEndX; stripe++)
+		while (value.stripe <= value.draw_end.x)
 		{
-			int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * config->S_tex.width / spriteWidth) / 256;
-			//the conditions in the if are:
-			//1) it's in front of camera plane so you don't see things behind you
-			//2) it's on the screen (left)
-			//3) it's on the screen (right)
-			//4) ZBuffer, with perpendicular distance
-			if (transformY > 0 && stripe > 0 && stripe < config->Rx && transformY < ZBuffer[stripe])
+			value.tex.x = (int)(256 * (value.stripe - (-value.sprite_width / 2 + value.sprite_sreen_x)) * config->S_tex.width / value.sprite_width) / 256;
+			if (value.transform.dy > 0 && value.stripe > 0 && value.stripe < config->Rx && value.transform.dy < ZBuffer[value.stripe])
 			{
-				for(int y = drawStartY; y <= drawEndY; y++) //for every pixel of the current stripe
+				value.coord.y = value.draw_start.y;
+				while (value.coord.y <= value.draw_end.y)
 				{
-					int d = (y) * 256 - config->Ry * 128 + spriteHeight * 128; //256 and 128 factors to avoid floats
-					int texY = ((d * config->S_tex.height) / spriteHeight) / 256;
-					unsigned int color = my_mlx_pixel_take(&config->S_tex, texX, texY);
-					if ((color & 0x00FFFFFF) != 0)
-					{
-						my_mlx_pixel_put(config->win, stripe, y, color);
-					}
-
-//					Uint32 color = texture[sprite[spriteOrder[i]].texture][texWidth * texY + texX]; //get current color from the texture
-//					if((color & 0x00FFFFFF) != 0) buffer[y][stripe] = color; //paint pixel if it isn't black, black is the invisible color
+					drawing_sprites(&value, &config->S_tex, config);
+					value.coord.y++;
 				}
 			}
+			value.stripe++;
 		}
 		i++;
 	}

@@ -13,7 +13,7 @@ static void		filling_file_screenshot(int fd, t_config *config)
 		while (++j < config->Rx)
 		{
 			color = *(int*)(config->win->addr + (i * config->win->line_len
-												 + j * (config->win->bpp / 8)));
+					+ j * (config->win->bpp / 8)));
 			write(fd, &color, 4);
 		}
 	}
