@@ -62,7 +62,7 @@ void			output(t_config *config, int is_screenshot)
 	fill_texture(config);
 	if (!is_screenshot)
 		config->win->mlx_win = mlx_new_window(config->win->mlx,
-											  config->rx, config->ry, "Cute girls & cakes");
+								config->rx, config->ry, "Cute girls & cakes");
 	config->win->img = mlx_new_image(config->win->mlx, config->rx, config->ry);
 	config->win->addr = mlx_get_data_addr(config->win->img, &config->win->bpp,
 								&config->win->line_len, &config->win->endian);
