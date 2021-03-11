@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-void error_output_n_exit(const char *str)
+void	error_output_n_exit(const char *str)
 {
 	int len;
 

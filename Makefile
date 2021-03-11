@@ -10,7 +10,9 @@ MLX = libmlx.dylib
 
 RM = rm -f
 
-OPTION = -c $< -o $@ -I ./includes
+OPTION = -c $< -o $@
+
+INCLUDES = -I./libft -I./get_next_line
 
 SRC = get_next_line/get_next_line.c \
       get_next_line/get_next_line_utils.c \
@@ -37,10 +39,10 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	gcc  -o $(NAME) $(OBJ) $(LIBFT) -lmlx -framework OpenGL -framework AppKit -I./includes
+	gcc  -o $(NAME) $(OBJ) $(LIBFT) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
 
 %.o: %.c
-		gcc  $(OPTION)
+		gcc  $(OPTION) $(INCLUDES)
 
 $(LIBFT):
 		make -C libft/
