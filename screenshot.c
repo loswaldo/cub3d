@@ -24,7 +24,7 @@ void screen_resolution_check(t_config *config, int is_screenshot)
 		{
 			config->rx = screen_w;
 		}
-		if (screen_w < config->rx)
+		if (screen_h < config->ry)
 		{
 			config->ry = screen_h;
 		}
