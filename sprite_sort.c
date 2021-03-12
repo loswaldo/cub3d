@@ -37,18 +37,19 @@ void	sprite_sorting(t_config *config, t_sprites *sp)
 	while (i < config->sp_quantity)
 	{
 		sp[i].dist = ((config->pl_pos_x - sp[i].x) *
-					  (config->pl_pos_x - sp[i].x) + (config->pl_pos_y - sp[i].y) * (config->pl_pos_y - sp[i].y));
+			(config->pl_pos_x - sp[i].x) + (config->pl_pos_y - sp[i].y)
+			* (config->pl_pos_y - sp[i].y));
 		i++;
 	}
 	i = 0;
 	while (i < config->sp_quantity)
 	{
 		j = config->sp_quantity - 1;
-		while(j > i)
+		while (j > i)
 		{
 			if (sp[j - 1].dist < sp[j].dist)
 			{
-				swap_value(&sp[j-1], &sp[j]);
+				swap_value(&sp[j - 1], &sp[j]);
 			}
 			j--;
 		}
