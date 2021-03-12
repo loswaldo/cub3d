@@ -50,39 +50,41 @@ typedef struct		s_for_sprites
 	double			inv_det;
 }					t_for_sprites;
 
-typedef struct	s_for_calculate
+typedef struct		s_for_calculate
 {
-	float		ray_dir_x;
-	float		ray_dir_y;
-	float		side_dist_x;
-	float		side_dist_y;
-	int			map_x;
-	int			map_y;
-	float		delta_dist_x;
-	float		delta_dist_y;
-	float		perp_wall_dist;
-	int			step_x;
-	int			step_y;
-	int			side;
-	double		wall_x;
-	int			tex_x;
-	int			tex_y;
-	double		step;
-	double		tex_pos;
-	int			draw_start;
-	int			draw_end;
-	int			line_height;
-}				t_for_calculate;
+	t_float_coord	ray_dir;
+	t_float_coord	side_dist;
+	t_float_coord	delta_dist;
 
-void			calc_side_dist(t_for_calculate *value, t_config *config);
-void			calculation(t_for_calculate *value, t_config *config, int x);
-void			calc_perpl_wall_dist(t_config *config, t_for_calculate *value);
-void			calc_draw_start_n_end(t_config *config, t_for_calculate *value);
-void			check_side_n_tex_x_y(t_config *config, t_for_calculate *value);
-void			fill_texture(t_config *config);
-void			sprites_coord(t_config *config, t_sprites *sprite);
-void			draw_map(t_config *config);
-void			draw_sprites(t_config *config, float *z_buffer);
-void			sprite_sorting(t_config *config, t_sprites *sp);
+	float			perp_wall_dist;
+
+	t_coord			map;
+	t_coord			step_c;
+	t_coord			tex;
+
+	double			wall_x;
+	double			step;
+	double			tex_pos;
+
+	int				side;
+	int				draw_start;
+	int				draw_end;
+	int				line_height;
+}					t_for_calculate;
+
+void				calc_side_dist(t_for_calculate *value, t_config *config);
+void				calculation(t_for_calculate *value, t_config *config,
+								int x);
+void				calc_perpl_wall_dist(t_config *config,
+										t_for_calculate *value);
+void				calc_draw_start_n_end(t_config *config,
+											t_for_calculate *value);
+void				check_side_n_tex_x_y(t_config *config,
+										t_for_calculate *value);
+void				fill_texture(t_config *config);
+void				sprites_coord(t_config *config, t_sprites *sprite);
+void				draw_map(t_config *config);
+void				draw_sprites(t_config *config, float *z_buffer);
+void				sprite_sorting(t_config *config, t_sprites *sp);
 
 #endif

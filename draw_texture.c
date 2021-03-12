@@ -16,7 +16,7 @@ void	take_n_put_color(t_for_win *texture, t_for_calculate *value,
 						t_coord coord, t_for_win *win)
 {
 	my_mlx_pixel_put(win, coord.x, coord.y,
-					my_mlx_pixel_take(texture, value->tex_x, value->tex_y));
+					my_mlx_pixel_take(texture, value->tex.x, value->tex.y));
 }
 
 void	texture_draw(t_config *config, t_for_calculate *value, int x, int y)
@@ -25,14 +25,14 @@ void	texture_draw(t_config *config, t_for_calculate *value, int x, int y)
 
 	if (value->side == 0)
 	{
-		if (value->step_x > 0)
+		if (value->step_c.x > 0)
 			take_n_put_color(&config->no_tex, value, coord, config->win);
 		else
 			take_n_put_color(&config->so_tex, value, coord, config->win);
 	}
 	if (value->side == 1)
 	{
-		if (value->step_y > 0)
+		if (value->step_c.y > 0)
 			take_n_put_color(&config->we_tex, value, coord, config->win);
 		else
 			take_n_put_color(&config->ea_tex, value, coord, config->win);
@@ -50,7 +50,7 @@ void	directly_draw(t_config *config, t_for_calculate *value, int x)
 			my_mlx_pixel_put(config->win, x, y, config->cel);
 		if (y >= value->draw_start && y <= value->draw_end)
 		{
-			value->tex_y = (int)value->tex_pos & (config->tmp_h - 1);
+			value->tex.y = (int)value->tex_pos & (config->tmp_h - 1);
 			value->tex_pos += value->step;
 			texture_draw(config, value, x, y);
 		}
@@ -68,19 +68,19 @@ void	check_hit(t_for_calculate *value, char **map)
 	hit = 0;
 	while (hit == 0)
 	{
-		if (value->side_dist_x < value->side_dist_y)
+		if (value->side_dist.x < value->side_dist.y)
 		{
-			value->side_dist_x += value->delta_dist_x;
-			value->map_x += value->step_x;
+			value->side_dist.x += value->delta_dist.x;
+			value->map.x += value->step_c.x;
 			value->side = 0;
 		}
 		else
 		{
-			value->side_dist_y += value->delta_dist_y;
-			value->map_y += value->step_y;
+			value->side_dist.y += value->delta_dist.y;
+			value->map.y += value->step_c.y;
 			value->side = 1;
 		}
-		if (map[value->map_x][value->map_y] == '1')
+		if (map[value->map.x][value->map.y] == '1')
 			hit = 1;
 	}
 }
