@@ -87,7 +87,6 @@ void	map_checker(t_config *config)
 {
 	int		x;
 	int		y;
-	int		check;
 
 	find_player_position(config, 0);
 	y = 0;

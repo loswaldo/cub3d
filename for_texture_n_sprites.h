@@ -73,5 +73,6 @@ void			fill_texture(t_config *config);
 void			sprites_coord(t_config *config, t_sprites *sprite);
 void			draw_map(t_config *config);
 void			draw_sprites(t_config *config, float *z_buffer);
+void			sprite_sorting(t_config *config, t_sprites *sp);
 
 #endif
