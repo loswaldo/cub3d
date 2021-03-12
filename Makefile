@@ -1,6 +1,9 @@
 NAME = cub3D
 
-HEADER = cub.h
+HEADER = cub.h \
+		config.h \
+		for_texture_n_sprites.h \
+		parser.h
 
 CFLAG = -Wall -Werror -Wextra
 
@@ -36,7 +39,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
+$(NAME): $(OBJ) $(LIBFT) $(MLX) $(HEADER)
 		gcc  -o $(NAME) $(OBJ) $(LIBFT) $(MLX) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
 
 %.o: %.c
