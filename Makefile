@@ -37,7 +37,7 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-		gcc  -o $(NAME) $(OBJ) $(LIBFT) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
+		gcc  -o $(NAME) $(OBJ) $(LIBFT) $(MLX) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
 
 %.o: %.c
 		gcc  $(OPTION) $(INCLUDES)
