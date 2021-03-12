@@ -14,24 +14,24 @@
 
 void	calculate_for_sprites(t_config *config, t_for_sprites *value, int i)
 {
-	value->sprite.dx = config->sp[i].x - config->pl_pos_x;
-	value->sprite.dy = config->sp[i].y - config->pl_pos_y;
+	value->sprite.x = config->sp[i].x - config->pl_pos_x;
+	value->sprite.y = config->sp[i].y - config->pl_pos_y;
 	value->inv_det = 1.0 / (config->plane_x * config->dir_y - config->dir_x
 			* config->plane_y);
-	value->transform.dx = value->inv_det * (config->dir_y * value->sprite.dx
-			- config->dir_x * value->sprite.dy);
-	value->transform.dy = value->inv_det * (-config->plane_y * value->sprite.dx
-			+ config->plane_x * value->sprite.dy);
-	value->sprite_sreen_x = (int)((config->rx / 2) * (1 + value->transform.dx
-			/ value->transform.dy));
-	value->sprite_height = abs((int)(config->ry / (value->transform.dy)));
+	value->transform.x = value->inv_det * (config->dir_y * value->sprite.x
+			- config->dir_x * value->sprite.y);
+	value->transform.y = value->inv_det * (-config->plane_y * value->sprite.x
+			+ config->plane_x * value->sprite.y);
+	value->sprite_sreen_x = (int)((config->rx / 2) * (1 + value->transform.x
+			/ value->transform.y));
+	value->sprite_height = abs((int)(config->ry / (value->transform.y)));
 	value->draw_start.y = -value->sprite_height / 2 + config->ry / 2;
 	if (value->draw_start.y < 0)
 		value->draw_start.y = 0;
 	value->draw_end.y = value->sprite_height / 2 + config->ry / 2;
 	if (value->draw_end.y >= config->ry)
 		value->draw_end.y = config->ry - 1;
-	value->sprite_width = abs((int)(config->ry / (value->transform.dy)));
+	value->sprite_width = abs((int)(config->ry / (value->transform.y)));
 	value->draw_start.x = -value->sprite_width / 2 + value->sprite_sreen_x;
 	if (value->draw_start.x < 0)
 		value->draw_start.x = 0;
@@ -72,8 +72,8 @@ void	draw_sprites(t_config *config, float *z_buffer)
 			value.tex.x = (int)(256 * (value.stripe - (-value.sprite_width / 2
 						+ value.sprite_sreen_x)) * config->s_tex.width
 						/ value.sprite_width) / 256;
-			if (value.transform.dy > 0 && value.stripe > 0 && value.stripe <
-				config->rx && value.transform.dy < z_buffer[value.stripe])
+			if (value.transform.y > 0 && value.stripe > 0 && value.stripe <
+				config->rx && value.transform.y < z_buffer[value.stripe])
 			{
 				value.coord.y = value.draw_start.y;
 				while (value.coord.y <= value.draw_end.y)

@@ -15,30 +15,40 @@
 
 # include "config.h"
 
-typedef struct	s_coord
+typedef struct		s_coord
 {
-	int			x;
-	int			y;
-	double		dx;
-	double		dy;
-}				t_coord;
+	int				x;
+	int				y;
+}					t_coord;
 
-typedef struct	s_for_sprites
+typedef struct		s_double_coord
 {
-	t_coord		sprite;
-	t_coord		transform;
-	t_coord		draw_start;
-	t_coord		draw_end;
-	t_coord		tex;
-	t_coord		coord;
+	double			x;
+	double			y;
+}					t_double_coord;
 
-	int			sprite_sreen_x;
-	int			sprite_height;
-	int			sprite_width;
-	int			stripe;
+typedef struct		s_float_coord
+{
+	float		x;
+	float		y;
+}					t_float_coord;
 
-	double		inv_det;
-}				t_for_sprites;
+typedef struct		s_for_sprites
+{
+	t_double_coord	sprite;
+	t_double_coord	transform;
+	t_coord			draw_start;
+	t_coord			draw_end;
+	t_coord			tex;
+	t_coord			coord;
+
+	int				sprite_sreen_x;
+	int				sprite_height;
+	int				sprite_width;
+	int				stripe;
+
+	double			inv_det;
+}					t_for_sprites;
 
 typedef struct	s_for_calculate
 {
