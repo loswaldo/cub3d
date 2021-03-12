@@ -27,6 +27,8 @@ int ft_skip_spaces(char *line, int i);
 int ft_is_identifier(char *line, int i, t_config *config);
 int check_data_filled(t_config *config);
 void map_validation(t_config *config);
+int		map_symbol_check(char c, const char *str);
+char	*ft_fill_spaces(char *str, int len);
 
 
 #endif

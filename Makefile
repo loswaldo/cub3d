@@ -17,7 +17,7 @@ INCLUDES = -I./libft -I./get_next_line
 SRC = get_next_line/get_next_line.c \
       get_next_line/get_next_line_utils.c \
       main.c \
-      other.c \
+      part_of_parser.c \
       parse_config.c \
       parse_rgb.c \
       for_window.c \
@@ -29,7 +29,8 @@ SRC = get_next_line/get_next_line.c \
       general_function.c \
       key_hooks.c \
       screenshot.c \
-      sprite_sort.c
+      sprite_sort.c \
+      map_validate.c
 
 
 
