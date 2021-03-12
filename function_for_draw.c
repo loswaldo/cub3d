@@ -31,6 +31,10 @@ void			my_mlx_pixel_put(t_for_win *data, int x, int y,
 		*(unsigned int*)dst = color;
 	}
 }
+int			close_win()
+{
+	exit(0);
+}
 
 void			init(t_config *config)
 {
@@ -75,6 +79,7 @@ void			output(t_config *config, int is_screenshot)
 		mlx_put_image_to_window(config->win->mlx, config->win->mlx_win,
 								config->win->img, 0, 0);
 		mlx_hook(config->win->mlx_win, 2, 1L << 0, key_hook, config);
+		mlx_hook(config->win->mlx_win, 17, 1L << 0, close_win, 0);
 		mlx_loop(config->win->mlx);
 	}
 }
