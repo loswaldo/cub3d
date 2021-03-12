@@ -109,4 +109,5 @@ void	draw_map(t_config *config)
 		z_buffer[x] = value.perp_wall_dist;
 	}
 	draw_sprites(config, z_buffer);
+	free(z_buffer);
 }
