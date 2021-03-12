@@ -72,6 +72,8 @@ typedef struct		s_for_calculate
 	int				line_height;
 }					t_for_calculate;
 
+void				screen_resolution_check(t_config *config,
+											int is_screenshot);
 void				calc_side_dist(t_for_calculate *value, t_config *config);
 void				calculation(t_for_calculate *value, t_config *config,
 								int x);

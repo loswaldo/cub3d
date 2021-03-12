@@ -64,6 +64,7 @@ void			output(t_config *config, int is_screenshot)
 {
 	config->win->mlx = mlx_init();
 	fill_texture(config);
+	screen_resolution_check(config, is_screenshot);
 	if (!is_screenshot)
 		config->win->mlx_win = mlx_new_window(config->win->mlx,
 								config->rx, config->ry, "Cute girls & cakes");

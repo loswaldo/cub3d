@@ -12,6 +12,25 @@
 
 #include "cub.h"
 
+void screen_resolution_check(t_config *config, int is_screenshot)
+{
+	int screen_w;
+	int screen_h;
+
+	if (!is_screenshot)
+	{
+		mlx_get_screen_size(config->win->mlx, &screen_w, &screen_h);
+		if (screen_w < config->rx)
+		{
+			config->rx = screen_w;
+		}
+		if (screen_w < config->rx)
+		{
+			config->ry = screen_h;
+		}
+	}
+}
+
 static void		filling_file_screenshot(int fd, t_config *config)
 {
 	int	i;
