@@ -17,8 +17,9 @@ int		check_data_filled(t_config *config)
 	return (config->floor->r != -1 && config->floor->g != -1
 			&& config->floor->b != -1 && config->celling->r != -1
 			&& config->celling->g != -1 && config->celling->b != -1
-			&& config->no_t != NULL && config->we_t != NULL && config->ea_t != NULL
-			&& config->so_t != NULL && config->s_t != NULL && config->ry != 0
+			&& config->no_t != NULL && config->we_t != NULL
+			&& config->ea_t != NULL && config->so_t != NULL
+			&& config->s_t != NULL && config->ry != 0
 			&& config->rx != 0);
 }
 

@@ -16,7 +16,7 @@ void	check_line_for_rgb(char *line)
 {
 	int				i;
 	int				count;
-	const char *	error = "WRONG COLOR";
+	const char		*error = "WRONG COLOR";
 
 	i = 0;
 	count = 0;
@@ -32,29 +32,31 @@ void	check_line_for_rgb(char *line)
 		error_output_n_exit(error);
 }
 
-int skip_digits(const char *line)
+int		skip_digits(const char *line)
 {
-	int i = 0;
+	int i;
 
-	while (line[i] && ft_isdigit(line[i])) {
+	i = 0;
+	while (line[i] && ft_isdigit(line[i]))
+	{
 		++i;
 	}
-	return i;
+	return (i);
 }
 
-int is_valid_color(int color)
+int		is_valid_color(int color)
 {
 	return (color <= 255 && color >= 0);
 }
 
-int parser_for_color(int * color_in_struct, const char * line)
+int		parser_for_color(int *color_in_struct, const char *line)
 {
-	const char * color_error = "WRONG COLOR";
+	const char *color_error = "WRONG COLOR";
 
 	*color_in_struct = ft_atoi(line);
 	if (!is_valid_color(*color_in_struct))
 		error_output_n_exit(color_error);
-	return skip_digits(line);
+	return (skip_digits(line));
 }
 
 void	parser_for_rgb(char *line, t_rgb *part_of_struct)
