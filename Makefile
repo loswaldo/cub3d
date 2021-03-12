@@ -14,33 +14,30 @@ OPTION = -c $< -o $@
 
 INCLUDES = -I./libft -I./get_next_line
 
-SRC = get_next_line/get_next_line.c \
-      get_next_line/get_next_line_utils.c \
-      main.c \
-      part_of_parser.c \
-      parse_config.c \
-      parse_rgb.c \
-      for_window.c \
-      function_for_draw.c \
-      parser.c \
-      sprite_draw.c \
-      calculate_texture.c \
-      draw_texture.c \
-      general_function.c \
-      key_hooks.c \
-      screenshot.c \
-      sprite_sort.c \
-      map_validate.c
-
-
-
+SRC =	get_next_line/get_next_line.c \
+		get_next_line/get_next_line_utils.c \
+		main.c \
+		part_of_parser.c \
+		parse_config.c \
+		parse_rgb.c \
+		for_window.c \
+		function_for_draw.c \
+		parser.c \
+		sprite_draw.c \
+		calculate_texture.c \
+		draw_texture.c \
+		general_function.c \
+		key_hooks.c \
+		screenshot.c \
+		sprite_sort.c \
+		map_validate.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	gcc  -o $(NAME) $(OBJ) $(LIBFT) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
+		gcc  -o $(NAME) $(OBJ) $(LIBFT) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
 
 %.o: %.c
 		gcc  $(OPTION) $(INCLUDES)
@@ -53,15 +50,15 @@ $(MLX):
 		cp minilibx_mms_20200219/libmlx.dylib .
 
 clean:
-	$(RM) $(OBJ)
-	make clean -C libft/
-	make clean -C minilibx_mms_20200219/
+		$(RM) $(OBJ)
+		make clean -C libft/
+		make clean -C minilibx_mms_20200219/
 
 fclean: clean
-	$(RM) $(NAME)
-	make fclean -C libft/
-	make clean -C minilibx_mms_20200219/
-	$(RM) $(MLX)
+		$(RM) $(NAME)
+		make fclean -C libft/
+		make clean -C minilibx_mms_20200219/
+		$(RM) $(MLX)
 
 re: fclean all
 

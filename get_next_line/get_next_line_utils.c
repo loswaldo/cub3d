@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: loswaldo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/12 14:29:12 by loswaldo          #+#    #+#             */
+/*   Updated: 2021/03/12 14:29:16 by loswaldo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	ft_strlenn(const char *s)
@@ -36,7 +48,6 @@ char	*ft_strjoinn(char *s1, char const *s2)
 	str[i] = 0;
 	free(s1);
 	return (str);
-
 }
 
 char	*ft_strchar(const char *s, int c)

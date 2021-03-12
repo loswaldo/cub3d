@@ -18,7 +18,7 @@
 char	*ft_rem(char *remainder, char **line)
 {
 	char	*res;
-	char *tmp;
+	char	*tmp;
 
 	res = NULL;
 	if (remainder)
@@ -58,7 +58,8 @@ int		get_next_line(int fd, char **line)
 	while (!remainder && (rd = read(fd, buf, BUFFER_SIZE)))
 	{
 		buf[rd] = '\0';
-		if ((res = ft_strchar(buf, '\n'))) {
+		if ((res = ft_strchar(buf, '\n')))
+		{
 			*res = '\0';
 			remainder = ft_strdupp(++res);
 		}
