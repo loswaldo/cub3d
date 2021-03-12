@@ -42,7 +42,7 @@ void			continue_screenshot(t_config *config, int fd)
 	zero = 0;
 	pos_pixel_data = 54;
 	size_screen = config->rx
-				  * config->ry * 4 + 54;
+				* config->ry * 4 + 54;
 	write(fd, "BM", 2);
 	write(fd, &size_screen, 4);
 	write(fd, &zero, 4);
@@ -65,10 +65,10 @@ void			screenshot(t_config *config)
 
 	fd = open("screen.bmp", O_CREAT | O_RDWR, 0666);
 	size_screen = config->rx
-				  * config->ry * 4 + 54;
+				* config->ry * 4 + 54;
 	zero = 0;
 	size = config->rx
-		   * config->ry;
+			* config->ry;
 	if (fd < 0)
 		write(1, "Error\n", 6);
 	continue_screenshot(config, fd);
@@ -82,4 +82,3 @@ void			screenshot(t_config *config)
 	filling_file_screenshot(fd, config);
 	close(fd);
 }
-
