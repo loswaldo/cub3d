@@ -40,10 +40,13 @@ void	parser_for_resolution(t_config *config, char *line)
 		config->rx = ft_atoi(&line[i]);
 	while (ft_isdigit(line[i]))
 		i++;
-	i++;
 	i = ft_skip_spaces(line, i);
 	if (ft_isdigit(line[i]))
 		config->ry = ft_atoi(&line[i]);
+	else
+	{
+		error_output_n_exit("WRONG NUMBER FOR RESOLUTION");
+	}
 	while (ft_isdigit(line[i]))
 		i++;
 	i = ft_skip_spaces(line, i);
