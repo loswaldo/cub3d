@@ -6,8 +6,8 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_FLAGS "-Wall -Wextra -Werror")
 #set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -Wno-unused -Wno-unused-variable -Wno-unused-parameter")
 
-#link_directories(./)
-include_directories(libft get_next_line)
+link_directories(./)
+include_directories(libft get_next_line ./)
 
 set(LIBFT_SRC
         libft/ft_atoi.c
@@ -56,11 +56,9 @@ set(GNL_SRC
 add_executable(cub
         ${LIBFT_SRC}
         ${GNL_SRC}
-#        minilibx_mms_20200219/libmlx.dylib
         cub.h
         parser.c
         sprite_sort.c
-#        parser.h
         map_validate.c
         main.c
         parse_config.c
@@ -72,8 +70,6 @@ add_executable(cub
         key_hooks.c
         sprite_draw.c
         calculate_texture.c
-#        for_texture_n_sprites.h
-#        config.h
         screenshot.c
         draw_texture.c
         general_function.c

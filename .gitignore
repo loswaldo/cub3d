@@ -4,6 +4,7 @@ libmlx.dylib
 screen.bmp
 
 *.o
+*.d
 
 minilibx_mms_20200219/*.swiftdoc
 minilibx_mms_20200219/*.swiftmodule
