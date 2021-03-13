@@ -20,6 +20,7 @@ void	parser_for_rgb(char *line, t_rgb *part_of_struct);
 void	parser_for_texture(char *line, char **part_of_struct, int i);
 void	parser_for_resolution(t_config *config, char *line);
 void	parse(t_config *config, char *file_name);
+int		parse_digit(char *line);
 
 void	rgb_conversion(t_rgb *color, int *part_of_struct);
 void	ft_init_struct(t_config *config);

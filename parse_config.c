@@ -35,25 +35,15 @@ void	parser_for_resolution(t_config *config, char *line)
 	int i;
 
 	i = 1;
+	config->rx = parse_digit(line + i);
 	i = ft_skip_spaces(line, i);
-	if (ft_isdigit(line[i]))
-		config->rx = ft_atoi(&line[i]);
 	while (ft_isdigit(line[i]))
 		i++;
-	i = ft_skip_spaces(line, i);
-	if (ft_isdigit(line[i]))
-		config->ry = ft_atoi(&line[i]);
-	else
-	{
+	config->ry = parse_digit(line + i);
+	if (config->ry <= 0 || config->rx <= 0)
 		error_output_n_exit("WRONG NUMBER FOR RESOLUTION");
-	}
 	while (ft_isdigit(line[i]))
 		i++;
-	i = ft_skip_spaces(line, i);
-	if (ft_isdigit(line[i]))
-	{
-		error_output_n_exit("WRONG NUMBER FOR RESOLUTION");
-	}
 }
 
 void	parser_for_texture(char *line, char **part_of_struct, int i)
