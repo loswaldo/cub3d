@@ -37,7 +37,7 @@ void	part_of_map_checker(t_config *config, int x, int y)
 
 	j = 0;
 	x += -1;
-	y += -1;
+	y += -2;
 	if ((x < 0 || x >= config->map_width) || (y < 0 || y >= config->map_height))
 		error_output_n_exit("MAP IS NOT VALID!");
 	while (j < 3)
@@ -90,13 +90,15 @@ void	map_checker(t_config *config)
 
 	find_player_position(config, 0);
 	y = 0;
-	while (y < config->map_height)
+	while (y <= config->map_height)
 	{
 		x = 0;
 		while (x < config->map_width)
 		{
 			if (map_symbol_check(config->map[y][x], "02NWES"))
 				part_of_map_checker(config, x, y);
+			if (!ft_strchr("02NWES1 ", config->map[y][x]))
+				error_output_n_exit("MAP IS NOT VALID!");
 			x++;
 		}
 		y++;
