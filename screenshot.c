@@ -29,6 +29,13 @@ void			screen_resolution_check(t_config *config, int is_screenshot)
 			config->ry = screen_h;
 		}
 	}
+	if (is_screenshot)
+	{
+		if (config->rx > 16384 || config->ry > 16384)
+		{
+			error_output_n_exit("TO BIG NUM FOR SCREENSHOT");
+		}
+	}
 }
 
 static void		filling_file_screenshot(int fd, t_config *config)
