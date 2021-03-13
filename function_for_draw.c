@@ -21,7 +21,7 @@ unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y)
 }
 
 void			my_mlx_pixel_put(t_config *config, int x, int y,
-								 unsigned int color)
+								unsigned int color)
 {
 	char	*dst;
 
@@ -32,7 +32,8 @@ void			my_mlx_pixel_put(t_config *config, int x, int y,
 		*(unsigned int*)dst = color;
 	}
 }
-int				close_win()
+
+int				close_win(void)
 {
 	exit(0);
 }

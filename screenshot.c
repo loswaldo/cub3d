@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-void screen_resolution_check(t_config *config, int is_screenshot)
+void			screen_resolution_check(t_config *config, int is_screenshot)
 {
 	int screen_w;
 	int screen_h;

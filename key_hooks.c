@@ -101,5 +101,3 @@ int		key_hook(int key, t_config *config)
 							config->win->img, 0, 0);
 	return (1);
 }
-
-/* todo: close window by krestik */

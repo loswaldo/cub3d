@@ -13,10 +13,10 @@
 #include "cub.h"
 
 void	take_n_put_color(t_for_win *texture, t_for_calculate *value,
-						 t_coord coord, t_config *config)
+						t_coord coord, t_config *config)
 {
 	my_mlx_pixel_put(config, coord.x, coord.y,
-					 my_mlx_pixel_take(texture, value->tex.x, value->tex.y));
+					my_mlx_pixel_take(texture, value->tex.x, value->tex.y));
 }
 
 void	texture_draw(t_config *config, t_for_calculate *value, int x, int y)

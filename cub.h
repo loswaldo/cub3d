@@ -30,7 +30,7 @@ void			error_output_n_exit(const char *str);
 void			cub();
 
 void			my_mlx_pixel_put(t_config *config, int x, int y,
-								 unsigned int color);
+								unsigned int color);
 unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y);
 
 void			output(t_config *config, int is_screenshot);
