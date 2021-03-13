@@ -18,15 +18,21 @@ void	check_line_for_rgb(char *line)
 	int				count;
 	const char		*error = "WRONG COLOR";
 
-	i = 0;
+	i = 1;
 	count = 0;
+	i = ft_skip_spaces(line, i);
 	while (line[i])
 	{
-		if (ft_isdigit(line[i]))
-			i++;
-		else if (line[i] == ',')
+		i += skip_digits(line + i);
+		i = ft_skip_spaces(line, i);
+		if (line[i] == ',')
+		{
 			count++;
-		i++;
+			i++;
+		}
+		i = ft_skip_spaces(line, i);
+		if (!ft_isdigit(line[i]) && line[i])
+			error_output_n_exit(error);
 	}
 	if (count > 2)
 		error_output_n_exit(error);
@@ -49,12 +55,18 @@ int		is_valid_color(int color)
 	return (color <= 255 && color >= 0);
 }
 
-int		parser_for_color(int *color_in_struct, const char *line)
+int		parser_for_color(t_rgb *color_in_struct, const char *line)
 {
-	const char *color_error = "WRONG COLOR";
+	const char	*color_error = "WRONG COLOR";
+	char		**color;
 
-	*color_in_struct = ft_atoi(line);
-	if (!is_valid_color(*color_in_struct))
+	color = ft_split(line, ',');
+	color_in_struct->r = parse_digit(color[0]);
+	color_in_struct->g = parse_digit(color[1]);
+	color_in_struct->b = parse_digit(color[2]);
+	if (!is_valid_color(color_in_struct->r) ||
+		!is_valid_color(color_in_struct->g) ||
+		!is_valid_color(color_in_struct->b))
 		error_output_n_exit(color_error);
 	return (skip_digits(line));
 }
@@ -65,24 +77,6 @@ void	parser_for_rgb(char *line, t_rgb *part_of_struct)
 
 	i = 1;
 	check_line_for_rgb(line);
-	while (line[i])
-	{
-		if (ft_isdigit(line[i]))
-		{
-			if (part_of_struct->r < 0)
-			{
-				i += parser_for_color(&part_of_struct->r, line + i);
-			}
-			else if (part_of_struct->g < 0)
-			{
-				i += parser_for_color(&part_of_struct->g, line + i);
-			}
-			else if (part_of_struct->b < 0)
-			{
-				i += parser_for_color(&part_of_struct->b, line + i);
-				continue ;
-			}
-		}
-		i++;
-	}
+	i = ft_skip_spaces(line, i);
+	parser_for_color(part_of_struct, line + i);
 }

@@ -22,14 +22,14 @@ void	error_output_n_exit(const char *str)
 	exit(1);
 }
 
-int		parse_digit(char *line)
+int		parse_digit(const char *line)
 {
 	int i;
 	int num;
 
-	i = 1;
+	i = 0;
 	num = 0;
-	i = ft_skip_spaces(line, i);
+	i = ft_skip_spaces((char *)line, i);
 	while (ft_isdigit(line[i]) && line[i] == '0')
 		i++;
 	while (ft_isdigit(line[i]))
@@ -37,7 +37,7 @@ int		parse_digit(char *line)
 		num = (num * 10) + (line[i] - 48);
 		i++;
 	}
-	i = ft_skip_spaces(line, i);
+	i = ft_skip_spaces((char *)line, i);
 	if (!ft_isdigit(line[i]) && line[i])
 		error_output_n_exit("WRONG SYMBOL");
 	if (num > 2147483647)
