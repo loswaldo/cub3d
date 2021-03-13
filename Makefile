@@ -42,7 +42,7 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(MLX) $(HEADER)
 		gcc  -o $(NAME) $(OBJ) $(LIBFT) $(MLX) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
 
-%.o: %.c
+%.o: %.c $(HEADER)
 		gcc  $(OPTION) $(INCLUDES)
 
 $(LIBFT):
