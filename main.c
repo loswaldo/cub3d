@@ -75,13 +75,12 @@ void	validate_save_argument(const char *arg_save)
 
 int		main(int ac, char **av)
 {
-	if (ac > 1)
+	if (ac > 1 && ac < 3)
 	{
 		if (ac == 2)
 		{
 			check_file_name(av[1]);
 			cub(av[1], 0);
-			printf("Yey!");
 		}
 		else if (ac == 3)
 		{
@@ -92,7 +91,7 @@ int		main(int ac, char **av)
 	}
 	else
 	{
-		printf("Nope!");
+		error_output_n_exit("TOO MUCH ARGUMENT");
 	}
 	return (0);
 }
