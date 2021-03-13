@@ -20,18 +20,19 @@ unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y)
 	return (*(unsigned int*)dst);
 }
 
-void			my_mlx_pixel_put(t_for_win *data, int x, int y,
-								unsigned int color)
+void			my_mlx_pixel_put(t_config *config, int x, int y,
+								 unsigned int color)
 {
 	char	*dst;
 
-	if ((x <= 1920 && x >= 0) || (y <= 1080 && y >= 0))
+	if ((x <= config->rx && x >= 0) || (y <= config->ry && y >= 0))
 	{
-		dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
+		dst = config->win->addr + (y * config->win->line_len + x *
+				(config->win->bpp / 8));
 		*(unsigned int*)dst = color;
 	}
 }
-int			close_win()
+int				close_win()
 {
 	exit(0);
 }

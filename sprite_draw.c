@@ -52,7 +52,7 @@ void	drawing_sprites(t_for_sprites *value, t_for_win *texture,
 	color = my_mlx_pixel_take(texture, value->tex.x, value->tex.y);
 	if ((color & 0x00FFFFFF) != 0)
 	{
-		my_mlx_pixel_put(config->win, value->stripe, value->coord.y, color);
+		my_mlx_pixel_put(config, value->stripe, value->coord.y, color);
 	}
 	value->coord.y++;
 }

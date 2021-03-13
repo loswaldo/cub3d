@@ -13,10 +13,10 @@
 #include "cub.h"
 
 void	take_n_put_color(t_for_win *texture, t_for_calculate *value,
-						t_coord coord, t_for_win *win)
+						 t_coord coord, t_config *config)
 {
-	my_mlx_pixel_put(win, coord.x, coord.y,
-					my_mlx_pixel_take(texture, value->tex.x, value->tex.y));
+	my_mlx_pixel_put(config, coord.x, coord.y,
+					 my_mlx_pixel_take(texture, value->tex.x, value->tex.y));
 }
 
 void	texture_draw(t_config *config, t_for_calculate *value, int x, int y)
@@ -26,16 +26,16 @@ void	texture_draw(t_config *config, t_for_calculate *value, int x, int y)
 	if (value->side == 0)
 	{
 		if (value->step_c.x > 0)
-			take_n_put_color(&config->no_tex, value, coord, config->win);
+			take_n_put_color(&config->no_tex, value, coord, config);
 		else
-			take_n_put_color(&config->so_tex, value, coord, config->win);
+			take_n_put_color(&config->so_tex, value, coord, config);
 	}
 	if (value->side == 1)
 	{
 		if (value->step_c.y > 0)
-			take_n_put_color(&config->we_tex, value, coord, config->win);
+			take_n_put_color(&config->we_tex, value, coord, config);
 		else
-			take_n_put_color(&config->ea_tex, value, coord, config->win);
+			take_n_put_color(&config->ea_tex, value, coord, config);
 	}
 }
 
@@ -47,7 +47,7 @@ void	directly_draw(t_config *config, t_for_calculate *value, int x)
 	while (y < value->draw_end)
 	{
 		if (y < value->draw_start)
-			my_mlx_pixel_put(config->win, x, y, config->cel);
+			my_mlx_pixel_put(config, x, y, config->cel);
 		if (y >= value->draw_start && y <= value->draw_end)
 		{
 			value->tex.y = (int)value->tex_pos & (config->tmp_h - 1);
@@ -58,7 +58,7 @@ void	directly_draw(t_config *config, t_for_calculate *value, int x)
 	}
 	y = value->draw_end;
 	while (y < config->ry)
-		my_mlx_pixel_put(config->win, x, y++, config->fl);
+		my_mlx_pixel_put(config, x, y++, config->fl);
 }
 
 void	check_hit(t_for_calculate *value, char **map)
