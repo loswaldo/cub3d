@@ -18,6 +18,7 @@ void	parse(t_config *config, char *file_name)
 	int		ret;
 	int		fd;
 
+	ft_init_struct(config);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{

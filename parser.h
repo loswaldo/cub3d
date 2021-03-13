@@ -22,6 +22,7 @@ void	parser_for_resolution(t_config *config, char *line);
 void	parse(t_config *config, char *file_name);
 
 void	rgb_conversion(t_rgb *color, int *part_of_struct);
+void	ft_init_struct(t_config *config);
 int		check_line(char *line, t_config *config);
 int		ft_skip_spaces(char *line, int i);
 int		ft_is_identifier(char *line, int i, t_config *config);

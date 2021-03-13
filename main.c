@@ -47,13 +47,18 @@ void	cub(char *file_name, int is_screenshot)
 	ft_bzero(&config, sizeof(t_config));
 	config.floor = malloc(sizeof(t_rgb));
 	config.celling = malloc(sizeof(t_rgb));
+	if (!config.floor || !config.celling)
+		error_output_n_exit("MALLOC ERROR");
 	config.win = malloc(sizeof(t_for_win));
-	ft_init_struct(&config);
+	if (!config.win)
+		error_output_n_exit("MALLOC ERROR");
 	parse(&config, file_name);
 	rgb_conversion(config.floor, &config.fl);
 	rgb_conversion(config.celling, &config.cel);
 	map_validation(&config);
 	config.sp = ft_calloc(sizeof(t_sprites), (config.sp_quantity));
+	if (!config.sp)
+		error_output_n_exit("MALLOC ERROR");
 	sprites_coord(&config, config.sp);
 	output(&config, is_screenshot);
 }
