@@ -30,7 +30,7 @@ int		ft_is_identifier(char *line, int i, t_config *config)
 	else if (line[i] == '1' && check_data_filled(config))
 		return (1);
 	else
-		error_output_n_exit("WRONG STRING OR NOT ");
+		error_output_n_exit("WRONG STRING OR NOT ENOUGH IDENTIFIERS");
 	return (0);
 }
 
@@ -52,7 +52,7 @@ int		check_line(char *line, t_config *config)
 	if (line[i] == '\0')
 	{
 		if (check_data_filled(config) && config->pre_map)
-			error_output_n_exit("map IS NOT map!");
+			error_output_n_exit("MAP ERROR");
 		return (0);
 	}
 	i = ft_skip_spaces(line, i);
