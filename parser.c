@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
 #include "cub.h"
+#include "parser.h"
+#include <fcntl.h>
 
 void	parse(t_config *config, char *file_name)
 {

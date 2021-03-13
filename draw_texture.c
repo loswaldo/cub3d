@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "cub.h"
+#include "for_texture_n_sprites.h"
 
 void	take_n_put_color(t_for_win *texture, t_for_calculate *value,
 						t_coord coord, t_config *config)

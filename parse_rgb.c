@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "libft.h"
+#include "parser.h"
 
 void	check_line_for_rgb(char *line)
 {

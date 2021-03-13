@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "cub.h"
+#include "parser.h"
 
 void	error_output_n_exit(const char *str)
 {

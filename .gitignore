@@ -13,3 +13,6 @@ libft/*.o
 libft/*.a
 
 cub3D
+
+cub3D.dSYM
+libmlx.dylib.dSYM

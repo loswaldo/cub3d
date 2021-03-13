@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include "minilibx_mms_20200219/mlx.h"
 #include "cub.h"
+#include "for_texture_n_sprites.h"
+
 
 unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y)
 {

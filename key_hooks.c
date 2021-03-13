@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <math.h>
+#include "minilibx_mms_20200219/mlx.h"
 #include "cub.h"
+#include "for_texture_n_sprites.h"
 
 #define MOVE_S 0.2f
 

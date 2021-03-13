@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "cub.h"
+#include "parser.h"
 
 int		ft_is_identifier(char *line, int i, t_config *config)
 {

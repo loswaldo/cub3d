@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "cub.h"
+#include "for_texture_n_sprites.h"
 
 void	calculate_for_sprites(t_config *config, t_for_sprites *value, int i)
 {

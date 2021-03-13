@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "libft.h"
+#include "parser.h"
+#include "for_texture_n_sprites.h"
 
 void	ft_init_struct(t_config *config)
 {

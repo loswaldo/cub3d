@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "config.h"
 #include "cub.h"
+#include "parser.h"
+#include "libft.h"
 
 void	sprites_counter(t_config *config)
 {
@@ -37,7 +40,7 @@ void	part_of_map_checker(t_config *config, int x, int y)
 
 	j = 0;
 	x += -1;
-	y += -2;
+	y += -1;
 	if ((x < 0 || x >= config->map_width) || (y < 0 || y >= config->map_height))
 		error_output_n_exit("MAP IS NOT VALID!");
 	while (j < 3)
@@ -45,7 +48,8 @@ void	part_of_map_checker(t_config *config, int x, int y)
 		i = 0;
 		while (i < 3)
 		{
-			if (!(map_symbol_check(config->map[y + j][x + i], "102NWES")))
+			if (!(map_symbol_check(config->map[y + j][x + i], "102NWES"))
+			&& config->map[y + j][x + i])
 				error_output_n_exit("MAP IS NOT VALID!");
 			i++;
 		}

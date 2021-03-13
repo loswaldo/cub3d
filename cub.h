@@ -13,18 +13,7 @@
 #ifndef CUB_H
 # define CUB_H
 
-# include <stdio.h>
-# include <fcntl.h>
-# include <math.h>
-# include <unistd.h>
-
 # include "config.h"
-# include "for_texture_n_sprites.h"
-# include "parser.h"
-
-# include "get_next_line.h"
-# include "libft.h"
-# include "minilibx_mms_20200219/mlx.h"
 
 void			error_output_n_exit(const char *str);
 void			cub();

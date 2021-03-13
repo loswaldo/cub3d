@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <fcntl.h>
+#include "minilibx_mms_20200219/mlx.h"
 #include "cub.h"
 
 void			screen_resolution_check(t_config *config, int is_screenshot)

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minilibx_mms_20200219/mlx.h"
 #include "cub.h"
 
 void	for_mlx_create(char *path, t_for_win *tex, t_for_win *win)

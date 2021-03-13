@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "cub.h"
+#include "libft.h"
+#include "parser.h"
 
 int		check_data_filled(t_config *config)
 {

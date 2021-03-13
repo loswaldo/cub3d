@@ -13,8 +13,6 @@ MLX = libmlx.dylib
 
 RM = rm -f
 
-OPTION = -c $< -o $@
-
 INCLUDES = -I./libft -I./get_next_line
 
 SRC =	get_next_line/get_next_line.c \
@@ -39,29 +37,32 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX) $(HEADER)
-		gcc  -o $(NAME) $(OBJ) $(LIBFT) $(MLX) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	gcc -o $(NAME) $(OBJ) $(LIBFT) $(MLX) -lmlx -framework OpenGL -framework AppKit $(INCLUDES)
 
-%.o: %.c $(HEADER)
-		gcc  $(OPTION) $(INCLUDES)
+%.o: %.c
+	gcc -MMD -c $< -o $@ $(INCLUDES)
+
+-include $(SRC:%.c=%.d)
 
 $(LIBFT):
-		make -C libft/
+	make -C libft/
 
 $(MLX):
-		make -C minilibx_mms_20200219/
-		cp minilibx_mms_20200219/libmlx.dylib .
+	make -C minilibx_mms_20200219/
+	cp minilibx_mms_20200219/libmlx.dylib .
 
 clean:
-		$(RM) $(OBJ)
-		make clean -C libft/
-		make clean -C minilibx_mms_20200219/
+	$(RM) $(OBJ)
+	$(RM) $(SRC:%.c=%.d)
+	make clean -C libft/
+	make clean -C minilibx_mms_20200219/
 
 fclean: clean
-		$(RM) $(NAME)
-		make fclean -C libft/
-		make clean -C minilibx_mms_20200219/
-		$(RM) $(MLX)
+	$(RM) $(NAME)
+	make fclean -C libft/
+	make clean -C minilibx_mms_20200219/
+	$(RM) $(MLX)
 
 re: fclean all
 
