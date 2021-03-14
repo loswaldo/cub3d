@@ -27,7 +27,7 @@ void	error_output_n_exit(const char *str)
 int		parse_digit(const char *line)
 {
 	int i;
-	int num;
+	long num;
 
 	i = 0;
 	num = 0;
@@ -37,6 +37,8 @@ int		parse_digit(const char *line)
 	while (ft_isdigit(line[i]))
 	{
 		num = (num * 10) + (line[i] - 48);
+		if (num >= 2147483647)
+			error_output_n_exit("NUM IS TOO BIG :(");
 		i++;
 	}
 	i = ft_skip_spaces((char *)line, i);
@@ -44,5 +46,5 @@ int		parse_digit(const char *line)
 		error_output_n_exit("WRONG SYMBOL");
 	if (num > 2147483647)
 		error_output_n_exit("NUM IS TOO BIG :(");
-	return (num);
+	return ((int)num);
 }
