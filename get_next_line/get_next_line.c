@@ -57,6 +57,8 @@ int		get_next_line(int fd, char **line)
 	remainder = ft_rem(remainder, line);
 	while (!remainder && (rd = read(fd, buf, BUFFER_SIZE)))
 	{
+		if (rd == -1)
+			return (-1);
 		buf[rd] = '\0';
 		if ((res = ft_strchar(buf, '\n')))
 		{
