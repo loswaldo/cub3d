@@ -44,7 +44,7 @@ typedef struct		s_for_sprites
 
 	int				sprite_sreen_x;
 	int				sprite_height;
-	int				sprite_width;
+	double			sprite_width;
 	int				stripe;
 
 	double			inv_det;
