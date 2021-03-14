@@ -88,6 +88,7 @@ void	parser_for_rgb(char *line, t_rgb *part_of_struct)
 
 	i = 1;
 	check_line_for_rgb(line);
+	check_line_rgb_again(line);
 	i = ft_skip_spaces(line, i);
 	parser_for_color(part_of_struct, line + i);
 }

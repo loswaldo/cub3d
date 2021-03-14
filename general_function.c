@@ -48,3 +48,25 @@ int		parse_digit(const char *line)
 		return(20000);
 	return ((int)num);
 }
+
+void	check_line_rgb_again(char *line)
+{
+	int i;
+
+	i = 1;
+	i = ft_skip_spaces(line, i);
+	i += skip_digits(line + i);
+	i = ft_skip_spaces(line, i);
+	if (line[i] == ',')
+		i++;
+	i = ft_skip_spaces(line, i);
+	i += skip_digits(line + i);
+	i = ft_skip_spaces(line, i);
+	if (line[i] == ',')
+		i++;
+	i = ft_skip_spaces(line, i);
+	i += skip_digits(line + i);
+	i = ft_skip_spaces(line, i);
+	if (ft_isdigit(line[i]) && line[i])
+		error_output_n_exit("WRONG NUMBER FOR COLOR");
+}
