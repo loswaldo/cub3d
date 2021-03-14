@@ -37,14 +37,14 @@ int		parse_digit(const char *line)
 	while (ft_isdigit(line[i]))
 	{
 		num = (num * 10) + (line[i] - 48);
-		if (num >= 2147483647)
-			error_output_n_exit("NUM IS TOO BIG :(");
+		if (num > 2147483647)
+			return(20000);
 		i++;
 	}
 	i = ft_skip_spaces((char *)line, i);
 	if (!ft_isdigit(line[i]) && line[i])
 		error_output_n_exit("WRONG SYMBOL");
 	if (num > 2147483647)
-		error_output_n_exit("NUM IS TOO BIG :(");
+		return(20000);
 	return ((int)num);
 }
