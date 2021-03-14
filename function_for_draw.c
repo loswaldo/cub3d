@@ -15,7 +15,6 @@
 #include "cub.h"
 #include "for_texture_n_sprites.h"
 
-
 unsigned int	my_mlx_pixel_take(t_for_win *win, int x, int y)
 {
 	char	*dst;
@@ -29,7 +28,7 @@ void			my_mlx_pixel_put(t_config *config, int x, int y,
 {
 	char	*dst;
 
-	if ((x <= config->rx && x >= 0) || (y <= config->ry && y >= 0))
+	if (((x <= config->rx && x >= 0) || (y <= config->ry && y >= 0)) && (color & 0x00FFFFFF) > 0)
 	{
 		dst = config->win->addr + (y * config->win->line_len + x *
 				(config->win->bpp / 8));
