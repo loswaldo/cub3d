@@ -39,13 +39,15 @@ void	parser_for_resolution(t_config *config, char *line)
 	i = 1;
 	config->rx = parse_digit(line + i);
 	i = ft_skip_spaces(line, i);
-	while (ft_isdigit(line[i]))
-		i++;
+	i += skip_digits(line + i);
+	i = ft_skip_spaces(line, i);
 	config->ry = parse_digit(line + i);
 	if (config->ry <= 0 || config->rx <= 0)
 		error_output_n_exit("WRONG NUMBER FOR RESOLUTION");
-	while (ft_isdigit(line[i]))
-		i++;
+	i += skip_digits(line + i);
+	i = ft_skip_spaces(line, i);
+	if (line[i])
+		error_output_n_exit("WRONG NUMBER FOR RESOLUTION");
 }
 
 void	parser_for_texture(char *line, char **part_of_struct, int i)
