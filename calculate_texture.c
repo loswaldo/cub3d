@@ -100,9 +100,9 @@ void	check_side_n_tex_x_y(t_config *config, t_for_calculate *value)
 	}
 	if (value->side == 1)
 	{
-		config->tmp_w = value->step_c.x > 0 ? config->we_tex.width :
+		config->tmp_w = value->step_c.y > 0 ? config->we_tex.width :
 						config->ea_tex.width;
-		config->tmp_h = value->step_c.x > 0 ? config->we_tex.height :
+		config->tmp_h = value->step_c.y > 0 ? config->we_tex.height :
 						config->ea_tex.height;
 	}
 	value->tex.x = (int)(value->wall_x * (double)(config->tmp_w));
