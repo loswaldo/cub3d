@@ -33,7 +33,7 @@ void	calculate_for_sprites(t_config *config, t_for_sprites *value, int i)
 	value->draw_end.y = value->sprite_height / 2 + config->ry / 2;
 	if (value->draw_end.y >= config->ry)
 		value->draw_end.y = config->ry - 1;
-	value->sprite_width = abs((int)(config->ry / (value->transform.y)));
+	value->sprite_width = abs((int)(config->rx / (value->transform.y)));
 	value->draw_start.x = -value->sprite_width / 2 + value->sprite_sreen_x;
 	if (value->draw_start.x < 0)
 		value->draw_start.x = 0;
