@@ -52,7 +52,11 @@ void	directly_draw(t_config *config, t_for_calculate *value, int x)
 			my_mlx_pixel_put(config, x, y, config->cel);
 		if (y >= value->draw_start && y <= value->draw_end)
 		{
-			value->tex.y = (int)value->tex_pos & (config->tmp_h - 1);
+			value->tex.y = (int)value->tex_pos;
+			if (value->tex.y >= config->tmp_h)
+			{
+				value->tex.y = config->tmp_h;
+			}
 			value->tex_pos += value->step;
 			texture_draw(config, value, x, y);
 		}
