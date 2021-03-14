@@ -78,7 +78,7 @@ void	validate_save_argument(const char *arg_save)
 
 int		main(int ac, char **av)
 {
-	if (ac > 1 && ac < 3)
+	if (ac > 1 && ac <= 3)
 	{
 		if (ac == 2)
 		{
