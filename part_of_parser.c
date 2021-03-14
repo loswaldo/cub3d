@@ -59,7 +59,7 @@ int		check_line(char *line, t_config *config)
 	}
 	i = ft_skip_spaces(line, i);
 	if (line[i] == '\0')
-		return (0);
+		error_output_n_exit("WRONG STRING");
 	return (ft_is_identifier(line, i, config));
 }
 
