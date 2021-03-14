@@ -93,6 +93,10 @@ void	map_checker(t_config *config)
 	int		y;
 
 	find_player_position(config, 0);
+	x = -1;
+	while (config->map[config->map_height][++x])
+		if (!(ft_strchr("1 ", config->map[config->map_height][x])))
+			error_output_n_exit("MAP ERRORS");
 	y = 0;
 	while (y <= config->map_height)
 	{
