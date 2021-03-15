@@ -26,8 +26,8 @@ void	error_output_n_exit(const char *str)
 
 int		parse_digit(const char *line)
 {
-	int i;
-	long num;
+	int		i;
+	long	num;
 
 	i = 0;
 	num = 0;
@@ -38,14 +38,14 @@ int		parse_digit(const char *line)
 	{
 		num = (num * 10) + (line[i] - 48);
 		if (num > 2147483647)
-			return(20000);
+			return (20000);
 		i++;
 	}
 	i = ft_skip_spaces((char *)line, i);
 	if (!ft_isdigit(line[i]) && line[i])
 		error_output_n_exit("WRONG SYMBOL");
 	if (num > 2147483647)
-		return(20000);
+		return (20000);
 	return ((int)num);
 }
 
@@ -73,13 +73,13 @@ void	check_line_rgb_again(char *line)
 
 void	free_color_array(char **str)
 {
-		char	**tmp;
+	char	**tmp;
 
-		tmp = str;
-		while (*str)
-		{
-			free(*str);
-			str++;
-		}
-		free(tmp);
+	tmp = str;
+	while (*str)
+	{
+		free(*str);
+		str++;
 	}
+	free(tmp);
+}

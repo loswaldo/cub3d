@@ -72,7 +72,7 @@ int		parser_for_color(t_rgb *color_in_struct, const char *line)
 	else
 		error_output_n_exit("COLOR ERROR");
 	if ((color_in_struct->b == -1) && color[2])
-	color_in_struct->b = parse_digit(color[2]);
+		color_in_struct->b = parse_digit(color[2]);
 	else
 		error_output_n_exit("COLOR ERROR");
 	if (!is_valid_color(color_in_struct->r) ||
