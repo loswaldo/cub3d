@@ -76,8 +76,8 @@ void	find_player_position(t_config *config, int check)
 				check++;
 				config->direction = config->map[y][x];
 				config->map[y][x] = '0';
-				config->pl_pos_y = (float)(x + 0.01);
-				config->pl_pos_x = (float)(y + 0.01);
+				config->pl_pos_y = (float)(x + 0.5);
+				config->pl_pos_x = (float)(y + 0.5);
 			}
 			x++;
 		}
