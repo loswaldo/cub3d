@@ -23,6 +23,7 @@ void	parse(t_config *config, char *file_name);
 int		parse_digit(const char *line);
 int		parser_for_color(t_rgb *color_in_struct, const char *line);
 int		skip_digits(const char *line);
+void	free_color_array(char **str);
 
 void	check_file_name(char *file_name, char *extension);
 void	check_line_rgb_again(char *line);

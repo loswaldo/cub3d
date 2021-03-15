@@ -79,6 +79,7 @@ int		parser_for_color(t_rgb *color_in_struct, const char *line)
 		!is_valid_color(color_in_struct->g) ||
 		!is_valid_color(color_in_struct->b))
 		error_output_n_exit(color_error);
+	free_color_array(color);
 	return (skip_digits(line));
 }
 

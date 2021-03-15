@@ -70,3 +70,16 @@ void	check_line_rgb_again(char *line)
 	if (ft_isdigit(line[i]) && line[i])
 		error_output_n_exit("WRONG NUMBER FOR COLOR");
 }
+
+void	free_color_array(char **str)
+{
+		char	**tmp;
+
+		tmp = str;
+		while (*str)
+		{
+			free(*str);
+			str++;
+		}
+		free(tmp);
+	}
