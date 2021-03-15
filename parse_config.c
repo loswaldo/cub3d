@@ -27,7 +27,7 @@ int		check_data_filled(t_config *config)
 
 int		ft_skip_spaces(char *line, int i)
 {
-	while (line[i] == ' ' || line[i] == '\t')
+	while ((line[i] == ' ' || line[i] == '\t') && line[i])
 		i++;
 	return (i);
 }

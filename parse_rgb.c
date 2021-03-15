@@ -63,18 +63,18 @@ int		parser_for_color(t_rgb *color_in_struct, const char *line)
 	char		**color;
 
 	color = ft_split(line, ',');
-	if (color_in_struct->r == -1)
+	if ((color_in_struct->r == -1) && color[0])
 		color_in_struct->r = parse_digit(color[0]);
 	else
-		error_output_n_exit("REITERATION COLOR");
-	if (color_in_struct->g == -1)
+		error_output_n_exit("COLOR ERROR");
+	if ((color_in_struct->g == -1) && color[1])
 		color_in_struct->g = parse_digit(color[1]);
 	else
-		error_output_n_exit("REITERATION COLOR");
-	if (color_in_struct->b == -1)
+		error_output_n_exit("COLOR ERROR");
+	if ((color_in_struct->b == -1) && color[2])
 	color_in_struct->b = parse_digit(color[2]);
 	else
-		error_output_n_exit("REITERATION COLOR");
+		error_output_n_exit("COLOR ERROR");
 	if (!is_valid_color(color_in_struct->r) ||
 		!is_valid_color(color_in_struct->g) ||
 		!is_valid_color(color_in_struct->b))
