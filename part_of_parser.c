@@ -31,6 +31,8 @@ int		ft_is_identifier(char *line, int i, t_config *config)
 		parser_for_rgb(line, line[i] == 'F' ? config->floor : config->celling);
 	else if (line[i] == '1' && check_data_filled(config))
 		return (1);
+	else if (line[i] == '\0' && check_data_filled(config))
+		return (1);
 	else
 		error_output_n_exit("WRONG STRING OR NOT ENOUGH IDENTIFIERS");
 	return (0);
@@ -58,7 +60,7 @@ int		check_line(char *line, t_config *config)
 		return (0);
 	}
 	i = ft_skip_spaces(line, i);
-	if (line[i] == '\0')
+	if (line[i] == '\0' && !check_data_filled(config) && !config->pre_map)
 		error_output_n_exit("WRONG STRING");
 	return (ft_is_identifier(line, i, config));
 }
