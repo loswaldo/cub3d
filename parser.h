@@ -24,6 +24,7 @@ int		parse_digit(const char *line);
 int		parser_for_color(t_rgb *color_in_struct, const char *line);
 int		skip_digits(const char *line);
 
+void	check_file_name(char *file_name, char *extension);
 void	check_line_rgb_again(char *line);
 void	rgb_conversion(t_rgb *color, int *part_of_struct);
 void	ft_init_struct(t_config *config);

@@ -53,12 +53,19 @@ void	parser_for_resolution(t_config *config, char *line)
 void	parser_for_texture(char *line, char **part_of_struct, int i)
 {
 	i = ft_skip_spaces(line, i);
+	while (line[i] != ' ' && line[i])
+		i++;
+	if (line[i])
+		error_output_n_exit("SPACES IN PATH");
+	i = 2;
+	i = ft_skip_spaces(line, i);
 	if (!(*part_of_struct))
 		*part_of_struct = ft_strdup(&line[i]);
 	else
 	{
 		error_output_n_exit("REITERATION TEXTURE");
 	}
+	check_file_name(*part_of_struct, "mpx.");
 }
 
 void	ft_parse_map(t_config *config, char *line)

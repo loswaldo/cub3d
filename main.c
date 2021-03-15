@@ -25,18 +25,16 @@ void	ft_init_struct(t_config *config)
 	config->celling->b = -1;
 }
 
-void	check_file_name(char *file_name)
+void	check_file_name(char *file_name, char *extension)
 {
 	int		len;
 	int		i;
-	char	*str;
 
-	str = "buc.";
 	len = ft_strlen(file_name);
 	i = 0;
 	while (i <= 3)
 	{
-		if (file_name[(len - i) - 1] == str[i])
+		if (file_name[(len - i) - 1] == extension[i])
 			i++;
 		else
 			error_output_n_exit("FILE EXTENSION ERROR");
@@ -82,12 +80,12 @@ int		main(int ac, char **av)
 	{
 		if (ac == 2)
 		{
-			check_file_name(av[1]);
+			check_file_name(av[1], "buc.");
 			cub(av[1], 0);
 		}
 		else if (ac == 3)
 		{
-			check_file_name(av[1]);
+			check_file_name(av[1], "buc.");
 			validate_save_argument(av[2]);
 			cub(av[1], 1);
 		}
