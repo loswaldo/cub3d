@@ -122,8 +122,12 @@ void	map_validation(t_config *config)
 	sprites_counter(config);
 	tmp = config->pre_map;
 	config->pre_map = ft_strtrim(config->pre_map, "\n");
+	if (!config->pre_map)
+		error_output_n_exit("MALLOC ERROR");
 	free(tmp);
 	config->map = ft_split(config->pre_map, '\n');
+	if (!config->map)
+		error_output_n_exit("MALLOC ERROR");
 	while (config->map[y])
 	{
 		if (config->map[y] != 0 && config->map_width >

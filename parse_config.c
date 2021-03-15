@@ -65,6 +65,8 @@ void	parser_for_texture(char *line, char **part_of_struct, int i)
 	{
 		error_output_n_exit("REITERATION TEXTURE");
 	}
+	if (!(*part_of_struct))
+		error_output_n_exit("MALLOC ERROR");
 	check_file_name(*part_of_struct, "mpx.");
 }
 
@@ -83,4 +85,6 @@ void	ft_parse_map(t_config *config, char *line)
 		config->pre_map = ft_strjoin(tmp, line);
 		free(tmp);
 	}
+	if (!(config->pre_map))
+		error_output_n_exit("MALLOC ERROR");
 }
