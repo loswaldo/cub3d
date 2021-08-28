@@ -1,9 +1,9 @@
 # cub3D
-*Project inspired* 
+*Project inspired by* 
 **"Wolfenstein 3D"**
 *game, which was the first FPS ever. The
-goal of the project was create a little game use ray-casting.* 
-*We need make a dynamic view inside a maze. I use miniLibX(tiny graphics library)*
+goal of the project was to create a little game using ray-casting.* 
+*We had to make a dynamic view inside a maze. I used miniLibX(tiny graphics library)*
 
 
 **use the --recursive flag for correct clone project**
